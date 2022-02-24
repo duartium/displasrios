@@ -1,0 +1,22 @@
+.wrap-login{
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    position: relative;
+    justify-content:center;
+    display:flex;
+}
+
+.bg-header-login{
+    width: 100%;
+    height: 45vh;
+    background-color: blueviolet;
+    position: absolute;
+}
+
+.wrap-form-login{
+    position: absolute;
+    margin-top: 40%;
+    z-index: 9;
+    width: 85%;
+}
