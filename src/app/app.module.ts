@@ -9,6 +9,9 @@ import { RideSidebarComponent } from './shared/ride-sidebar/ride-sidebar.compone
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarBottomComponent } from './shared/navbar-bottom/navbar-bottom.component';
+import { OrderComponent } from './pages/order/order.component';
+import { HeaderMobileComponent } from './shared/header-mobile/header-mobile.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     SidebarComponent,
     RideSidebarComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarBottomComponent,
+    OrderComponent,
+    HeaderMobileComponent
   ],
   imports: [
     BrowserModule,
