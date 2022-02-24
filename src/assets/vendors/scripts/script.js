@@ -1,18 +1,18 @@
 jQuery(window).on("load",function() {
 	"use strict";
 	// bootstrap wysihtml5
-	$('.textarea_editor').wysihtml5({
-		html: true
-	});
+	// $('.textarea_editor').wysihtml5({
+	// 	html: true
+	// });
 });
 jQuery(window).on("load resize", function () {
 	// custom scrollbar
-	$(".customscroll").mCustomScrollbar({
-		theme:"dark-2",
-		scrollInertia: 300,
-		autoExpandScrollbar: true,
-		advanced: { autoExpandHorizontalScroll: true }
-	});
+	// $(".customscroll").mCustomScrollbar({
+	// 	theme:"dark-2",
+	// 	scrollInertia: 300,
+	// 	autoExpandScrollbar: true,
+	// 	advanced: { autoExpandHorizontalScroll: true }
+	// });
 });
 jQuery(document).ready(function(){
 	"use strict";
@@ -99,7 +99,7 @@ jQuery(document).ready(function(){
 	});
 
 	// custom select 2 init
-	$('.custom-select2').select2();
+	// $('.custom-select2').select2();
 
 	// Bootstrap Select
 	//$('.selectpicker').selectpicker();
