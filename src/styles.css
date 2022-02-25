@@ -1,0 +1,20 @@
+/* #7538b9 primario 
+    #56238e primario oscuro
+    #9935b3 secundario
+    #f6891e card-button
+*/
+.btn-primary{
+    background-color: #7538b9 !important;
+    border-color: #56238e !important;
+}
+.form-control{
+    transition: .2s;
+}
+.form-control:focus{
+    border-color: #9935b3 !important;
+    border: 2px solid #9935b3;
+    -webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
