@@ -17,7 +17,13 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
+  getByIdentification(){
+    this.customerService.getByIdentification('123123').subscribe(resp => {
+        console.log('SOY RESP', resp);
+      }
+    );
+  }
+
   getCustomer(){
      
   }

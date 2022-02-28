@@ -3,11 +3,11 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from '../services/token.service';
-import { request } from 'http';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

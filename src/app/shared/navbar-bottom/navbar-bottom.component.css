@@ -2,7 +2,7 @@
     background-color: #7538b9;
     position: fixed;
     bottom: 0;
-    height: 65px;
+    height: 10%;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -20,7 +20,7 @@
   .bloc-icon span {
     width: 30px;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   @media screen and (min-width: 600px) {
