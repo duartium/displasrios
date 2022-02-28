@@ -12,6 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarBottomComponent } from './shared/navbar-bottom/navbar-bottom.component';
 import { OrderComponent } from './pages/order/order.component';
 import { HeaderMobileComponent } from './shared/header-mobile/header-mobile.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -23,12 +25,13 @@ import { HeaderMobileComponent } from './shared/header-mobile/header-mobile.comp
     LoginComponent,
     NavbarBottomComponent,
     OrderComponent,
-    HeaderMobileComponent
+    HeaderMobileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

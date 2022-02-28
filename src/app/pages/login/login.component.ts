@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthRequest } from 'src/app/models/AuthRequest.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,9 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [Validators.required, Validators.minLength(3)])
   });
   
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder,
+    private authService: AuthService,
+    private tokenService: TokenService) { 
     
   }
 
@@ -27,6 +32,16 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    const authRequest: AuthRequest ={
+        username: this.frmUser.get('username').value,
+        password: this.frmUser.get('password').value
+    };
+
+    this.authService.authenticate(authRequest)
+      .subscribe(resp => {
+        console.log('created', resp);
+        this.tokenService.saveToken(resp.data);
+      });
     console.log('OPK');
   }
 
