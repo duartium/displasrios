@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { AuthDto } from '../Dtos/AuthDto.model';
 import { AuthRequest } from '../models/AuthRequest.model';
 import { TokenService } from './token.service';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  
-  private apiUrl = 'http://localhost:63674/api/v1/authentication/login';
+  private apiUrl = `${environment.API_URL}/authentication/login`;
 
   constructor(private http: HttpClient) { }
 

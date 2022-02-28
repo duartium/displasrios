@@ -1,20 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomerResponse } from '../models/Customer.model';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomersService {
-
-  private apiUrl = 'http://localhost:63674/api/v1/customers';
+  
+  private apiUrl = `${environment.API_URL}/customers`;
 
   constructor(private http: HttpClient) { }
 
   getAll(){
-    // let headers = new HttpHeaders();
-    // headers = headers.set('Authorization', `Bearer ${token}`);
-    // headers = headers.set('Content-type', 'application/json');
     return this.http.get(this.apiUrl);
   }
 }
