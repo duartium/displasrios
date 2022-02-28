@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthRequest } from 'src/app/models/AuthRequest.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { CatalogsService } from 'src/app/services/catalogs.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
@@ -18,7 +20,9 @@ export class LoginComponent implements OnInit {
   
   constructor(private fb: FormBuilder,
     private authService: AuthService,
-    private tokenService: TokenService) { 
+    private tokenService: TokenService,
+    private router: Router,
+    private catalogService: CatalogsService) { 
     
   }
 
@@ -39,10 +43,13 @@ export class LoginComponent implements OnInit {
 
     this.authService.authenticate(authRequest)
       .subscribe(resp => {
-        console.log('created', resp);
         this.tokenService.saveToken(resp.data);
       });
-    console.log('OPK');
+      
+    this.catalogService.getAll().subscribe(resp => {
+        localStorage.setItem('catalogs', JSON.stringify(resp));
+    })
+    this.router.navigate(['pedido']);
   }
 
 }

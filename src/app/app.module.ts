@@ -12,7 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarBottomComponent } from './shared/navbar-bottom/navbar-bottom.component';
 import { OrderComponent } from './pages/order/order.component';
 import { HeaderMobileComponent } from './shared/header-mobile/header-mobile.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

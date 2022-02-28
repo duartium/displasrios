@@ -11,13 +11,10 @@ export class CustomersService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(token: string){
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-    headers = headers.set('Content-type', 'application/json');
-    
-    return this.http.get(this.apiUrl, {
-      headers
-    });
+  getAll(){
+    // let headers = new HttpHeaders();
+    // headers = headers.set('Authorization', `Bearer ${token}`);
+    // headers = headers.set('Content-type', 'application/json');
+    return this.http.get(this.apiUrl);
   }
 }

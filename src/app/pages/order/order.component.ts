@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomersService } from 'src/app/services/customers.service';
-import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-order',
@@ -9,22 +8,18 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class OrderComponent implements OnInit {
 
-  constructor(private customerService: CustomersService,
-    private tokenService: TokenService) { 
-      this.getCustomers();
+  catalogs = [];
+  constructor(private customerService: CustomersService) { 
+       this.catalogs = JSON.parse(localStorage.getItem('catalogs'));
+       console.log(this.catalogs);
     }
 
   ngOnInit(): void {
   }
 
   
-  getCustomers(){
-    const token = this.tokenService.getToken();
-      console.log(token);
-      this.customerService.getAll(token)
-      .subscribe(customers => {
-        console.log(customers);
-      });
+  getCustomer(){
+     
   }
 
 }
