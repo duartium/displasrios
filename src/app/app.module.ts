@@ -14,6 +14,7 @@ import { OrderComponent } from './pages/order/order.component';
 import { HeaderMobileComponent } from './shared/header-mobile/header-mobile.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     NavbarBottomComponent,
     OrderComponent,
     HeaderMobileComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

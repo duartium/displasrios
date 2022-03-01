@@ -1,7 +1,89 @@
 <div class="wrap-content">
     <app-header-mobile></app-header-mobile>
     <div class="main-content">
+        <div class="row mt-1" style="margin-left: 0;">
+            <div class="col-9" style="padding-left:0;">
+                <h3 class="">Nuevo Pedido</h3>
+            </div>
+            <div class="col-3 text-center">
+                <button type="button" class="btn btn-circle" data-bgcolor="#3b5998" 
+                data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: #9935b3;"><i class="fa fa-shopping-cart"></i></button>
+                <span class="badge badge-primary badge-pill order-counter">0</span>
+            </div>
+        </div>
+       
+        <div class="header-search">
+            <form [formGroup]="frmOrder">
+                <div class="form-group mb-0">
+                    <i class="dw dw-search2 search-icon"></i>
+                    <input type="text" class="form-control search-input" placeholder="Buscar cliente"
+                    (click)="showFinder()" formControlName="id_client">
+                </div>
+
+                <div class="form-group my-3 text-center">
+                    <button type="button" class="btn btn-success" (click)="addProduct()"><i class="fa fa-plus-circle"></i> Agregar Producto</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Forma de Pago</label>
+                    <div style="display: block;">
+                        <div class="custom-control custom-radio" >
+                            <input type="radio" id="rb_efectivo" name="rb_forma_pago" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="rb_efectivo" formControlName="efectivo">Efectivo</label>
+                        </div>
+                        <div class="custom-control custom-radio" >
+                            <input type="radio" id="rb_transferencia" name="rb_forma_pago" 
+                            class="custom-control-input" formControlName="transferencia">
+                            <label class="custom-control-label" for="rb_transferencia">Transferencia</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Tipo de Pago</label>
+                    <div style="display: block;">
+                        <div class="custom-control custom-radio" >
+                            <input type="radio" id="rb_contado" name="rb_tipo_pago" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="rb_contado" formControlName="contado">Contado</label>
+                        </div>
+                        <div class="custom-control custom-radio" >
+                            <input type="radio" id="rb_credito" name="rb_tipo_pago" 
+                            class="custom-control-input" formControlName="credito">
+                            <label class="custom-control-label" for="rb_credito">Crédito</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label for="descuento">Descuento</label>
+                        <input type="text" class="form-control" formControlName="descuento">
+                    </div>
+                    <div class="col-6 form-group">
+                        <label for="cliente_paga">Cliente Paga</label>
+                        <input type="text" class="form-control" formControlName="cliente_paga">
+                    </div>
+                </div>
+
+               <div class="row">
+                    <div class="col-6 form-group">
+                        <label>CAMBIO</label><br>
+                        <h2>0.00</h2>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label>TOTAL</label><br> 
+                        <h2>0.00</h2>
+                    </div>
+               </div>
+
+               <div class="form-group my-3 text-right">
+                    <button type="submit" class="btn btn-primary">Generar</button>
+                </div>
+
+            </form>
+        </div>
         
     </div>
 </div>
 <app-navbar-bottom></app-navbar-bottom>
+<app-modal [modalTitle]="modalTitle"></app-modal>
