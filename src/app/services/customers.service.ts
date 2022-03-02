@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CustomerFinderResp, CustomersFinderResp } from '../models/CustomerFinder.model';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -12,10 +13,14 @@ export class CustomersService {
   constructor(private http: HttpClient) { }
 
   getByIdentification(identification: string){
-    return this.http.get(`${environment.API_URL}/customers/identification/${identification}`);
+    return this.http.get<CustomerFinderResp>(`${environment.API_URL}/customers/identification/${identification}`);
+  }
+
+  getByNames(names: string){ 
+    return this.http.get<CustomersFinderResp>(`${environment.API_URL}/customers/names/${names}`);
   }
 
   getAll(){
-    return this.http.get(this.apiUrl);
+    return this.http.get<CustomersFinderResp>(this.apiUrl);
   }
 }

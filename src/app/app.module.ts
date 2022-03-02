@@ -8,7 +8,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { RideSidebarComponent } from './shared/ride-sidebar/ride-sidebar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavbarBottomComponent } from './shared/navbar-bottom/navbar-bottom.component';
 import { OrderComponent } from './pages/order/order.component';
 import { HeaderMobileComponent } from './shared/header-mobile/header-mobile.component';
@@ -34,7 +34,8 @@ import { ModalComponent } from './components/modal/modal.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }

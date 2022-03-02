@@ -14,51 +14,73 @@
        
         <div class="header-search">
             <form [formGroup]="frmOrder">
-                <div class="form-group mb-0">
+                <div class="form-group mb-0" *ngIf="!customerSelected">
                     <i class="dw dw-search2 search-icon"></i>
                     <input type="text" class="form-control search-input" placeholder="Buscar cliente"
-                    (click)="showFinder()" formControlName="id_client">
+                    (click)="showFinder()">
+                </div>
+                
+                <div *ngIf="customerSelected" class="row mt-2">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label >Identificación</label>
+                            <p>{{customerSelected.identification}}</p>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label>Nombres</label>
+                            <p>{{customerSelected.full_names}}</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="form-group my-4 text-center">
+                    <button type="button" class="btn btn-success" (click)="addProduct()"><i class="fa fa-plus-circle"></i> Agregar Producto</button>
                 </div>
 
-                <div class="form-group my-3 text-center">
-                    <button type="button" class="btn btn-success" (click)="addProduct()"><i class="fa fa-plus-circle"></i> Agregar Producto</button>
+                <div class="form-group">
+                    <label for="">Método de Pago</label>
+                    <div style="display: block;">
+                        <div class="custom-control custom-radio" >
+                            <input type="radio" id="rb_contado" name="payment_method" class="custom-control-input"
+                            formControlName="payment_method" value="1">
+                            <label class="custom-control-label" for="rb_contado" >Contado</label>
+                        </div>
+                        <div class="custom-control custom-radio" >
+                            <input type="radio" id="rb_credito" name="payment_method" class="custom-control-input"
+                            formControlName="payment_method" value="1019">
+                            <label class="custom-control-label" for="rb_credito">Crédito</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="">Forma de Pago</label>
                     <div style="display: block;">
                         <div class="custom-control custom-radio" >
-                            <input type="radio" id="rb_efectivo" name="rb_forma_pago" class="custom-control-input" checked>
-                            <label class="custom-control-label" for="rb_efectivo" formControlName="efectivo">Efectivo</label>
+                            <input type="radio" id="rb_efectivo" name="payment_mode" class="custom-control-input" 
+                            formControlName="payment_mode" value="2">
+                            <label class="custom-control-label" for="rb_efectivo" >Efectivo</label>
                         </div>
                         <div class="custom-control custom-radio" >
-                            <input type="radio" id="rb_transferencia" name="rb_forma_pago" 
-                            class="custom-control-input" formControlName="transferencia">
-                            <label class="custom-control-label" for="rb_transferencia">Transferencia</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Tipo de Pago</label>
-                    <div style="display: block;">
-                        <div class="custom-control custom-radio" >
-                            <input type="radio" id="rb_contado" name="rb_tipo_pago" class="custom-control-input" checked>
-                            <label class="custom-control-label" for="rb_contado" formControlName="contado">Contado</label>
-                        </div>
-                        <div class="custom-control custom-radio" >
-                            <input type="radio" id="rb_credito" name="rb_tipo_pago" 
-                            class="custom-control-input" formControlName="credito">
-                            <label class="custom-control-label" for="rb_credito">Crédito</label>
+                            <input type="radio" id="rb_transferencia" name="payment_mode" class="custom-control-input"
+                            formControlName="payment_mode" value="3">
+                            <label class="custom-control-label" for="rb_transferencia" >Transferencia</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-6 form-group">
-                        <label for="descuento">Descuento</label>
-                        <input type="text" class="form-control" formControlName="descuento">
+                        <label for="discount">Descuento</label>
+                        <input type="text" class="form-control" formControlName="discount">
+
+                        <!-- <div class="form-control-feedback" 
+                        *ngIf="frmOrder.discount.touched && frmOrder.discount.invalid">Sorry, that username's taken. Try another?</div> -->
                     </div>
+                    
+
                     <div class="col-6 form-group">
                         <label for="cliente_paga">Cliente Paga</label>
                         <input type="text" class="form-control" formControlName="cliente_paga">
@@ -86,4 +108,54 @@
     </div>
 </div>
 <app-navbar-bottom></app-navbar-bottom>
-<app-modal [modalTitle]="modalTitle"></app-modal>
+<app-modal [modalTitle]="modalTitle">
+    <div *ngIf="finder=='customer'">
+        <div class="form-group">
+            <label for="">Filtros</label>
+            <div style="display: block;">
+                <div class="custom-control custom-radio" >
+                    <input id="rb_identificacion" [(ngModel)]="filterClientFinder" type="radio" name="filter_client" class="custom-control-input"
+                    value="identification" (change)="changeFilterCustomer($event)" checked>
+                    <label class="custom-control-label" for="rb_identificacion">Identificación</label>
+                </div>
+                <div class="custom-control custom-radio" >
+                    <input id="rb_nombres" type="radio"  [(ngModel)]="filterClientFinder" name="filter_client" class="custom-control-input"
+                    value="nombres" (change)="changeFilterCustomer($event)">
+                    <label class="custom-control-label" for="rb_nombres">Nombres</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input #idtextClientFinder type="text" class="form-control" name="textClientFinder" 
+            (keyup.enter)="findCustomer()" [(ngModel)]="textClientFinder" autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary btn-search" type="button" id="btn_find_client" (click)="findCustomer()"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+        <hr>
+        <ul class="list-group list-group-flush">
+            <li *ngFor="let customer of customers" class="list-group-item" 
+            (click)="selectedClient(customer)">{{customer.full_names}}</li>
+        </ul>
+        <hr>
+        <small class="form-text text-muted">Se encontraron {{customers.length}} registros</small>
+    </div>
+
+    <div *ngIf="finder=='product'">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="textProductFinder" 
+            (keyup.enter)="findProduct()" [(ngModel)]="textProductFinder" autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary btn-search" type="button" id="btn_find_client" (click)="findCustomer()"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+        <hr>
+        <ul class="list-group list-group-flush">
+            <li *ngFor="let customer of customers" class="list-group-item" 
+            (click)="selectedClient(customer)">{{customer.full_names}}</li>
+        </ul>
+        <hr>
+        <small class="form-text text-muted">Se encontraron {{customers.length}} registros</small>
+    </div>
+</app-modal>
