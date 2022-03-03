@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ProductsFinderResp } from '../models/ProductFinder.model';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -7,12 +8,10 @@ import { environment } from './../../environments/environment';
 })
 export class ProductsService {
 
-  private apiUrl = `${environment.API_URL}/customers`;
-
   constructor(private http: HttpClient) { }
 
   getByName(name: string){
-    return this.http.get(`${environment.API_URL}/customers/identification/${name}`);
+    return this.http.get<ProductsFinderResp>(`${environment.API_URL}/products/get-for-sale/name/${name}`);
   }
-
+  
 }

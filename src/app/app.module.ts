@@ -15,6 +15,8 @@ import { HeaderMobileComponent } from './shared/header-mobile/header-mobile.comp
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ModalComponent } from './components/modal/modal.component';
+import * as bootstrap from "bootstrap";
+import * as $ from "jquery";
 
 
 @NgModule({

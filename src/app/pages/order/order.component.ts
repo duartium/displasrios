@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormsModule } from '@angular/forms';
 import { pipe } from 'rxjs';
 import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
+import { ProductFinder } from 'src/app/models/ProductFinder.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -18,7 +19,11 @@ export class OrderComponent implements OnInit {
   textProductFinder = "";
   modalTitle = 'Buscar cliente';
   customerSelected: CustomerFinder;
+  productSelected: ProductFinder;
   customers: CustomerFinder[] = [];
+  products: ProductFinder[] = [];
+  productsOrder: ProductFinder[] = [];
+  detailsOpened: boolean = false;
 
   frmOrder = this.fb.group({
     id_client:  this.fb.control('', [Validators.required, Validators.minLength(3)]),
@@ -50,6 +55,10 @@ export class OrderComponent implements OnInit {
     
   }
 
+  showOrderDetails(){
+      this.detailsOpened = !this.detailsOpened;
+  }
+
   findCustomer(){
 
       if(this.filterClientFinder === "identification"){
@@ -74,11 +83,13 @@ export class OrderComponent implements OnInit {
   }
 
   findProduct(){
-    this.productService.getByName(this.textClientFinder)
+
+    this.productService.getByName(this.textProductFinder)
     .subscribe(resp => {
       console.log(resp);
+      this.products = resp.data;
     }, (errorResp) => {
-      this.customers = [];
+      this.products = [];
       if(errorResp.status == 404){
           
       }
@@ -86,8 +97,14 @@ export class OrderComponent implements OnInit {
   }
 
   selectedClient(customerSelected: CustomerFinder){
-      console.log(customerSelected);
+      this.detailsOpened = true;
       this.customerSelected = customerSelected;
+      $("#main-modal").modal("hide");
+  }
+
+  selectedProduct(productSelected: ProductFinder){
+      this.productSelected = productSelected;
+      this.productsOrder.push(productSelected);
       $("#main-modal").modal("hide");
   }
 

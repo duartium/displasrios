@@ -39,6 +39,42 @@
                     <button type="button" class="btn btn-success" (click)="addProduct()"><i class="fa fa-plus-circle"></i> Agregar Producto</button>
                 </div>
 
+                <div class="row" *ngIf="products?.length > 0">
+                    <div class="col-12">
+                        
+                        <div class="card mb-3" (click)="showOrderDetails()">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Detalle de pedido
+                                    <i *ngIf="!detailsOpened" class="fa fa-angle-double-down" style="color:darkgray"></i>
+                                    <i *ngIf="detailsOpened" class="fa fa-angle-double-up" style="color:darkgray"></i>
+                                </li>
+                            </ul>
+
+                            <div class="table-responsive p-2 mt-1" *ngIf="detailsOpened">
+                                <table class="table table-sm">
+                                    <thead>
+                                      <tr>
+                                        <th>Producto</th>
+                                        <th>Cant</th>
+                                        <th>Precio</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody *ngFor="let product of productsOrder">
+                                      <tr>
+                                        <td>{{product.name}}</td>
+                                        <td>{{product.quantity}}</td>
+                                        <td>{{product.price | currency}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                  </div>
+
                 <div class="form-group">
                     <label for="">Método de Pago</label>
                     <div style="display: block;">
@@ -144,18 +180,18 @@
 
     <div *ngIf="finder=='product'">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="textProductFinder" 
+            <input type="text" class="form-control" name="textProductFinder" placeholder="Nombre de producto"
             (keyup.enter)="findProduct()" [(ngModel)]="textProductFinder" autocomplete="off">
             <div class="input-group-append">
-              <button class="btn btn-primary btn-search" type="button" id="btn_find_client" (click)="findCustomer()"><i class="fa fa-search"></i></button>
+              <button class="btn btn-primary btn-search" type="button" id="btn_find_client" (click)="findProduct()"><i class="fa fa-search"></i></button>
             </div>
         </div>
         <hr>
         <ul class="list-group list-group-flush">
-            <li *ngFor="let customer of customers" class="list-group-item" 
-            (click)="selectedClient(customer)">{{customer.full_names}}</li>
+            <li *ngFor="let product of products" class="list-group-item" 
+            (click)="selectedProduct(product)">{{product.name}}</li>
         </ul>
         <hr>
-        <small class="form-text text-muted">Se encontraron {{customers.length}} registros</small>
+        <small class="form-text text-muted">Se encontraron {{products?.length}} registros</small>
     </div>
 </app-modal>
