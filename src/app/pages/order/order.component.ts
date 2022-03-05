@@ -5,6 +5,8 @@ import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
 import { ProductFinder } from 'src/app/models/ProductFinder.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-order',
@@ -36,7 +38,9 @@ export class OrderComponent implements OnInit {
   catalogs = [];
   constructor(private customerService: CustomersService,
     private fb: FormBuilder,
-    private productService: ProductsService) { 
+    private productService: ProductsService,
+    private toastr: ToastrService) { 
+
     }
 
   ngOnInit(): void {
@@ -109,9 +113,12 @@ export class OrderComponent implements OnInit {
   }
 
   addProduct(){
+
     this.modalTitle = "Buscar Producto";
     this.finder = "product";
     $("#main-modal").modal("show");
+    this.toastr.success('Hello world!', 'Toastr fun!');
+
   }
 
   showFinder(){

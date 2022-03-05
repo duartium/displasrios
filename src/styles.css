@@ -3,6 +3,8 @@
     #9935b3 secundario
     #f6891e card-button
 */
+@import '~ngx-toastr/toastr.css';
+
 h1, h2, h3, h4, h5{
     color:  #7538b9;
 }

@@ -17,6 +17,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ModalComponent } from './components/modal/modal.component';
 import * as bootstrap from "bootstrap";
 import * as $ from "jquery";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -37,7 +39,13 @@ import * as $ from "jquery";
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
