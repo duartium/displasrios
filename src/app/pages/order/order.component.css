@@ -24,3 +24,9 @@
 .table td{
     font-weight: normal;
 }
+
+.quantity-field{
+    width: 60px;
+    display: inline;
+    text-align: center;
+}

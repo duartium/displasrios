@@ -43,6 +43,7 @@
                     <div class="col-12">
                         
                         <div class="card mb-3" (click)="showOrderDetails()">
+                            
                             <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Detalle de pedido
@@ -60,8 +61,8 @@
                                         <th>Precio</th>
                                       </tr>
                                     </thead>
-                                    <tbody *ngFor="let product of productsOrder">
-                                      <tr>
+                                    <tbody >
+                                      <tr *ngFor="let product of productsOrder">
                                         <td>{{product.name}}</td>
                                         <td>{{product.quantity}}</td>
                                         <td>{{product.price | currency}}</td>
@@ -187,10 +188,17 @@
             </div>
         </div>
         <hr>
-        <ul class="list-group list-group-flush">
-            <li *ngFor="let product of products" class="list-group-item" 
-            (click)="selectedProduct(product)">{{product.name}}</li>
-        </ul>
+        <div class="table-responsive p-2 mt-1">
+            <table class="table table-sm">
+                <tbody>
+                  <tr *ngFor="let product of products">
+                    <td><button class="btn btn-success" type="button" id="btn_find_client" (click)="selectedProduct(product)"><i class="fa fa-plus"></i></button></td>
+                    <td><input class="form-control quantity-field" value="1" type="number"></td>
+                    <td>{{product.name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
         <hr>
         <small class="form-text text-muted">Se encontraron {{products?.length}} registros</small>
     </div>
