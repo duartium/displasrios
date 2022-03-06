@@ -19,6 +19,7 @@ import * as bootstrap from "bootstrap";
 import * as $ from "jquery";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
     OrderComponent,
     HeaderMobileComponent,
     ModalComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -87,12 +87,15 @@ export class OrderComponent implements OnInit {
   }
 
   findProduct(){
-
+    document.getElementById("loader").style.display = "";
     this.productService.getByName(this.textProductFinder)
     .subscribe(resp => {
       console.log(resp);
       this.products = resp.data;
+
+      document.getElementById("loader").style.display = "none";
     }, (errorResp) => {
+      document.getElementById("loader").style.display = "none";
       this.products = [];
       if(errorResp.status == 404){
           
@@ -113,11 +116,11 @@ export class OrderComponent implements OnInit {
   }
 
   addProduct(){
-
+    
     this.modalTitle = "Buscar Producto";
     this.finder = "product";
     $("#main-modal").modal("show");
-    this.toastr.success('Hello world!', 'Toastr fun!');
+    //this.toastr.success('Hello world!', 'Toastr fun!');
 
   }
 
