@@ -111,27 +111,30 @@
                 <div class="row">
                     <div class="col-6 form-group">
                         <label for="discount">Descuento</label>
-                        <input type="text" class="form-control" formControlName="discount">
+                        <input type="text" class="form-control" formControlName="discount" (keyup)="applyDiscount()">
 
                         <!-- <div class="form-control-feedback" 
                         *ngIf="frmOrder.discount.touched && frmOrder.discount.invalid">Sorry, that username's taken. Try another?</div> -->
                     </div>
                     
-
                     <div class="col-6 form-group">
                         <label for="cliente_paga">Cliente Paga</label>
-                        <input type="text" class="form-control" formControlName="cliente_paga">
+                        <input type="text" class="form-control" formControlName="cliente_paga" (keyup)="setOrderChange($event)">
                     </div>
                 </div>
 
                <div class="row">
                     <div class="col-6 form-group">
                         <label>CAMBIO</label><br>
-                        <h2>{{fullOrderDto.change | currency}}</h2>
+                        <h3>{{frmOrder.value.change | currency}}</h3>
+                    </div>
+                    <div class="col-6 form-group">
+                        <label>SUBTOTAL</label><br> 
+                        <h3>{{frmOrder.value.subtotal | currency}}</h3>
                     </div>
                     <div class="col-6 form-group">
                         <label>TOTAL</label><br> 
-                        <h2>{{fullOrderDto.total | currency}}</h2>
+                        <h3>{{frmOrder.value.total | currency}}</h3>
                     </div>
                </div>
 

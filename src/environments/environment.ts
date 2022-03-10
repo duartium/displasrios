@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:63674/api/v1'
+  API_URL: 'http://bduarte-001-site1.ftempurl.com/api/v1'
 };
 
 /*
