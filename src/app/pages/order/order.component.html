@@ -8,7 +8,7 @@
             <div class="col-3 text-center">
                 <button type="button" class="btn btn-circle" data-bgcolor="#3b5998" 
                 data-color="#ffffff" style="color: rgb(255, 255, 255); background-color: #9935b3;"><i class="fa fa-shopping-cart"></i></button>
-                <span class="badge badge-primary badge-pill order-counter">0</span>
+                <span class="badge badge-primary badge-pill order-counter">{{quantity_cart}}</span>
             </div>
         </div>
        
@@ -65,7 +65,7 @@
                                       <tr *ngFor="let product of productsOrder">
                                         <td>{{product.name}}</td>
                                         <td>{{product.quantity}}</td>
-                                        <td>{{product.price | currency}}</td>
+                                        <td style="text-align:right">{{product.sale_price}}</td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -127,11 +127,11 @@
                <div class="row">
                     <div class="col-6 form-group">
                         <label>CAMBIO</label><br>
-                        <h2>0.00</h2>
+                        <h2>{{fullOrderDto.change | currency}}</h2>
                     </div>
                     <div class="col-6 form-group">
                         <label>TOTAL</label><br> 
-                        <h2>0.00</h2>
+                        <h2>{{fullOrderDto.total | currency}}</h2>
                     </div>
                </div>
 

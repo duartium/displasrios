@@ -1,6 +1,6 @@
 export interface ProductOrderDetail{
-    id: number,
-    quantity: number,
-    name: string,
-    price: number
+    id: number;
+    quantity: number;
+    name?: string;
+    price: number;
 }
