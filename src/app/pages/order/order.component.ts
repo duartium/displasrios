@@ -38,11 +38,15 @@ export class OrderComponent implements OnInit {
         
       this.frmOrder = this.fb.group({
         id_client:  this.fb.control('', [Validators.required, Validators.minLength(3)]),
+        customer_payment:  this.fb.control('0.00', [Validators.required, Validators.minLength(1)]),
+        items: this.fb.array([]),
+        change: 0,
         payment_method:  this.fb.control('1', [Validators.required]),
         payment_mode:  this.fb.control('2', [Validators.required]),
         discount:  this.fb.control('0.00', [Validators.required]),
-        cliente_paga:  this.fb.control('0.00', [Validators.required, Validators.minLength(1)]),
-        items: this.fb.array([])
+        subtotal: 0,
+        iva: 0,
+        total: 0
       });
       //this.initialize();
     }
@@ -68,30 +72,32 @@ export class OrderComponent implements OnInit {
 
   calculateTotals(){
     this.quantity_cart = 0;
-    console.log(this.frmOrder.value.items);
-
+    
+    console.log('INI CALCULATE', this.frmOrder.value);
     this.frmOrder.value.items.forEach(prod => {
-        this.quantity_cart += prod.quantity,
-        this.frmOrder.value.subtotal += parseFloat(prod.price.toString())
+      console.log(prod); 
+        this.quantity_cart += prod.value.quantity,
+        this.frmOrder.value.subtotal = parseFloat(this.frmOrder.value.subtotal) + parseFloat(prod.value.price)
     });
     this.frmOrder.value.total = this.frmOrder.value.subtotal;
-
-    this.applyDiscount();
+    console.log('FIN CALCULATE', this.frmOrder.value);
+    // this.setOrderChange();
+    // this.applyDiscount();
 
   }
 
-  setOrderChange(e){
-      let currentValue: number = parseFloat(e.target.value);
-      if(currentValue > this.frmOrder.value.total){
-        this.frmOrder.value.change = currentValue - this.frmOrder.value.total;
-      }else{
-        this.frmOrder.value.change = 0;
+  setOrderChange(changeValue: string){
+      let currentValue: number = parseFloat(changeValue);
+      console.log('SETORDERCHANGE', this.frmOrder.value);
+
+      if(currentValue > parseFloat(this.frmOrder.value.total)){
+        this.frmOrder.value.change = currentValue - parseFloat(this.frmOrder.value.total);
       }
   }
 
   applyDiscount(){
     //if(this.fullOrderDto.discount === 0) return;
-    console.log(this.frmOrder.value.discount);
+    console.log('APPLYDISCOUNT', this.frmOrder.value.discount);
     this.frmOrder.value.total = this.frmOrder.value.subtotal - this.frmOrder.value.discount;
   }
 
@@ -146,6 +152,7 @@ export class OrderComponent implements OnInit {
   selectedClient(customerSelected: CustomerFinder){
       this.detailsOpened = true;
       this.customerSelected = customerSelected;
+      this.frmOrder.value.id_client = customerSelected.id;
       $("#main-modal").modal("hide");
   }
 
