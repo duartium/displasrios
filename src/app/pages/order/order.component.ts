@@ -67,6 +67,7 @@ export class OrderComponent implements OnInit {
     // }
 
   ngOnInit(): void {
+
   }
 
 
@@ -190,6 +191,14 @@ export class OrderComponent implements OnInit {
     this.modalTitle = "Buscar Cliente";
     this.finder = "customer";
     $("#main-modal").modal("show");
+  }
+
+  orderRegister(){
+    if(!this.frmOrder.valid){
+      this.frmOrder.markAllAsTouched();
+      alert('form invalido');
+      return;
+    }
   }
 
 }

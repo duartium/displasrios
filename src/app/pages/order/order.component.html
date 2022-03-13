@@ -13,7 +13,7 @@
         </div>
        
         <div class="header-search">
-            <form [formGroup]="frmOrder">
+            <form [formGroup]="frmOrder" (ngSubmit)="orderRegister()">
                 <div class="form-group mb-0" *ngIf="!customerSelected">
                     <i class="dw dw-search2 search-icon"></i>
                     <input type="text" class="form-control search-input" placeholder="Buscar cliente"
@@ -119,7 +119,7 @@
                     
                     <div class="col-6 form-group">
                         <label for="cliente_paga">Cliente Paga</label>
-                        <input type="text" class="form-control" formControlName="customer_payment" (change)="setOrderChange($event.target.value)">
+                        <input type="text" class="form-control" formControlName="customer_payment" >
                     </div>
                 </div>
 
