@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormsModule, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, FormGroup, FormArray } from '@angular/forms';
 import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
 import { ProductFinder } from 'src/app/models/ProductFinder.model';
 import { CustomersService } from 'src/app/services/customers.service';
@@ -28,59 +28,94 @@ export class OrderComponent implements OnInit {
   detailsOpened: boolean = false;
   //fullOrderDto: FullOrderDto;
   quantity_cart: number = 0;
+  arrayItems: {
+    id: number,
+    quantity: number,
+    price: number
+  }[];
 
   frmOrder: FormGroup;
 
   catalogs = [];
+
   constructor(private customerService: CustomersService,
     private fb: FormBuilder,  private productService: ProductsService,
     private toastr: ToastrService) { 
         
       this.frmOrder = this.fb.group({
-        id_client:  this.fb.control('', [Validators.required, Validators.minLength(3)]),
-        customer_payment:  this.fb.control('0.00', [Validators.required, Validators.minLength(1)]),
+        id_client:  this.fb.control('', [Validators.required]),
         items: this.fb.array([]),
-        change: 0,
+        customer_payment:  this.fb.control('0', [Validators.required, Validators.minLength(1)]),
+        change: this.fb.control('0', [Validators.required]),
         payment_method:  this.fb.control('1', [Validators.required]),
         payment_mode:  this.fb.control('2', [Validators.required]),
-        discount:  this.fb.control('0.00', [Validators.required]),
-        subtotal: 0,
-        iva: 0,
-        total: 0
+        discount:  this.fb.control('0', [Validators.required]),
+        subtotal: this.fb.control('0', [Validators.required]),
+        iva: this.fb.control('0', [Validators.required]),
+        total: this.fb.control('0', [Validators.required])
       });
-      //this.initialize();
     }
 
-    // initialize(): void{
-    //   this.fullOrderDto = {
-    //     id_client: 0,
-    //     items: [],
-    //     payment_method: 0,
-    //     payment_mode: 0,
-    //     customer_payment: 0,
-    //     change: 0,
-    //     discount: 0,
-    //     subtotal: 0,
-    //     iva: 0,
-    //     total: 0
-    //   }
-    // }
-
   ngOnInit(): void {
-
+      // this.frmOrder.valueChanges
+      // .subscribe(value => {
+      //   console.log(value);
+      // });
   }
 
+  get idClient(){
+    return this.frmOrder.get('id_client');
+  }
+
+  get customerPayment(){
+    return this.frmOrder.get('customer_payment');
+  }
+
+  get discount(){
+    return this.frmOrder.get('discount');
+  }
+
+  get change(){
+    return this.frmOrder.get('change');
+  }
+
+  get subtotal(){
+    return this.frmOrder.get('subtotal');
+  }
+
+  get productItems(){
+    return this.frmOrder.get('items') as FormArray;
+  }
+
+  addItem(item) {
+    this.arrayItems.push(item);
+    this.productItems.push(this.fb.control(''));
+ }
+
+ removeItem(i: number) {
+    const items = this.productItems;
+
+    if(items.length > 1){
+      items.removeAt(i);
+    }else{
+      items.reset();
+    }
+ }
+
+  get total(){
+    return this.frmOrder.get('total');
+  }
 
   calculateTotals(){
     this.quantity_cart = 0;
     
     console.log('INI CALCULATE', this.frmOrder.value);
-    this.frmOrder.value.items.forEach(prod => {
-      console.log(prod); 
-        this.quantity_cart += prod.value.quantity,
-        this.frmOrder.value.subtotal = parseFloat(this.frmOrder.value.subtotal) + parseFloat(prod.value.price)
+    this.productItems.value.forEach(prod => {
+      console.log('PROD', prod); 
+        this.quantity_cart += prod.quantity,
+        this.subtotal.setValue(parseFloat(this.subtotal.value) + parseFloat(prod.price));
     });
-    this.frmOrder.value.total = this.frmOrder.value.subtotal;
+    this.total.setValue(this.subtotal.value);
     console.log('FIN CALCULATE', this.frmOrder.value);
     // this.setOrderChange();
     // this.applyDiscount();
@@ -91,15 +126,15 @@ export class OrderComponent implements OnInit {
       let currentValue: number = parseFloat(changeValue);
       console.log('SETORDERCHANGE', this.frmOrder.value);
 
-      if(currentValue > parseFloat(this.frmOrder.value.total)){
-        this.frmOrder.value.change = currentValue - parseFloat(this.frmOrder.value.total);
+      if(currentValue > parseFloat(this.total.value)){
+        this.change.setValue(currentValue - parseFloat(this.total.value));
       }
   }
 
   applyDiscount(){
     //if(this.fullOrderDto.discount === 0) return;
-    console.log('APPLYDISCOUNT', this.frmOrder.value.discount);
-    this.frmOrder.value.total = this.frmOrder.value.subtotal - this.frmOrder.value.discount;
+    console.log('APPLYDISCOUNT', this.discount);
+    this.total.setValue(this.subtotal.value - this.discount.value);
   }
 
   changeFilterCustomer(e){
@@ -161,19 +196,19 @@ export class OrderComponent implements OnInit {
       this.productSelected = productSelected;
       this.productsOrder.push(productSelected);
       console.log(productSelected);
-      // const prod: ProductOrderDetail = {
-      //   id: productSelected.id,
-      //   quantity: 1,
-      //   price: productSelected.sale_price
-      // } 
+      
       const prod = this.fb.group({
         id: [productSelected.id, Validators.required],
         quantity: [1, Validators.required],
         price: [productSelected.sale_price, Validators.required]
-    });
+      });
 
-      console.log(this.frmOrder.value);
-      this.frmOrder.value.items.push(prod);
+      const elementProduct = this.productItems;
+      elementProduct.push(prod);
+
+      console.log('ELEMENT_PRODUCT', elementProduct);
+      console.log('FORM_VALUE', this.frmOrder.value);
+      
       this.calculateTotals();
       $("#main-modal").modal("hide");
   }

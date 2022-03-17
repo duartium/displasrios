@@ -42,9 +42,9 @@
                 <div class="row" *ngIf="products?.length > 0">
                     <div class="col-12">
                         
-                        <div class="card mb-3" (click)="showOrderDetails()">
+                        <div class="card mb-3" >
                             
-                            <ul class="list-group">
+                            <ul class="list-group" (click)="showOrderDetails()">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Detalle de pedido
                                     <i *ngIf="!detailsOpened" class="fa fa-angle-double-down" style="color:darkgray"></i>
@@ -62,10 +62,22 @@
                                       </tr>
                                     </thead>
                                     <tbody >
-                                      <tr *ngFor="let product of productsOrder">
-                                        <td>{{product.name}}</td>
+                                      <tr formArrayName="items" *ngFor="let product of productsOrder; let i = index;">
+                                        <td [id]="product.id">{{product.name}}</td>
                                         <td>{{product.quantity}}</td>
                                         <td style="text-align:right">{{product.sale_price}}</td>
+                                        <td>
+                                            <div class="dropdown show">
+                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="dw dw-more"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                    <a class="dropdown-item" href="#"><i class="dw dw-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vista</font></font></a>
+                                                    <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Editar</font></font></a>
+                                                    <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Borrar</font></font></a>
+                                                </div>
+                                            </div>
+                                        </td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -107,6 +119,7 @@
                         </div>
                     </div>
                 </div>
+                <input type="text" class="form-control" formControlName="iva" >
 
                 <div class="row">
                     <div class="col-6 form-group">
@@ -117,9 +130,13 @@
                         *ngIf="frmOrder.discount.touched && frmOrder.discount.invalid">Sorry, that username's taken. Try another?</div> -->
                     </div>
                     
-                    <div class="col-6 form-group">
+                    <div class="col-6 form-group ">
                         <label for="cliente_paga">Cliente Paga</label>
-                        <input type="text" class="form-control" formControlName="customer_payment" >
+                        <input type="text" class="form-control" formControlName="customer_payment" 
+                        [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')">
+                        
+                        <div *ngIf="customerPayment.hasError('required')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
                     </div>
                 </div>
 
