@@ -64,10 +64,10 @@
                                     <tbody >
                                       <tr formArrayName="items" *ngFor="let product of productsOrder; let i = index;">
                                         <td [id]="product.id">{{product.name}}</td>
-                                        <td>{{product.quantity}}</td>
+                                        <td class="text-center">{{product.quantity}}</td>
                                         <td style="text-align:right">{{product.sale_price}}</td>
-                                        <td>
-                                            <div class="dropdown show">
+                                        <td class="px-2">
+                                            <div class="dropdown show ">
                                                 <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                                                     <i class="dw dw-more"></i>
                                                 </a>
@@ -119,8 +119,6 @@
                         </div>
                     </div>
                 </div>
-                <input type="text" class="form-control" formControlName="iva" >
-
                 <div class="row">
                     <div class="col-6 form-group">
                         <label for="discount">Descuento</label>
@@ -211,9 +209,9 @@
         <div class="table-responsive p-2 mt-1">
             <table class="table table-sm">
                 <tbody>
-                  <tr *ngFor="let product of products">
+                  <tr *ngFor="let product of products" >
                     <td><button class="btn btn-success" type="button" id="btn_find_client" (click)="selectedProduct(product)"><i class="fa fa-plus"></i></button></td>
-                    <td><input class="form-control quantity-field" value="1" type="number"></td>
+                    <td><input id="input_prod_{{product.id}}" class="form-control quantity-field"  value="1" type="number"></td>
                     <td>{{product.name}}</td>
                   </tr>
                 </tbody>

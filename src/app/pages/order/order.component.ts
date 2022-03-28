@@ -194,21 +194,20 @@ export class OrderComponent implements OnInit {
 
   selectedProduct(productSelected: ProductFinder){
       this.productSelected = productSelected;
+      let input_prod = document.getElementById(`input_prod_${productSelected.id}`) as HTMLInputElement;
+
+      this.productSelected.quantity = parseInt(input_prod.value);
       this.productsOrder.push(productSelected);
-      console.log(productSelected);
-      
+
       const prod = this.fb.group({
         id: [productSelected.id, Validators.required],
-        quantity: [1, Validators.required],
+        quantity: [input_prod.value, Validators.required],
         price: [productSelected.sale_price, Validators.required]
       });
 
       const elementProduct = this.productItems;
       elementProduct.push(prod);
 
-      console.log('ELEMENT_PRODUCT', elementProduct);
-      console.log('FORM_VALUE', this.frmOrder.value);
-      
       this.calculateTotals();
       $("#main-modal").modal("hide");
   }
