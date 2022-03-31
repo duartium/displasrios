@@ -111,8 +111,7 @@ export class OrderComponent implements OnInit {
     
     console.log('INI CALCULATE', this.frmOrder.value);
     this.productItems.value.forEach(prod => {
-      console.log('PROD', prod); 
-        this.quantity_cart += prod.quantity,
+        this.quantity_cart += parseInt(prod.quantity),
         this.subtotal.setValue(parseFloat(this.subtotal.value) + parseFloat(prod.price));
     });
     this.total.setValue(this.subtotal.value);
@@ -208,7 +207,8 @@ export class OrderComponent implements OnInit {
       const elementProduct = this.productItems;
       elementProduct.push(prod);
 
-      this.calculateTotals();
+      
+      //this.calculateTotals();
       $("#main-modal").modal("hide");
   }
 
