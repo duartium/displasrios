@@ -20,7 +20,11 @@ import * as $ from "jquery";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LoaderComponent } from './components/loader/loader.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   declarations: [
@@ -47,7 +51,8 @@ import { LoaderComponent } from './components/loader/loader.component';
       timeOut: 2000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
-    })
+    }),
+    NgxMaskModule.forRoot(maskConfig),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }

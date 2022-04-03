@@ -53,31 +53,26 @@
                             </ul>
 
                             <div class="table-responsive p-2 mt-1" *ngIf="detailsOpened">
-                                <table class="table table-sm">
+                                <table class="table table-sm" style="overflow-x: auto; table-layout: fixed;
+                                word-wrap: break-word;">
                                     <thead>
                                       <tr>
-                                        <th>Producto</th>
-                                        <th>Cant</th>
-                                        <th>Precio</th>
+                                        <th style="width: 40px;"></th>
+                                        <th style="width: 160px;">Producto</th>
+                                        <th style="width: 80px;" class="text-center">Total</th>
+                                        <th style="width: 60px;">Cant</th>
+                                        <th style="width: 80px;">Precio</th>
                                       </tr>
                                     </thead>
                                     <tbody >
                                       <tr formArrayName="items" *ngFor="let product of productsOrder; let i = index;">
-                                        <td [id]="product.id">{{product.name}}</td>
-                                        <td class="text-center">{{product.quantity}}</td>
-                                        <td style="text-align:right">{{product.sale_price}}</td>
                                         <td class="px-2">
-                                            <div class="dropdown show ">
-                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                                    <i class="dw dw-more"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                    <a class="dropdown-item" href="#"><i class="dw dw-eye"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vista</font></font></a>
-                                                    <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Editar</font></font></a>
-                                                    <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Borrar</font></font></a>
-                                                </div>
-                                            </div>
+                                            <button class="btn btn-sm" type="button" (click)="removeProduct(product.id)"><i class="dw dw-delete-3" style="color: #d9534f"></i></button>
                                         </td>
+                                        <td [id]="product.id">{{product.name}}</td>
+                                        <td style="text-align:center">{{product.sale_price * product.quantity | currency}}</td>
+                                        <td class="text-center">{{product.quantity}}</td>
+                                        <td class="text-center">{{product.sale_price | currency}}</td>
                                       </tr>
                                     </tbody>
                                   </table>
@@ -122,7 +117,7 @@
                 <div class="row">
                     <div class="col-6 form-group">
                         <label for="discount">Descuento</label>
-                        <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()">
+                        <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()" mask="separator.2" separatorLimit =" 10000 " thousandSeparator=",">
 
                         <!-- <div class="form-control-feedback" 
                         *ngIf="frmOrder.discount.touched && frmOrder.discount.invalid">Sorry, that username's taken. Try another?</div> -->
@@ -130,7 +125,7 @@
                     
                     <div class="col-6 form-group ">
                         <label for="cliente_paga">Cliente Paga</label>
-                        <input type="text" class="form-control" formControlName="customer_payment" 
+                        <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  mask="separator.2" separatorLimit =" 10000 " thousandSeparator=","
                         [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')">
                         
                         <div *ngIf="customerPayment.hasError('required')" 
@@ -141,20 +136,20 @@
                <div class="row">
                     <div class="col-6 form-group">
                         <label>SUBTOTAL</label><br> 
-                        <h3>{{frmOrder.value.subtotal | currency}}</h3>
+                        <h3>{{subtotal.value | currency}}</h3>
                     </div>
                     <div class="col-6 form-group">
-                        <label>TOTAL</label><br> 
-                        <h3>{{frmOrder.value.total | currency}}</h3>
+                        <label>TOTAL A PAGAR</label><br> 
+                        <h3>{{total.value | currency}}</h3>
                     </div>
                     <div class="col-6 form-group">
                         <label>CAMBIO</label><br>
-                        <h3>{{frmOrder.value.change | currency}}</h3>
+                        <h3>{{change.value | currency}}</h3>
                     </div>
                </div>
 
                <div class="form-group my-3 text-right">
-                    <button type="submit" class="btn btn-primary">Generar</button>
+                    <button type="submit" class="btn btn-primary"><i class="dw dw-checked"></i> Generar</button>
                 </div>
 
             </form>
@@ -170,7 +165,7 @@
             <div style="display: block;">
                 <div class="custom-control custom-radio" >
                     <input id="rb_identificacion" [(ngModel)]="filterClientFinder" type="radio" name="filter_client" class="custom-control-input"
-                    value="identification" (change)="changeFilterCustomer($event)" checked>
+                    value="identification" (change)="changeFilterCustomer($event)">
                     <label class="custom-control-label" for="rb_identificacion">Identificación</label>
                 </div>
                 <div class="custom-control custom-radio" >

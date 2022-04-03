@@ -16,7 +16,7 @@ import { ProductOrderDetail } from 'src/app/models/Product.model';
 export class OrderComponent implements OnInit {
   
   finder = 'customer';
-  filterClientFinder = "identification";
+  filterClientFinder = "nombres";
   textClientFinder = "";
   textProductFinder = "";
   modalTitle = 'Buscar cliente';
@@ -83,6 +83,10 @@ export class OrderComponent implements OnInit {
     return this.frmOrder.get('subtotal');
   }
 
+  get iva(){
+    return this.frmOrder.get('iva');
+  }
+
   get productItems(){
     return this.frmOrder.get('items') as FormArray;
   }
@@ -102,6 +106,10 @@ export class OrderComponent implements OnInit {
     }
  }
 
+ removeProduct(id: string){
+    console.log('ELIMINAR', id);
+ }
+
   get total(){
     return this.frmOrder.get('total');
   }
@@ -110,21 +118,30 @@ export class OrderComponent implements OnInit {
     this.quantity_cart = 0;
     
     console.log('INI CALCULATE', this.frmOrder.value);
-    this.productItems.value.forEach(prod => {
-        this.quantity_cart += parseInt(prod.quantity),
-        this.subtotal.setValue(parseFloat(this.subtotal.value) + parseFloat(prod.price));
-    });
-    this.total.setValue(this.subtotal.value);
-    console.log('FIN CALCULATE', this.frmOrder.value);
-    // this.setOrderChange();
-    // this.applyDiscount();
 
+    let subtotal: number = 0;
+    this.productItems.value.forEach(prod => {
+        this.quantity_cart += parseInt(prod.quantity);
+        let total_line = parseFloat(prod.price) * parseInt(prod.quantity);
+        subtotal += total_line;
+    });
+    this.subtotal.setValue(subtotal);
+    this.total.setValue(this.subtotal.value);
+    this.iva.setValue(subtotal * 0.12);
+    //  this.setOrderChange();
+    //  this.applyDiscount();
+    //  console.log('FIN CALCULATE', this.frmOrder.value);
   }
 
-  setOrderChange(changeValue: string){
-      let currentValue: number = parseFloat(changeValue);
-      console.log('SETORDERCHANGE', this.frmOrder.value);
+  setOrderChange(){
+    console.log(this.customerPayment.value);
 
+      if(this.customerPayment.value.length == 0){
+          this.change.setValue(0);
+      }
+        
+      let currentValue: number = parseFloat(this.customerPayment.value);
+    
       if(currentValue > parseFloat(this.total.value)){
         this.change.setValue(currentValue - parseFloat(this.total.value));
       }
@@ -134,6 +151,7 @@ export class OrderComponent implements OnInit {
     //if(this.fullOrderDto.discount === 0) return;
     console.log('APPLYDISCOUNT', this.discount);
     this.total.setValue(this.subtotal.value - this.discount.value);
+    this.iva.setValue(this.total.value * 0.12);
   }
 
   changeFilterCustomer(e){
@@ -187,7 +205,7 @@ export class OrderComponent implements OnInit {
   selectedClient(customerSelected: CustomerFinder){
       this.detailsOpened = true;
       this.customerSelected = customerSelected;
-      this.frmOrder.value.id_client = customerSelected.id;
+      this.idClient.setValue(customerSelected.id);
       $("#main-modal").modal("hide");
   }
 
@@ -208,7 +226,7 @@ export class OrderComponent implements OnInit {
       elementProduct.push(prod);
 
       
-      //this.calculateTotals();
+      this.calculateTotals();
       $("#main-modal").modal("hide");
   }
 
@@ -228,11 +246,14 @@ export class OrderComponent implements OnInit {
   }
 
   orderRegister(){
+    console.log('READY FOR SEND', this.frmOrder.value);
     if(!this.frmOrder.valid){
       this.frmOrder.markAllAsTouched();
       alert('form invalido');
       return;
     }
+    console.log("TODO OK ");
+    
   }
 
 }
