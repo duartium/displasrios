@@ -7,6 +7,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import { ToastrService } from 'ngx-toastr';
 import { FullOrderDto } from 'src/app/Dtos/FullOrderDto.model';
 import { ProductOrderDetail } from 'src/app/models/Product.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order',
@@ -117,8 +118,6 @@ export class OrderComponent implements OnInit {
   calculateTotals(){
     this.quantity_cart = 0;
     
-    console.log('INI CALCULATE', this.frmOrder.value);
-
     let subtotal: number = 0;
     this.productItems.value.forEach(prod => {
         this.quantity_cart += parseInt(prod.quantity);
@@ -128,20 +127,14 @@ export class OrderComponent implements OnInit {
     this.subtotal.setValue(subtotal);
     this.total.setValue(this.subtotal.value);
     this.iva.setValue(subtotal * 0.12);
-    //  this.setOrderChange();
-    //  this.applyDiscount();
-    //  console.log('FIN CALCULATE', this.frmOrder.value);
   }
 
   setOrderChange(){
-    console.log(this.customerPayment.value);
-
       if(this.customerPayment.value.length == 0){
           this.change.setValue(0);
       }
         
       let currentValue: number = parseFloat(this.customerPayment.value);
-    
       if(currentValue > parseFloat(this.total.value)){
         this.change.setValue(currentValue - parseFloat(this.total.value));
       }
@@ -246,10 +239,11 @@ export class OrderComponent implements OnInit {
   }
 
   orderRegister(){
+    
     console.log('READY FOR SEND', this.frmOrder.value);
     if(!this.frmOrder.valid){
       this.frmOrder.markAllAsTouched();
-      alert('form invalido');
+      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong!'});
       return;
     }
     console.log("TODO OK ");
