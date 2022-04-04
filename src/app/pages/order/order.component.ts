@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FullOrderDto } from 'src/app/Dtos/FullOrderDto.model';
 import { ProductOrderDetail } from 'src/app/models/Product.model';
 import Swal from 'sweetalert2';
+import { SaleService } from 'src/app/services/sale.service';
 
 @Component({
   selector: 'app-order',
@@ -41,7 +42,8 @@ export class OrderComponent implements OnInit {
 
   constructor(private customerService: CustomersService,
     private fb: FormBuilder,  private productService: ProductsService,
-    private toastr: ToastrService) { 
+    private toastr: ToastrService,
+    private saleService: SaleService) { 
         
       this.frmOrder = this.fb.group({
         id_client:  this.fb.control('', [Validators.required]),
@@ -248,6 +250,11 @@ export class OrderComponent implements OnInit {
     }
     console.log("TODO OK ");
     
+    const order: FullOrderDto = null;
+    Object.assign(order, this.frmOrder.value);
+    this.saleService.create(order).subscribe(resp => {
+        console.log('RESPUESTA ORDER', resp);
+    });
   }
 
 }
