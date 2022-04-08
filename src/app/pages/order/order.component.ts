@@ -46,24 +46,21 @@ export class OrderComponent implements OnInit {
     private saleService: SaleService) { 
         
       this.frmOrder = this.fb.group({
-        id_client:  this.fb.control('', [Validators.required]),
+        id_client:  this.fb.control(-1, [Validators.required]),
         items: this.fb.array([]),
-        customer_payment:  this.fb.control('0', [Validators.required, Validators.minLength(1)]),
-        change: this.fb.control('0', [Validators.required]),
+        customer_payment:  this.fb.control(0, [Validators.required, Validators.minLength(1)]),
+        change: this.fb.control(0, [Validators.required]),
         payment_method:  this.fb.control('1', [Validators.required]),
         payment_mode:  this.fb.control('2', [Validators.required]),
-        discount:  this.fb.control('0', [Validators.required]),
-        subtotal: this.fb.control('0', [Validators.required]),
-        iva: this.fb.control('0', [Validators.required]),
-        total: this.fb.control('0', [Validators.required])
+        discount:  this.fb.control(0, [Validators.required]),
+        subtotal: this.fb.control(0, [Validators.required]),
+        iva: this.fb.control(0, [Validators.required]),
+        total: this.fb.control(0, [Validators.required])
       });
     }
 
   ngOnInit(): void {
-      // this.frmOrder.valueChanges
-      // .subscribe(value => {
-      //   console.log(value);
-      // });
+     
   }
 
   get idClient(){
@@ -72,6 +69,14 @@ export class OrderComponent implements OnInit {
 
   get customerPayment(){
     return this.frmOrder.get('customer_payment');
+  }
+
+  get PaymentMethod(){
+    return this.frmOrder.get('payment_method');
+  }
+
+  get PaymentMode(){
+    return this.frmOrder.get('payment_mode');
   }
 
   get discount(){
@@ -88,6 +93,10 @@ export class OrderComponent implements OnInit {
 
   get iva(){
     return this.frmOrder.get('iva');
+  }
+
+  get total(){
+    return this.frmOrder.get('total');
   }
 
   get productItems(){
@@ -113,9 +122,6 @@ export class OrderComponent implements OnInit {
     console.log('ELIMINAR', id);
  }
 
-  get total(){
-    return this.frmOrder.get('total');
-  }
 
   calculateTotals(){
     this.quantity_cart = 0;
@@ -213,11 +219,12 @@ export class OrderComponent implements OnInit {
 
       const prod = this.fb.group({
         id: [productSelected.id, Validators.required],
-        quantity: [input_prod.value, Validators.required],
-        price: [productSelected.sale_price, Validators.required]
+        quantity: [parseInt(input_prod.value), Validators.required],
+        price: [parseFloat(productSelected.sale_price.toString()), Validators.required]
       });
 
       const elementProduct = this.productItems;
+
       elementProduct.push(prod);
 
       
@@ -243,15 +250,47 @@ export class OrderComponent implements OnInit {
   orderRegister(){
     
     console.log('READY FOR SEND', this.frmOrder.value);
+    
+    // if((this.productItems.value as FormArray).controls.length == 0){
+    //   Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Agregue al menos un producto al pedido.'});
+    //   return;
+    // }
+
+    if(this.customerPayment.value == 0){
+      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese el monto que el cliente paga.'});
+      return;
+    }
+
+    if(this.idClient.value == ''){
+      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Seleccione el cliente que realiza el pedido.'});
+      return;
+    }
+
+
     if(!this.frmOrder.valid){
       this.frmOrder.markAllAsTouched();
-      Swal.fire({ icon: 'error', title: 'Oops...', text: 'Something went wrong!'});
+      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Complete los datos del pedido para enviarlo'});
       return;
     }
     console.log("TODO OK ");
     
-    const order: FullOrderDto = null;
-    Object.assign(order, this.frmOrder.value);
+    const order: FullOrderDto = {
+        id_client: this.idClient.value,
+        customer_payment: parseFloat(this.customerPayment.value),
+        change: parseFloat(this.change.value),
+        items: this.productItems.value,
+        payment_method: parseInt(this.PaymentMethod.value),
+        payment_mode: parseInt(this.PaymentMode.value),
+        discount: parseFloat(this.discount.value),
+        subtotal: this.subtotal.value,
+        iva: this.iva.value,
+        total: this.total.value
+    };
+    //Object.assign(order, this.frmOrder.value);
+    console.log('ORDER OBJ', order);
+    
+    
+
     this.saleService.create(order).subscribe(resp => {
         console.log('RESPUESTA ORDER', resp);
     });
