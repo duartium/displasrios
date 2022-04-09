@@ -165,12 +165,17 @@ export class OrderComponent implements OnInit {
   }
 
   findCustomer(){
+      document.getElementById("loader").style.display = "";
+      
 
       if(this.filterClientFinder === "identification"){
         this.customerService.getByIdentification(this.textClientFinder)
         .subscribe(resp => {
+          document.getElementById("loader").style.display = "none";
           this.customers.push(resp.data);
+
         }, (errorResp) => {
+          document.getElementById("loader").style.display = "none";
           this.customers = [];
           if(errorResp.status == 404){
               
@@ -181,19 +186,27 @@ export class OrderComponent implements OnInit {
         
         this.customerService.getByNames(this.textClientFinder)
         .subscribe(resp => {
+          document.getElementById("loader").style.display = "none";
           console.log(resp);
           this.customers = resp.data;
+        }, (errorResp) => {
+            console.log(errorResp);
+            document.getElementById("loader").style.display = "none";
+          if(errorResp.status > 499){
+            Swal.fire("Inconveniente de Infraestructura", "Lo sentimos, por ahora el servicio no se encuentra disponible.", "error");
+          }
         });
       }
   }
 
   findProduct(){
     document.getElementById("loader").style.display = "";
+    
     this.productService.getByName(this.textProductFinder)
     .subscribe(resp => {
+      document.getElementById("loader").style.display = "none";
       this.products = resp.data;
       
-      document.getElementById("loader").style.display = "none";
     }, (errorResp) => {
       document.getElementById("loader").style.display = "none";
       this.products = [];
@@ -244,8 +257,12 @@ export class OrderComponent implements OnInit {
   showFinder(){
     this.modalTitle = "Buscar Cliente";
     this.finder = "customer";
+    this.customers = [];
+    this.textClientFinder = "";
+    
     $("#main-modal").modal("show");
   }
+
 
   orderRegister(){
     

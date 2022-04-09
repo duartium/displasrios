@@ -20,18 +20,21 @@
                     (click)="showFinder()">
                 </div>
                 
-                <div *ngIf="customerSelected" class="row mt-2">
+                <div *ngIf="customerSelected" class="row mt-3">
                     <div class="col-4">
                         <div class="form-group">
                             <label >Identificación</label>
                             <p>{{customerSelected.identification}}</p>
                         </div>
                     </div>
-                    <div class="col-8">
+                    <div class="col-6">
                         <div class="form-group">
                             <label>Nombres</label>
                             <p>{{customerSelected.full_names}}</p>
                         </div>
+                    </div>
+                    <div class="col-2 p-2" class="text-center">
+                        <span  (click)="showFinder()"><i class="icon-copy dw dw-exchange"></i><!--<small style="display:block">Cambiar</small>--></span>
                     </div>
                 </div>
                
@@ -39,7 +42,7 @@
                     <button type="button" class="btn btn-success" (click)="addProduct()"><i class="fa fa-plus-circle"></i> Agregar Producto</button>
                 </div>
 
-                <div class="row" *ngIf="products?.length > 0">
+                <div class="row" *ngIf="productItems?.length > 0">
                     <div class="col-12">
                         
                         <div class="card mb-3" >
