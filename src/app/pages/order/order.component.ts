@@ -255,17 +255,22 @@ export class OrderComponent implements OnInit {
     //   Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Agregue al menos un producto al pedido.'});
     //   return;
     // }
+    console.log(this.idClient.value);
+    if(this.idClient.value <= 0){
+      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Seleccione el cliente que realiza el pedido.'});
+      return;
+    }
+
+    console.log('TOTAL', this.total.value);
+    if(this.total.value == 0){
+      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese al menos 1 producto para continuar.'});
+      return;
+    }
 
     if(this.customerPayment.value == 0){
       Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese el monto que el cliente paga.'});
       return;
     }
-
-    if(this.idClient.value == ''){
-      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Seleccione el cliente que realiza el pedido.'});
-      return;
-    }
-
 
     if(!this.frmOrder.valid){
       this.frmOrder.markAllAsTouched();
