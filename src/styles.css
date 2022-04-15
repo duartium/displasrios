@@ -29,6 +29,7 @@ h1, h2, h3, h4, h5{
 
 .main-content{
     width: 100%;
+    min-height: 75%;
     max-height: 75%;
     padding-left: 2rem;
     padding-right: 2rem;

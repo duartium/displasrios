@@ -263,7 +263,7 @@ export class OrderComponent implements OnInit {
     $("#main-modal").modal("show");
   }
 
-
+  
   orderRegister(){
     
     console.log('READY FOR SEND', this.frmOrder.value);
