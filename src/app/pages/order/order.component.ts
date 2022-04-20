@@ -9,6 +9,7 @@ import { FullOrderDto } from 'src/app/Dtos/FullOrderDto.model';
 import { ProductOrderDetail } from 'src/app/models/Product.model';
 import Swal from 'sweetalert2';
 import { SaleService } from 'src/app/services/sale.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-order',
@@ -315,6 +316,12 @@ export class OrderComponent implements OnInit {
 
     this.saleService.create(order).subscribe(resp => {
         console.log('RESPUESTA ORDER', resp);
+        if(resp.success){
+          this.frmOrder.reset();
+          Swal.fire({ icon: 'success', title: 'Enviado', text: `Se ha generado el pedido nº ${resp.data}`});
+        }else{
+            Swal.fire({ icon: 'warning', title: 'Pedido Fallido', text: 'Lo sentimos, hubo un problema al registrar tu pedido, vuelve a intentarlo más tarde.'});
+        }
     });
   }
 

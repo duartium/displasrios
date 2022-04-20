@@ -1,10 +1,36 @@
 <div class="wrap-content">
     <app-header-mobile></app-header-mobile>
-    <div class="main-content">
+    <div class="main-header">
         <div class="row mt-1" style="margin-left: 0;">
             <div class="col-12" style="padding-left:0;">
                 <h3>Pedidos por Cobrar</h3>
             </div>
+        </div>
+
+        <div class="header-search">
+            <div class="form-group">
+                <label for="sel_tipo_busqueda">Búsqueda por</label>
+                <select name="sel_tipo_busqueda" id="sel_tipo_busqueda" class="form-control" [ngModel]="tipo_busqueda">
+                    <option value="cliente">CLIENTE</option>
+                    <option value="num_pedido">NÚMERO DE PEDIDO</option>
+                    <option value="todos">TODOS</option>
+                </select>
+            </div>
+            <form [formGroup]="frmFiltersOrdersReceivable">
+                <div class="form-group">
+                    
+                </div> 
+            </form>  
+        </div>
+
+       
+
+    </div>
+    <div class="main-results">
+        <div id="orders_rec_results" class="p-3">
+
+            <app-order-receivable-cardbox [ordersReceivable]="ordersReceivable"></app-order-receivable-cardbox>
+
         </div>
     </div>
 </div>

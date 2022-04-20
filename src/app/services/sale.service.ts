@@ -14,7 +14,7 @@ export class SaleService {
   }
 
   create(order: FullOrderDto){
-    return this.http.post(this.url, order);
+    return this.http.post<SaleResponse>(this.url, order);
   }
 
 }

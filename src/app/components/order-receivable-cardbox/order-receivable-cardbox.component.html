@@ -1,0 +1,16 @@
+<div class="card-box pd-10 height-100-p mt-2" *ngFor="let order of ordersReceivable">
+    <div class="row" >
+        <div class="col-6">
+            <h5>Nº {{order.order_number}}</h5>
+            <small>{{order.full_names | uppercase}}</small><br>
+            
+        </div>
+        <div class="col-3">
+            <small>{{order.date}}</small><br>
+            <strong>{{order.total_amount | currency}}</strong>
+        </div>
+        <div class="col-3" style="display: flex; justify-content: center; align-items: center;">
+            <i class="dw dw-right-chevron" style="font-size: 30px; color:#CfCFD1"></i>
+        </div>
+    </div>
+</div>
