@@ -22,7 +22,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { OrdersReceivableComponent } from './pages/orders-receivable/orders-receivable.component';
-import { OrderReceivableCardboxComponent } from './components/order-receivable-cardbox/order-receivable-cardbox.component'
+import { OrderReceivableCardboxComponent } from './components/order-receivable-cardbox/order-receivable-cardbox.component';
+import { OrderReceivableComponent } from './pages/order-receivable/order-receivable.component'
   
 
 const maskConfig: Partial<IConfig> = {
@@ -44,6 +45,7 @@ const maskConfig: Partial<IConfig> = {
     LoaderComponent,
     OrdersReceivableComponent,
     OrderReceivableCardboxComponent,
+    OrderReceivableComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,24 @@
+.wrap-order-receivable{
+    width: 100vw;
+    height: 100vh;
+    background-color: #56238e;
+}
+
+.header-order-receivable{
+    height: 20%;
+    width: 100%;
+    background-color: #56238e;
+    color: #fff;
+    text-align: center;
+}
+
+.detail-order-receivable{
+    background-color: #fff;
+    height: 80%;
+    width: 100%;
+    padding: 25px;
+}
+
+.products-details{
+    
+}
