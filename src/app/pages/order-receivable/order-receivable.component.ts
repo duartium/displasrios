@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-receivable',
@@ -9,11 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 export class OrderReceivableComponent implements OnInit {
 
   idOrder: string;
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.idOrder = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('idOrder', this.idOrder);
+  }
+
+  goToBack(){
+    this.router.navigate(['/pedidos-cobrar']);
   }
 
 }

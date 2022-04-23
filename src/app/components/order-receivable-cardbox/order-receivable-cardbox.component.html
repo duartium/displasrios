@@ -1,4 +1,4 @@
-<div class="card-box pd-10 height-100-p mt-2" *ngFor="let order of ordersReceivable">
+<div class="card-box pd-10 height-100-p mt-2" *ngFor="let order of ordersReceivable" (click)="goToDetail(order.id)">
     <div class="row" >
         <div class="col-6">
             <h5>Nº {{order.order_number}}</h5>
