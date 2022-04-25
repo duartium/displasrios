@@ -13,6 +13,10 @@ h1, h2, h3, h4, h5{
     border-color: #56238e !important;
 }
 
+.dp-color-primary{
+    color:  #7538b9;
+}
+
 .form-control:focus{
     border-color: #9935b3 !important;
     border: 2px solid #9935b3;

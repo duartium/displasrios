@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OrderReceivableResp } from '../Dtos/OrderReceivableDto.model';
+import { FullOrderReceivableResp, OrderReceivableResp } from '../Dtos/OrderReceivableDto.model';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -17,4 +17,9 @@ export class OrderService {
   GetOrdersReceivable(){
       return this.http.get<OrderReceivableResp>(this.url);
   }
+
+  GetOrderReceivable(id: number){
+      return this.http.get<FullOrderReceivableResp>(this.url + '/'+id);
+  }
+
 }
