@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public authenticate(){
-    console.log(this.frmUser);
+  authenticate(){
+    console.log('authenticate', this.frmUser);
     if(!this.frmUser.valid){
       alert('Usuario o contraseña incorrectas');
       return;
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.catalogService.getAll().subscribe(resp => {
         localStorage.setItem('catalogs', JSON.stringify(resp));
     })
-    this.router.navigate(['pedido']);
+    this.router.navigate(['pedidos-cobrar']);
   }
 
 }

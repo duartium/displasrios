@@ -22,6 +22,12 @@ export interface FullOrderReceivable{
     products: ProductResume[]
 }
 
+export interface OrderPaymentRequest{
+    id_order: number;
+    change: number;
+    customer_payment: number;
+}
+
 export interface OrderReceivableResp extends ApiResponse{
     data: OrderReceivableDto[]
 }
