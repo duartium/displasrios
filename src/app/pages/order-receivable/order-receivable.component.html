@@ -1,7 +1,8 @@
 <div class="wrap-order-receivable">
     <p class="pt-4 px-3" (click)="goToBack()"><i class="dw dw-left-arrow1" style="font-size: 28px; color:#fff"></i></p>
     <div class="header-order-receivable pt-2">
-        <h2 style="color: #fff;">{{orderReceivable.total_amount | currency}}</h2>
+        <small>TOTAL A PAGAR</small><br>
+        <h2 style="color: #fff;">{{orderReceivable.balance| currency}}</h2>
         <small>{{orderReceivable.full_names}}</small>
     </div>
     <div class="detail-order-receivable">
@@ -70,10 +71,10 @@
                     <div *ngIf="customerPayment.hasError('required')" 
                     class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
                 </div>
-                <div class="col-6 form-group">
+                <!-- <div class="col-6 form-group">
                     <label>SALDO</label><br>
                     <h3>{{orderReceivable.balance | currency}}</h3>
-                </div>
+                </div> -->
                 <div class="col-6 form-group">
                     <label>CAMBIO</label><br>
                     <h3>{{change.value | currency}}</h3>

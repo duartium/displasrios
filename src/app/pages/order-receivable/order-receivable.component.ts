@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FullOrderReceivable, OrderPaymentRequest } from 'src/app/Dtos/OrderReceivableDto.model';
 import { OrderService } from 'src/app/services/order.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-receivable',
@@ -75,16 +76,26 @@ export class OrderReceivableComponent implements OnInit {
   }
 
   registerPayment(){
+    document.getElementById("loader").style.display = "";
     this.orderPaymentRequest = {
-      customer_payment: parseFloat(this.customerPayment.value),
+      customer_payment: Math.round(parseFloat(this.customerPayment.value)),
       id_order: parseInt(this.idOrder),
-      change: parseFloat(this.change.value)
+      change: Math.round(parseFloat(this.change.value))
     }
-
-    console.log(this.orderPaymentRequest);
+    
     this.orderService.registerPayment(this.orderPaymentRequest).subscribe(resp => {
       console.log('registerPayment', resp);
-      
+      document.getElementById("loader").style.display = "none";
+        if(resp.success){
+            Swal.fire("Venta Cerrada", resp.message, "success")
+            .then(function() {
+                this.goToBack();
+            });
+            
+        }else{
+          Swal.fire("Cobro Recibido", resp.message, "error");
+        }
+            
     });
   }
 

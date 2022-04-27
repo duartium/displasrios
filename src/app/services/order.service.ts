@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FullOrderReceivableResp, OrderPaymentRequest, OrderReceivableResp } from '../Dtos/OrderReceivableDto.model';
+import { ApiResponse } from '../models/ApiResponse';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -24,7 +25,7 @@ export class OrderService {
 
   
   registerPayment(orderPayment: OrderPaymentRequest){
-    return this.http.post(this.url + '/pay', orderPayment);
+    return this.http.post<ApiResponse>(this.url + '/pay', orderPayment);
   }
 
   
