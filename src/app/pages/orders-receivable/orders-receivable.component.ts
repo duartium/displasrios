@@ -10,6 +10,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrdersReceivableComponent implements OnInit {
 
+  
   tipo_busqueda: string = "todos";
   frmFiltersOrdersReceivable: FormGroup;  
   ordersReceivable: OrderReceivableDto[];

@@ -19,7 +19,7 @@
                 <strong>Días en Deuda</strong>
                 <span class="badge badge-pill badge-sm badge-warning ml-1 px-2">{{orderReceivable.days_debt}}</span>
                 <br>    
-                <button class="btn btn-sm btn-info mt-2" *ngIf="orderReceivable.payments.length > 0"><i class="dw dw-eye"></i> Ver Pagos</button>
+                <button class="btn btn-sm btn-info mt-2" *ngIf="orderReceivable.payments.length > 0" (click)="showModal()"><i class="dw dw-eye"></i> Ver Pagos</button>
             </div>
             <div class="col-5 text-right">
                 <strong >Total General</strong>
@@ -86,3 +86,20 @@
         </form>
     </div>
 </div>
+<app-modal [modalTitle]="modalTitle">
+    <div>
+        <div class="table-responsive p-2 mt-1">
+            <table class="table table-sm">
+                <thead>
+                    <tr><th>Fecha</th><th>Monto</th></tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let payment of orderReceivable.payments">
+                    <td>{{payment.date}}</td>
+                    <td>{{payment.amount | currency}}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</app-modal>

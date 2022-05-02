@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FullOrderReceivable, OrderPaymentRequest } from 'src/app/Dtos/OrderReceivableDto.model';
+import { Payment } from 'src/app/models/Payment.model';
 import { OrderService } from 'src/app/services/order.service';
 import Swal from 'sweetalert2';
 
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class OrderReceivableComponent implements OnInit {
 
+  modalTitle: string = "PAGOS";
   detailsOpened: boolean = false;
   idOrder: string;
   frmOrderReceivable: FormGroup;
@@ -54,7 +56,10 @@ export class OrderReceivableComponent implements OnInit {
     this.detailsOpened = !this.detailsOpened;
   }
 
-  
+  showModal(){
+    
+    $("#main-modal").modal("show");
+  }
 
   setOrderChange(){
       if(this.customerPayment.value.length == 0){

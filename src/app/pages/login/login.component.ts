@@ -48,8 +48,9 @@ export class LoginComponent implements OnInit {
       
     this.catalogService.getAll().subscribe(resp => {
         localStorage.setItem('catalogs', JSON.stringify(resp));
+        this.router.navigate(['pedidos-cobrar']);
     })
-    this.router.navigate(['pedidos-cobrar']);
+    
   }
 
 }
