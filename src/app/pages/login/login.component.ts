@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthRequest } from 'src/app/models/AuthRequest.model';
+import { User } from 'src/app/models/User.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CatalogsService } from 'src/app/services/catalogs.service';
 import { TokenService } from 'src/app/services/token.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private tokenService: TokenService,
     private router: Router,
-    private catalogService: CatalogsService) { 
+    private catalogService: CatalogsService,
+    private userService: UsersService) { 
     
   }
 
@@ -50,7 +53,19 @@ export class LoginComponent implements OnInit {
     this.catalogService.getAll().subscribe(resp => {
         localStorage.setItem('catalogs', JSON.stringify(resp));
 
-        this.router.navigate(['pedidos-cobrar']);
+        this.userService.getProfile().subscribe(resp => {
+          const userProfile: User = resp.data;
+          
+          if(userProfile.role == 1){
+            this.router.navigate(['pedidos']);
+          }else{
+            this.router.navigate(['pedidos-cobrar']);
+          }
+
+        });
+        
+        
+        
     })
     
   }

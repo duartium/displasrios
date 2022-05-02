@@ -11,9 +11,14 @@ import { environment } from './../../environments/environment';
 export class AuthService {
   private apiUrl = `${environment.API_URL}/authentication/login`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private tokenService: TokenService) { }
 
   authenticate(authRequest: AuthRequest){
       return this.http.post<AuthDto>(this.apiUrl, authRequest);
+  }
+
+  logout(){
+    this.tokenService.removeToken();
   }
 }

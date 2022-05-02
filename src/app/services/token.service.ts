@@ -15,4 +15,8 @@ export class TokenService {
       return localStorage.getItem('displasrios_access_token');
   }
 
+  removeToken(){
+    localStorage.removeItem('displasrios_access_token');
+  }
+
 }
