@@ -82,6 +82,7 @@ export class OrderReceivableComponent implements OnInit {
 
   registerPayment(){
     document.getElementById("loader").style.display = "";
+    
     this.orderPaymentRequest = {
       customer_payment: Math.round(parseFloat(this.customerPayment.value)),
       id_order: parseInt(this.idOrder),
@@ -92,15 +93,17 @@ export class OrderReceivableComponent implements OnInit {
       console.log('registerPayment', resp);
       document.getElementById("loader").style.display = "none";
         if(resp.success){
-            Swal.fire("Venta Cerrada", resp.message, "success")
-            .then(function() {
+            Swal.fire({ title: "Venta Cerrada", text: resp.message, icon: "success"})
+            .then(resp => {
                 this.goToBack();
             });
-            
         }else{
-          Swal.fire("Cobro Recibido", resp.message, "error");
+          Swal.fire({ title: "Cobro Recibido", text: resp.message, icon: "error"})
+            .then(resp => {
+                this.goToBack();
+            });
         }
-            
+
     });
   }
 
