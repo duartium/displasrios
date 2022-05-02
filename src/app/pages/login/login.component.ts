@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [Validators.required, Validators.minLength(3)])
   });
   
+  private idProfile: string;
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private tokenService: TokenService,
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
       
     this.catalogService.getAll().subscribe(resp => {
         localStorage.setItem('catalogs', JSON.stringify(resp));
+
         this.router.navigate(['pedidos-cobrar']);
     })
     
