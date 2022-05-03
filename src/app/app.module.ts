@@ -24,8 +24,10 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { OrdersReceivableComponent } from './pages/orders-receivable/orders-receivable.component';
 import { OrderReceivableCardboxComponent } from './components/order-receivable-cardbox/order-receivable-cardbox.component';
 import { OrderReceivableComponent } from './pages/order-receivable/order-receivable.component';
-import { OrdersOfDayComponent } from './pages/orders-of-day/orders-of-day.component'
-  
+import { OrdersOfDayComponent } from './pages/orders-of-day/orders-of-day.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AdminModule } from './pages/admin/admin.module';
+
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -62,6 +64,7 @@ const maskConfig: Partial<IConfig> = {
       preventDuplicates: true,
     }),
     NgxMaskModule.forRoot(maskConfig),
+    AdminModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
