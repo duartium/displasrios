@@ -4,6 +4,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { CustomersComponent } from './customers/customers.component';
 import { AdminRoutingModule } from './admin-routing-module';
 import { AdminComponent } from './admin.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 
 
@@ -11,14 +12,16 @@ import { RouterModule } from '@angular/router';
   declarations: [
     AdminComponent, 
     CustomerComponent, 
-    CustomersComponent
+    CustomersComponent,
   ],
   imports: [
     CommonModule,
+    SharedModule,
+    RouterModule,
     AdminRoutingModule,
   ],
   exports: [
-    AdminComponent
+    
   ]
 })
 export class AdminModule { }

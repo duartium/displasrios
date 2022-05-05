@@ -34,11 +34,12 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(){
-    console.log('authenticate', this.frmUser);
+    
     if(!this.frmUser.valid){
       alert('Usuario o contraseña incorrectas');
       return;
     }
+    document.getElementById("loader").style.display = "";
 
     const authRequest: AuthRequest ={
         username: this.frmUser.get('username').value,
@@ -48,6 +49,8 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(authRequest)
       .subscribe(resp => {
         this.tokenService.saveToken(resp.data);
+      }, (err) => {
+        document.getElementById("loader").style.display = "none";
       });
       
     this.catalogService.getAll().subscribe(resp => {
@@ -57,16 +60,18 @@ export class LoginComponent implements OnInit {
           const userProfile: User = resp.data;
           
           if(userProfile.role == 1){
-            this.router.navigate(['pedidos']);
+            this.router.navigate(['admin']);
           }else{
             this.router.navigate(['pedidos-cobrar']);
           }
-
+          document.getElementById("loader").style.display = "none";
+        }, (err) => {
+          document.getElementById("loader").style.display = "none";
         });
         
-        
-        
-    })
+    }, (err) => {
+      document.getElementById("loader").style.display = "none";
+    });
     
   }
 

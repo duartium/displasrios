@@ -10,13 +10,14 @@ import { OrdersOfDayComponent } from './pages/orders-of-day/orders-of-day.compon
 import { OrdersReceivableComponent } from './pages/orders-receivable/orders-receivable.component';
 
 const routes: Routes = [
-  // { path: '', component: LoginComponent, pathMatch: 'full'},
+  { path: '', component: LoginComponent, pathMatch: 'full'},
   { path: 'login', component: LoginComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'pedido', component: OrderComponent},
   { path: 'pedido-cobrar/:id', component: OrderReceivableComponent},
   { path: 'pedidos-cobrar', component: OrdersReceivableComponent},
-  { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
+  // { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
+  { path: 'admin', component: AdminComponent},
   { path: '**', component: LoginComponent},
 ];
 
@@ -27,7 +28,7 @@ const routes: Routes = [
     // Enable scrolling to anchors
     anchorScrolling: "enabled",
   }),
-  AdminRoutingModule
+  // AdminRoutingModule
 ],
   exports: [RouterModule]
 })

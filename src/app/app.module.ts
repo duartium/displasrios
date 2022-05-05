@@ -3,9 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { RideSidebarComponent } from './shared/ride-sidebar/ride-sidebar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -25,7 +22,7 @@ import { OrdersReceivableComponent } from './pages/orders-receivable/orders-rece
 import { OrderReceivableCardboxComponent } from './components/order-receivable-cardbox/order-receivable-cardbox.component';
 import { OrderReceivableComponent } from './pages/order-receivable/order-receivable.component';
 import { OrdersOfDayComponent } from './pages/orders-of-day/orders-of-day.component';
-import { AdminComponent } from './pages/admin/admin.component';
+import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './pages/admin/admin.module';
 
 
@@ -36,14 +33,9 @@ const maskConfig: Partial<IConfig> = {
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    SidebarComponent,
-    RideSidebarComponent,
     DashboardComponent,
     LoginComponent,
-    NavbarBottomComponent,
     OrderComponent,
-    HeaderMobileComponent,
     ModalComponent,
     LoaderComponent,
     OrdersReceivableComponent,
@@ -64,6 +56,7 @@ const maskConfig: Partial<IConfig> = {
       preventDuplicates: true,
     }),
     NgxMaskModule.forRoot(maskConfig),
+    SharedModule,
     AdminModule
   ],
   providers: [
