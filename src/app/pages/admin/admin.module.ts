@@ -6,13 +6,14 @@ import { AdminRoutingModule } from './admin-routing-module';
 import { AdminComponent } from './admin.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
   declarations: [
     AdminComponent, 
     CustomerComponent, 
-    CustomersComponent,
+    CustomersComponent, AdminDashboardComponent,
   ],
   imports: [
     CommonModule,

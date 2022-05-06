@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: 'pedido', component: OrderComponent},
   { path: 'pedido-cobrar/:id', component: OrderReceivableComponent},
   { path: 'pedidos-cobrar', component: OrdersReceivableComponent},
-  // { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
-  { path: 'admin', component: AdminComponent},
+  { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
+  // { path: 'admin', component: AdminComponent},
   { path: '**', component: LoginComponent},
 ];
 
