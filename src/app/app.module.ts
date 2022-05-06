@@ -21,7 +21,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { OrdersReceivableComponent } from './pages/orders-receivable/orders-receivable.component';
 import { OrderReceivableCardboxComponent } from './components/order-receivable-cardbox/order-receivable-cardbox.component';
 import { OrderReceivableComponent } from './pages/order-receivable/order-receivable.component';
-import { OrdersOfDayComponent } from './pages/orders-of-day/orders-of-day.component';
+import { OrdersOfDayComponent } from './pages/admin/orders-of-day/orders-of-day.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './pages/admin/admin.module';
 

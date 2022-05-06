@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
           const userProfile: User = resp.data;
           
           if(userProfile.role == 1){
-            this.router.navigate(['admin']);
+            this.router.navigate(['admin/pedidos']);
           }else{
             this.router.navigate(['pedidos-cobrar']);
           }

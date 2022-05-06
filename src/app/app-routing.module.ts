@@ -6,7 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OrderReceivableComponent } from './pages/order-receivable/order-receivable.component';
 import { OrderComponent } from './pages/order/order.component';
-import { OrdersOfDayComponent } from './pages/orders-of-day/orders-of-day.component';
+import { OrdersOfDayComponent } from './pages/admin/orders-of-day/orders-of-day.component';
 import { OrdersReceivableComponent } from './pages/orders-receivable/orders-receivable.component';
 
 const routes: Routes = [
@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'pedido-cobrar/:id', component: OrderReceivableComponent},
   { path: 'pedidos-cobrar', component: OrdersReceivableComponent},
   { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
-  // { path: 'admin', component: AdminComponent},
   { path: '**', component: LoginComponent},
 ];
 
