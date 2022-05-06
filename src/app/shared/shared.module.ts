@@ -5,6 +5,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarBottomComponent } from './navbar-bottom/navbar-bottom.component';
 import { RideSidebarComponent } from './ride-sidebar/ride-sidebar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AdminRoutingModule } from '../pages/admin/admin-routing-module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -17,7 +19,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     SidebarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    AdminRoutingModule
   ],
   exports: [
     HeaderMobileComponent,
