@@ -35,3 +35,15 @@ export interface OrderReceivableResp extends ApiResponse{
 export interface FullOrderReceivableResp extends ApiResponse{
     data: FullOrderReceivable
 }
+
+export interface SummaryOrdersOfDayResp extends ApiResponse{
+    data: SummaryOrderOfDay[]
+}
+
+export interface SummaryOrderOfDay{
+    id: number;
+    order_number: string;
+    full_names: string;
+    total_amount: string;
+    date: string;
+}
