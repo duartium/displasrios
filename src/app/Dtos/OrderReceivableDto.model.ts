@@ -46,4 +46,5 @@ export interface SummaryOrderOfDay{
     full_names: string;
     total_amount: string;
     date: string;
+    username: string;
 }

@@ -18,10 +18,9 @@ export class OrdersOfDayComponent implements OnInit {
 
   getSummaryOrdersOfDay(){
     this.orderService.GetSummaryOrdersOfDay().subscribe(resp => {
-      console.log(resp);
         if(resp.success){
             this.summaryOrders = resp.data;
-            
+            console.log(resp.data);
         }
     });
   }

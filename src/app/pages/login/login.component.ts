@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CatalogsService } from 'src/app/services/catalogs.service';
 import { TokenService } from 'src/app/services/token.service';
 import { UsersService } from 'src/app/services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -49,8 +50,11 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(authRequest)
       .subscribe(resp => {
         this.tokenService.saveToken(resp.data);
+        
       }, (err) => {
+        console.log('err', err);
         document.getElementById("loader").style.display = "none";
+        Swal.fire({ icon: 'error', title: 'Lo sentimos, se ha generado un conflicto', text: 'No se pudo autenticar.'});
       });
       
     this.catalogService.getAll().subscribe(resp => {

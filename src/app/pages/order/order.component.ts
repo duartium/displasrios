@@ -295,7 +295,7 @@ export class OrderComponent implements OnInit {
       Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Complete los datos del pedido para enviarlo'});
       return;
     }
-    console.log("TODO OK ");
+    document.getElementById("loader").style.display = "";
     
     const order: FullOrderDto = {
         id_client: this.idClient.value,
@@ -316,12 +316,16 @@ export class OrderComponent implements OnInit {
 
     this.saleService.create(order).subscribe(resp => {
         console.log('RESPUESTA ORDER', resp);
+        document.getElementById("loader").style.display = "none";
         if(resp.success){
           this.frmOrder.reset();
           Swal.fire({ icon: 'success', title: 'Enviado', text: `Se ha generado el pedido nº ${resp.data}`});
         }else{
             Swal.fire({ icon: 'warning', title: 'Pedido Fallido', text: 'Lo sentimos, hubo un problema al registrar tu pedido, vuelve a intentarlo más tarde.'});
         }
+    }, (err) => {
+        document.getElementById("loader").style.display = "none";
+        Swal.fire({ icon: 'error', title: 'Lo sentimos, se ha generado un conflicto', text: 'No se pudo registrar el pedido.'});
     });
   }
 
