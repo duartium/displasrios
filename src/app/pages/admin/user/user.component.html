@@ -1,0 +1,55 @@
+<div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nuevo Usuario</li>
+        </ol>
+    </nav>
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Nuevo Usuario</h4>
+            </div>
+        </div>
+        <form formGroup="frmUser">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Identificación</label>
+                        <input class="form-control" type="text" placeholder="Identificación" maxlength="10">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Nombres</label>
+                        <input class="form-control" type="text" placeholder="Nombres" >
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Apellidos</label>
+                        <input class="form-control" type="text" placeholder="Apellidos" >
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" placeholder="Email" type="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Cargo</label>
+                    <div class="dropdown bootstrap-select form-control dropup"><select class="selectpicker form-control" data-style="btn-outline-primary" data-size="5" tabindex="-98">
+                        <option value="2">Repartidor</option>
+                        <option value="1">Administrador</option>
+                    </select><button type="button" class="btn dropdown-toggle btn-outline-primary" data-toggle="dropdown" role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false" title="Mustard"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">Mustard</div></div> </div></button><div class="dropdown-menu" style="max-height: 237px; overflow: hidden;"><div class="inner show" role="listbox" id="bs-select-1" tabindex="-1" aria-activedescendant="bs-select-1-1" style="max-height: 237px; overflow-y: auto;"><ul class="dropdown-menu inner show" role="presentation" style="margin-top: 0px; margin-bottom: 0px;"><li class="dropdown-header optgroup-1"><span class="text">Condiments</span></li><li class="optgroup-1 selected active"><a role="option" class="opt dropdown-item active selected" id="bs-select-1-1" tabindex="0" aria-setsize="6" aria-posinset="1" aria-selected="true"><span class="text">Mustard</span></a></li><li class="optgroup-1"><a role="option" class="opt dropdown-item" id="bs-select-1-2" tabindex="0"><span class="text">Ketchup</span></a></li><li class="optgroup-1"><a role="option" class="opt dropdown-item" id="bs-select-1-3" tabindex="0"><span class="text">Relish</span></a></li><li class="dropdown-divider optgroup-1div"></li><li class="dropdown-header optgroup-2"><span class="text">Breads</span></li><li class="optgroup-2"><a role="option" class="opt dropdown-item" id="bs-select-1-6" tabindex="0"><span class="text">Plain</span></a></li><li class="optgroup-2"><a role="option" class="opt dropdown-item" id="bs-select-1-7" tabindex="0"><span class="text">Steamed</span></a></li><li class="optgroup-2"><a role="option" class="opt dropdown-item" id="bs-select-1-8" tabindex="0"><span class="text">Toasted</span></a></li></ul></div></div></div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>
