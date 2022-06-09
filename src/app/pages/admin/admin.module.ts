@@ -14,7 +14,9 @@ import { UserComponent } from './user/user.component';
   declarations: [
     AdminComponent, 
     CustomerComponent, 
-    CustomersComponent, AdminDashboardComponent, UserComponent,
+    CustomersComponent, 
+    AdminDashboardComponent, 
+    UserComponent,
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,38 @@
-<p>customers works!</p>
+<div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+        </ol>
+    </nav>
 
-<p>customers works!</p>
-<p>customers works!</p>
-<p>customers works!</p>
-<p>customers works!</p>
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Clientes</h4>
+            </div>
+        </div>
 
+        <table class="table mt-4">
+            <thead style="text-transform: uppercase;">
+                <tr>
+                    <th scope="col">Identificación</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Dirección</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let customer of customers">
+                <tr>
+                    <td scope="row">{{customer.identification}}</td>
+                    <td>{{customer.names}}  {{customer.surnames}}</td>
+                    <td>{{customer.email}}</td>
+                    <td>{{customer.phone_number}}</td>
+                    <td>{{customer.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
