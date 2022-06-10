@@ -1,0 +1,40 @@
+<div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+        </ol>
+    </nav>
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Usuarios</h4>
+            </div>
+            <div class="pull-right">
+                <a href="#basic-table" class="btn btn-primary btn-sm scroll-click" rel="content-y" data-toggle="collapse" role="button"><i class="fa fa-code"></i> Source Code</a>
+            </div>
+        </div>
+        <table class="table ">
+            <thead style="text-transform: uppercase;">
+                <tr>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Identificación</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let user of users">
+                <tr>
+                    <!-- <th scope="row">{{order.order_number}}</th>
+                    <td>{{order.date}}</td>
+                    <td>{{order.full_names}}</td>
+                    <td>{{order.username}}</td>
+                    <td>{{order.total_amount}}</td>
+                    <td><span class="badge badge-primary">Primary</span></td> -->
+                </tr>
+            </tbody>
+        </table>
+       
+    </div>
+</div>

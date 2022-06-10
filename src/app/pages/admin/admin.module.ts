@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserComponent } from './user/user.component';
+import { UsersComponent } from './users/users.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UserComponent } from './user/user.component';
     CustomerComponent, 
     CustomersComponent, 
     AdminDashboardComponent, 
-    UserComponent,
+    UserComponent, 
+    UsersComponent
   ],
   imports: [
     CommonModule,
