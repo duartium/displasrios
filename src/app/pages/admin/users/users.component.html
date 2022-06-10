@@ -26,12 +26,11 @@
             </thead>
             <tbody *ngFor="let user of users">
                 <tr>
-                    <!-- <th scope="row">{{order.order_number}}</th>
-                    <td>{{order.date}}</td>
-                    <td>{{order.full_names}}</td>
-                    <td>{{order.username}}</td>
-                    <td>{{order.total_amount}}</td>
-                    <td><span class="badge badge-primary">Primary</span></td> -->
+                    <td scope="row">{{user.fullname}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.identification}}</td>
+                    <td>{{user.email}}</td>
+                    <td><button class="badge badge-warning">Edit</button></td>
                 </tr>
             </tbody>
         </table>

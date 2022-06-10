@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiResponse } from '../models/ApiResponse';
+import { Response } from '../models/Response.model';
+import { User } from '../models/User.model';
 import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class UsersService {
   }
 
   getAll(){
-    return this.http.get(this.apiUrl);
+    return this.http.get<Response<User[]>>(this.apiUrl);
   }
   
 }
