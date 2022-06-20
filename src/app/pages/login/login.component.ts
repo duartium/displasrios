@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -50,11 +51,15 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(authRequest)
       .subscribe(resp => {
         this.tokenService.saveToken(resp.data);
-        
-      }, (err) => {
+        console.log('token', resp.data);
+      }, (err: HttpErrorResponse) => {
         console.log('err', err);
+        if(err.status == 400){
+          Swal.fire({ icon: 'warning', title: 'Al parecer has olvidado tus credenciales', text: "Usuario o contraseña incorrectas. Revisa tus credenciales y vuelve a intentar."});
+        }else{
+            Swal.fire({ icon: 'error', title: 'Lo sentimos, se ha generado un conflicto', text: 'No se pudo autenticar.'});
+        }
         document.getElementById("loader").style.display = "none";
-        Swal.fire({ icon: 'error', title: 'Lo sentimos, se ha generado un conflicto', text: 'No se pudo autenticar.'});
       });
       
     this.catalogService.getAll().subscribe(resp => {
@@ -65,10 +70,12 @@ export class LoginComponent implements OnInit {
           
           if(userProfile.role == 1){
             this.router.navigate(['admin/pedidos']);
+            document.getElementById("loader").style.display = "none";
           }else{
             this.router.navigate(['pedidos-cobrar']);
+            document.getElementById("loader").style.display = "none";
           }
-          document.getElementById("loader").style.display = "none";
+          
         }, (err) => {
           document.getElementById("loader").style.display = "none";
         });
