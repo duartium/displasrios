@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
+import { ProductsComponent } from './products/products.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UsersComponent } from './users/users.component';
     CustomersComponent, 
     AdminDashboardComponent, 
     UserComponent, 
-    UsersComponent
+    UsersComponent, 
+    ProductsComponent
   ],
   imports: [
     CommonModule,
