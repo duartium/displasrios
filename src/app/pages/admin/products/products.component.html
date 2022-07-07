@@ -16,22 +16,30 @@
         <table class="table mt-4">
             <thead style="text-transform: uppercase;">
                 <tr>
-                    <th scope="col">Identificación</th>
-                    <th scope="col">Nombres</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Dirección</th>
+                    <th scope="col">CODIGO</th>
+                    <th scope="col">NOMBRE PRODUCTO</th>
+                    <th scope="col">COSTO</th>
+                    <th scope="col">P. VENTA</th>
+                    <th scope="col">STOCK</th>
+                    <th scope="col">CANT X PAQ.</th>
+                    <th scope="col">CANT X BULTO.</th>
+                    <th scope="col">CATEGORÍA</th>
+                    <th scope="col">PROVEEDOR</th>
                 </tr>
             </thead>
-            <!-- <tbody *ngFor="let product of products">
-                <tr>
-                    <td scope="row">{{customer.identification}}</td>
-                    <td>{{customer.names}}  {{customer.surnames}}</td>
-                    <td>{{customer.email}}</td>
-                    <td>{{customer.phone_number}}</td>
-                    <td>{{customer.address}}</td>
+            <tbody >
+                <tr *ngFor="let product of products">
+                    <td scope="row">{{ product.code }}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.cost | currency}}</td>
+                    <td>{{product.sale_price | currency}}</td>
+                    <td>{{product.stock}}</td>
+                    <td>{{product.quantity_package}}</td>
+                    <td>{{product.quantity_lump}}</td>
+                    <td>{{product.category_name}}</td>
+                    <td>{{product.provider_name}}</td>
                 </tr>
-            </tbody> -->
+            </tbody>
         </table>
 
     </div>
