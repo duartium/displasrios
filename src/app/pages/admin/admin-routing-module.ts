@@ -6,6 +6,7 @@ import { AdminComponent } from './admin.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomersComponent } from './customers/customers.component';
 import { OrdersOfDayComponent } from './orders-of-day/orders-of-day.component';
+import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
@@ -21,6 +22,7 @@ const routes = [
         { path: 'usuario', component: UserComponent },
         { path: 'usuarios', component: UsersComponent },
         { path: 'productos', component: ProductsComponent },
+        { path: 'producto/nuevo', component: ProductComponent },
       ] 
     }
   ]

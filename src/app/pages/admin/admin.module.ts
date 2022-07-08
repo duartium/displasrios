@@ -10,6 +10,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
 import { ProductsComponent } from './products/products.component';
+import { ProductComponent } from './product/product.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,13 +22,15 @@ import { ProductsComponent } from './products/products.component';
     AdminDashboardComponent, 
     UserComponent, 
     UsersComponent, 
-    ProductsComponent
+    ProductsComponent, 
+    ProductComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
     AdminRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     

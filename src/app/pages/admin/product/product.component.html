@@ -1,0 +1,99 @@
+<div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nuevo Producto</li>
+        </ol>
+    </nav>
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Nuevo Producto</h4>
+            </div>
+        </div>
+        <form [formGroup]="frmProduct" (ngSubmit)="createProduct()">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <label>Código</label>
+                        <input class="form-control" type="text" formControlName="code" placeholder="Código" maxlength="10">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5">
+                    <div class="form-group">
+                        <label>Nombre del producto</label>
+                        <input class="form-control" type="text" formControlName="name" placeholder="Nombre del producto" >
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <input class="form-control" type="text" formControlName="description" placeholder="Descripción" >
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-5">
+                    <div class="form-group">
+                        <label>Categoría</label>
+                        <select class="custom-select2 form-control select2-hidden-accessible" formControlName="category_id" style="width: 100%; height: 38px;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                            <option value="AK" data-select2-id="3">Alaska</option>
+                            <option value="HI" data-select2-id="14">Hawaii</option>
+                        </select>
+                        <span class="select2 select2-container select2-container--default select2-container--above select2-container--focus" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-state-bq-container"><span class="select2-selection__rendered" id="select2-state-bq-container" role="textbox" aria-readonly="true" title="Hawaii">Hawaii</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-7">
+                    <div class="form-group">
+                        <label>Proveedor</label>
+                        <select class="custom-select2 form-control select2-hidden-accessible" formControlName="provider_id" style="width: 100%; height: 38px;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                            <option value="AK" data-select2-id="3">Alaska</option>
+                            <option value="HI" data-select2-id="14">Hawaii</option>
+                        </select>
+                        <span class="select2 select2-container select2-container--default select2-container--above select2-container--focus" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-state-bq-container"><span class="select2-selection__rendered" id="select2-state-bq-container" role="textbox" aria-readonly="true" title="Hawaii">Hawaii</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <div class="form-group">
+                        <label>Stock Inicial</label>
+                        <input class="form-control" formControlName="stock" placeholder="Stock Inicial" type="email">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <div class="form-group">
+                        <label>Costo</label>
+                        <input class="form-control" formControlName="cost" placeholder="Costo" type="email">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <div class="form-group">
+                        <label>Precio Venta</label>
+                        <input class="form-control" formControlName="sale_price" placeholder="Precio Venta" type="email">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <div class="form-group">
+                        <label>Cant X Paquete</label>
+                        <input class="form-control" formControlName="quantity_package" placeholder="Cant. X Paquete" type="email">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <div class="form-group">
+                        <label>Cant por Bulto</label>
+                        <input class="form-control" formControlName="quantity_lump" placeholder="Cant X Bulto" type="email">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-success">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>
