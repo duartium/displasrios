@@ -48,10 +48,32 @@ export class LoginComponent implements OnInit {
         password: this.frmUser.get('password').value
     };
 
-    this.authService.authenticate(authRequest)
-      .subscribe(resp => {
-        this.tokenService.saveToken(resp.data);
-        console.log('token', resp.data);
+      this.authService.authenticate(authRequest)
+        .subscribe(resp => {
+          this.tokenService.saveToken(resp.data);
+          console.log('token', resp.data);
+          this.catalogService.getAll().subscribe(resp => {
+            localStorage.setItem('catalogs', JSON.stringify(resp));
+    
+            this.userService.getProfile().subscribe(resp => {
+              const userProfile: User = resp.data;
+              
+              if(userProfile.role == 1){
+                this.router.navigate(['admin/pedidos']);
+                document.getElementById("loader").style.display = "none";
+              }else{
+                this.router.navigate(['pedidos-cobrar']);
+                document.getElementById("loader").style.display = "none";
+              }
+              
+            }, (err) => {
+              document.getElementById("loader").style.display = "none";
+            });
+            
+        }, (err) => {
+          document.getElementById("loader").style.display = "none";
+        });
+
       }, (err: HttpErrorResponse) => {
         console.log('err', err);
         if(err.status == 400){
@@ -62,27 +84,7 @@ export class LoginComponent implements OnInit {
         document.getElementById("loader").style.display = "none";
       });
       
-    this.catalogService.getAll().subscribe(resp => {
-        localStorage.setItem('catalogs', JSON.stringify(resp));
-
-        this.userService.getProfile().subscribe(resp => {
-          const userProfile: User = resp.data;
-          
-          if(userProfile.role == 1){
-            this.router.navigate(['admin/pedidos']);
-            document.getElementById("loader").style.display = "none";
-          }else{
-            this.router.navigate(['pedidos-cobrar']);
-            document.getElementById("loader").style.display = "none";
-          }
-          
-        }, (err) => {
-          document.getElementById("loader").style.display = "none";
-        });
-        
-    }, (err) => {
-      document.getElementById("loader").style.display = "none";
-    });
+   
     
   }
 

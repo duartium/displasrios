@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CatalogsService } from 'src/app/services/catalogs.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -11,11 +12,14 @@ export class ProductComponent implements OnInit {
   frmProduct: FormGroup;
 
   constructor(private productService: ProductsService,
+    private catalogsService: CatalogsService,
     private fb: FormBuilder) { 
       this.createForm();
+      
   }
 
   ngOnInit(): void {
+    this.getCatalogs();
   }
 
   createForm(){
@@ -32,6 +36,12 @@ export class ProductComponent implements OnInit {
       tarifa_id:  this.fb.control(0, []),
       category_id:  this.fb.control(-1, [Validators.required]),
       provider_id:  this.fb.control(-1, [Validators.required]),
+    });
+  }
+
+  getCatalogs(){
+    this.catalogsService.getByName('categoria_productos').subscribe(resp => {
+       console.log('cat', resp);
     });
   }
 

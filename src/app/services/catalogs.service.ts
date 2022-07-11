@@ -13,4 +13,8 @@ export class CatalogsService {
   getAll(){
       return this.http.get(this.apiUrl);
   }
+
+  getByName(name: string){
+    return this.http.get(this.apiUrl+'/'+name);
+  }
 }
