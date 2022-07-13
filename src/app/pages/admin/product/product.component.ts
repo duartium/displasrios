@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ItemCatalogue } from 'src/app/models/ItemCatalogue.model';
 import { CatalogsService } from 'src/app/services/catalogs.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { ProvidersService } from 'src/app/services/providers.service';
 
 @Component({
   selector: 'app-product',
@@ -12,9 +13,11 @@ import { ProductsService } from 'src/app/services/products.service';
 export class ProductComponent implements OnInit {
   frmProduct: FormGroup;
   categoryCatalog: ItemCatalogue[];
+  providersCatalog: ItemCatalogue[];
 
   constructor(private productService: ProductsService,
     private catalogsService: CatalogsService,
+    private providerService: ProvidersService,
     private fb: FormBuilder) { 
       this.createForm();
       
@@ -85,6 +88,12 @@ export class ProductComponent implements OnInit {
     this.catalogsService.getByName('categoria_productos').subscribe(resp => {
        this.categoryCatalog = resp.data.items;
        this.categoryId.setValue(this.categoryCatalog[0].id);
+    });
+
+    this.providerService.getAsCatalogue().subscribe(resp => {
+      console.log(resp);
+      this.providersCatalog = resp.data;
+      this.providerId.setValue(resp.data[0].id);
     });
   }
 
