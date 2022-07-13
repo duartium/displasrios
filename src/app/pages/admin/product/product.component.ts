@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ItemCatalogue } from 'src/app/models/ItemCatalogue.model';
 import { CatalogsService } from 'src/app/services/catalogs.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -10,6 +11,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductComponent implements OnInit {
   frmProduct: FormGroup;
+  categoryCatalog: ItemCatalogue[];
 
   constructor(private productService: ProductsService,
     private catalogsService: CatalogsService,
@@ -34,14 +36,55 @@ export class ProductComponent implements OnInit {
       quantity_lump:  this.fb.control(0, [Validators.required]),
       discount:  this.fb.control(0, []),
       tarifa_id:  this.fb.control(0, []),
-      category_id:  this.fb.control(-1, [Validators.required]),
+      category_id:  this.fb.control(0, [Validators.required]),
       provider_id:  this.fb.control(-1, [Validators.required]),
     });
   }
 
+  get code() {
+    return this.frmProduct.get('code');
+  }
+
+  get name() {
+    return this.frmProduct.get('name');
+  }
+
+  get description() {
+    return this.frmProduct.get('description');
+  }
+
+  get cost() {
+    return this.frmProduct.get('cost');
+  }
+
+  get salePrice() {
+    return this.frmProduct.get('sale_price');
+  }
+
+  get stock() {
+    return this.frmProduct.get('stock');
+  }
+
+  get quantityPackage() {
+    return this.frmProduct.get('quantity_package');
+  }
+
+  get quantityLump() {
+    return this.frmProduct.get('quantity_lump');
+  }
+
+  get categoryId() {
+    return this.frmProduct.get('category_id');
+  }
+
+  get providerId() {
+    return this.frmProduct.get('provider_id');
+  }
+
   getCatalogs(){
     this.catalogsService.getByName('categoria_productos').subscribe(resp => {
-       console.log('cat', resp);
+       this.categoryCatalog = resp.data.items;
+       this.categoryId.setValue(this.categoryCatalog[0].id);
     });
   }
 

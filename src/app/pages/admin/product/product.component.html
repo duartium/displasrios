@@ -38,11 +38,11 @@
                 <div class="col-xs-12 col-sm-12 col-md-5">
                     <div class="form-group">
                         <label>Categoría</label>
-                        <select class="custom-select2 form-control select2-hidden-accessible" formControlName="category_id" style="width: 100%; height: 38px;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                            <option value="AK" data-select2-id="3">Alaska</option>
-                            <option value="HI" data-select2-id="14">Hawaii</option>
+                        <select  class="form-control" formControlName="category_id" style="width: 100%; height: 38px;" aria-hidden="true">
+                            <option *ngFor="let category of categoryCatalog" [ngValue]="category.id">
+                                {{ category.description }}
+                            </option>
                         </select>
-                        <span class="select2 select2-container select2-container--default select2-container--above select2-container--focus" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-state-bq-container"><span class="select2-selection__rendered" id="select2-state-bq-container" role="textbox" aria-readonly="true" title="Hawaii">Hawaii</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
                     </div>
                 </div>
 

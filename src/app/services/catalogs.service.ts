@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ApiResponse } from '../models/ApiResponse';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -15,6 +16,6 @@ export class CatalogsService {
   }
 
   getByName(name: string){
-    return this.http.get(this.apiUrl+'/'+name);
+    return this.http.get<ApiResponse>(this.apiUrl+'/'+name);
   }
 }
