@@ -1,0 +1,54 @@
+<div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nuevo Proveedor</li>
+        </ol>
+    </nav>
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Nuevo Proveedor</h4>
+            </div>
+        </div>
+        <form [formGroup]="frmProvider" (ngSubmit)="createProvider()">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <label>RUC</label>
+                        <input class="form-control" type="text" formControlName="ruc" placeholder="RUC" maxlength="10">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5">
+                    <div class="form-group">
+                        <label>Nombre del Proveedor</label>
+                        <input class="form-control" type="text" formControlName="name" placeholder="Nombre del Proveedor" >
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input class="form-control" type="text" formControlName="email" placeholder="Correo Electrónico" >
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input class="form-control" type="text" formControlName="address" placeholder="Dirección" >
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input class="form-control" type="text" formControlName="phone" placeholder="Teléfono" maxlength="10">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>

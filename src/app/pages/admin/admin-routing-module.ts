@@ -8,6 +8,8 @@ import { CustomersComponent } from './customers/customers.component';
 import { OrdersOfDayComponent } from './orders-of-day/orders-of-day.component';
 import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
+import { ProviderComponent } from './provider/provider.component';
+import { ProvidersComponent } from './providers/providers.component';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
 
@@ -23,6 +25,8 @@ const routes = [
         { path: 'usuarios', component: UsersComponent },
         { path: 'productos', component: ProductsComponent },
         { path: 'producto/nuevo', component: ProductComponent },
+        { path: 'proveedores', component: ProvidersComponent },
+        { path: 'proveedor/nuevo', component: ProviderComponent },
       ] 
     }
   ]
