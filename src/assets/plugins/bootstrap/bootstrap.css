@@ -3201,6 +3201,7 @@ input[type="button"].btn-block {
 }
 
 .dropdown-toggle::after {
+  background-color: red;
   display: inline-block;
   margin-left: 0.255em;
   vertical-align: 0.255em;
