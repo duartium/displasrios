@@ -24,6 +24,7 @@ import { OrderReceivableComponent } from './pages/order-receivable/order-receiva
 import { OrdersOfDayComponent } from './pages/admin/orders-of-day/orders-of-day.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './pages/admin/admin.module';
+import { RouterModule } from '@angular/router';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -57,7 +58,8 @@ const maskConfig: Partial<IConfig> = {
     }),
     NgxMaskModule.forRoot(maskConfig),
     SharedModule,
-    AdminModule
+    AdminModule,
+    RouterModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
