@@ -10,13 +10,13 @@
     </div>
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
-            <ul id="accordion-menu" #acordion_menu >
+            <ul id="accordion-menu" >
                 <li class="dropdown">
                     <a  routerLink="/admin" routerLinkActive="active" class="dropdown-toggle">
                         <span class="micon dw dw-house-1"></span><span class="mtext">Inicio</span>
                     </a>
                 </li>
-                <li class="dropdown show" (click)="openSubmenu($event)">
+                <li class="dropdown show" (click)="openSubmenu('administrar')" #acordion_menu>
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon dw dw-edit2"></span><span class="mtext">Administrar</span>
                     </a>

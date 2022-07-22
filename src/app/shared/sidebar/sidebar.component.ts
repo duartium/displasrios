@@ -11,12 +11,28 @@ export class SidebarComponent implements OnInit {
   constructor(private renderer2: Renderer2) { }
 
   ngOnInit(): void {
+
   }
 
-  openSubmenu(e){
-    console.log(e.target);
-    const itemMenu = e.target;
-    this.renderer2.addClass(itemMenu, 'show');
+  openSubmenu(name: string){
+  let element: ElementRef;
+
+  switch (name){
+    case 'administrar':
+      element = this.acordion_menu.nativeElement.querySelector('.submenu');
+      break;
+    }  
+
+    if((this.acordion_menu.nativeElement as HTMLElement).classList.contains('show')){
+      this.renderer2.setStyle(element, 'display', 'none');
+      this.renderer2.removeClass(this.acordion_menu.nativeElement, 'show');
+      console.log('SI');
+    }else{
+      this.renderer2.setStyle(element, 'display', 'block');
+      this.renderer2.addClass(this.acordion_menu.nativeElement, 'show');
+      console.log('NO');
+    }
+      
   }
   
 }
