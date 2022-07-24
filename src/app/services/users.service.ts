@@ -16,6 +16,10 @@ export class UsersService {
     return this.http.get<ApiResponse>(this.apiUrl + "/profile");
   }
 
+  getProfiles(){
+    return this.http.get<ApiResponse>(this.apiUrl + "/profiles");
+  }
+
   getAll(){
     return this.http.get<Response<User[]>>(this.apiUrl);
   }

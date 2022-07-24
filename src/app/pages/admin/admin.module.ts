@@ -25,7 +25,9 @@ import { ProviderComponent } from './provider/provider.component';
     UserComponent, 
     UsersComponent, 
     ProductsComponent, 
-    ProductComponent, ProvidersComponent, ProviderComponent
+    ProductComponent, 
+    ProvidersComponent, 
+    ProviderComponent
   ],
   imports: [
     CommonModule,
