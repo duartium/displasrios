@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ItemCatalogue } from 'src/app/models/ItemCatalogue.model';
 import { UsersService } from 'src/app/services/users.service';
@@ -10,13 +10,15 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  @ViewChild('main_loader') mainModal: ElementRef;
 
   frmUser: FormGroup;
   profiles: ItemCatalogue[];
   firstIdProfile: number;
 
   constructor(private fb: FormBuilder,
-    private userService: UsersService) {
+    private userService: UsersService,
+    private renderer: Renderer2) {
       
   }
 
@@ -28,19 +30,63 @@ export class UserComponent implements OnInit {
       names: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       surnames: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       email: this.fb.control('', [Validators.required, Validators.email, Validators.minLength(3)]),
-      id_profile: this.fb.control(this.firstIdProfile, [Validators.required, Validators.email, Validators.minLength(3)])
+      id_profile: this.fb.control(-1, [Validators.required, Validators.email, Validators.minLength(3)])
     });
+  }
+
+  get identification(){
+    return this.frmUser.get('identification');
+  }
+
+  get names(){
+    return this.frmUser.get('names');
+  }
+
+  get email(){
+    return this.frmUser.get('email');
+  }
+
+  get surnames(){
+    return this.frmUser.get('surnames');
+  }
+
+  get id_profile(){
+    return this.frmUser.get('id_profile');
   }
 
   getProfiles(){
     this.userService.getProfiles().subscribe(resp => {
       this.profiles = resp.data;
-      this.firstIdProfile = this.profiles[0].id;
+      this.id_profile.setValue(this.profiles[0].id);
     });
   }
 
   createUser(){
-      console.log(this.frmUser.value);
+    //this.renderer.setStyle(this.mainModal.nativeElement, 'display', 'normal');
+
+    this.frmUser.markAllAsTouched();
+    console.log(this.frmUser);
+
+    if(!this.frmUser.invalid){
+      this.frmUser.reset();
+      //this.renderer.setStyle(this.mainModal.nativeElement, 'display', '');
+      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Corrija los datos e intente nuevamente.'});
+      return;
+    }
+      
+    this.userService.create(this.frmUser.value).subscribe(resp => {
+      console.log(resp);
+      if(resp.success){
+        Swal.fire({ icon: 'error', title: 'Notificación', text: 'Usuario creado. Se enviaron las credenciales al correo electrónico '+this.email.value});
+      }else{
+        Swal.fire({ icon: 'error', title: 'Notificación', text: resp.message});
+      }
+      //this.renderer.setStyle(this.mainModal.nativeElement, 'display', '');
+    }, (err) => {
+      Swal.fire({ icon: 'error', title: 'Notificación', text: err.error});
+      //this.renderer.setStyle(this.mainModal.nativeElement, 'display', '');
+    });
+
   }
 
 }

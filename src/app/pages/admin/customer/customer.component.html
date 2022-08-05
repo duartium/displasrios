@@ -1,1 +1,100 @@
-<p>customer works!</p>
+<div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nuevo Cliente</li>
+        </ol>
+    </nav>
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Nuevo Cliente</h4>
+            </div>
+        </div>
+        <form [formGroup]="frmCustomer" (submit)="createCustomer()">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <label>Identificación</label>
+                        <input class="form-control" formControlName="identification" type="text" placeholder="Identificación" maxlength="10"
+                        [class.form-control-danger]="identification.touched && (identification.hasError('required') || identification.hasError('minlength'))">
+
+                        <div *ngIf="identification.touched && identification.hasError('required')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
+                        <div *ngIf="identification.touched && identification.hasError('minlength')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 letras.</font></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tipo Identificación</label>
+                    <select class="form-control" formControlName="ident_type" style="width: 100%; height: 38px;">
+                        <option value="C" selected>CÉDULA</option>
+                        <option value="P">PASAPORTE</option>
+                        <option value="R">RUC</option>
+                    </select>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label>Nombres</label>
+                        <input class="form-control" formControlName="names" type="text" placeholder="Nombres" 
+                        [class.form-control-danger]="names.touched && (names.hasError('required') || names.hasError('minlength'))">
+
+                        <div *ngIf="names.touched && names.hasError('required')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
+                        <div *ngIf="names.touched && names.hasError('minlength')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 letras.</font></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label>Apellidos</label>
+                        <input class="form-control" formControlName="surnames" type="text" placeholder="Apellidos" 
+                        [class.form-control-danger]="surnames.touched && (surnames.hasError('required') || surnames.hasError('minlength'))">
+
+                        <div *ngIf="surnames.touched && surnames.hasError('required')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
+                        <div *ngIf="surnames.touched && surnames.hasError('minlength')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 letras.</font></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control"  formControlName="email" placeholder="Email" type="email"
+                        [class.form-control-danger]="email.touched && (email.hasError('required') || email.hasError('minlength'))">
+
+                        <div *ngIf="email.touched && email.hasError('required')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
+                        <div *ngIf="email.touched && email.hasError('minlength')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 letras.</font></div>
+                        <div *ngIf="email.touched && email.hasError('email')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">El correo es inválido.</font></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input class="form-control"  formControlName="phone_number" placeholder="Teléfono"
+                        [class.form-control-danger]="email.touched && (email.hasError('required') || email.hasError('minlength'))">
+
+                        <div *ngIf="email.touched && email.hasError('required')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
+                        <div *ngIf="email.touched && email.hasError('minlength')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 letras.</font></div>
+                        <div *ngIf="email.touched && email.hasError('email')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">El correo es inválido.</font></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </div>
+        </form>
+    </div>
+</div>

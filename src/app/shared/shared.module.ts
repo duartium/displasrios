@@ -7,6 +7,8 @@ import { RideSidebarComponent } from './ride-sidebar/ride-sidebar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AdminRoutingModule } from '../pages/admin/admin-routing-module';
 import { RouterModule } from '@angular/router';
+import { OrderReceivableCardboxComponent } from '../components/order-receivable-cardbox/order-receivable-cardbox.component';
+import { LoaderComponent } from '../components/loader/loader.component';
 
 
 
@@ -16,7 +18,8 @@ import { RouterModule } from '@angular/router';
     NavbarComponent,
     NavbarBottomComponent,
     RideSidebarComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { RouterModule } from '@angular/router';
     NavbarComponent,
     NavbarBottomComponent,
     RideSidebarComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoaderComponent
   ], schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

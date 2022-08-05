@@ -10,7 +10,7 @@ import { CustomersService } from 'src/app/services/customers.service';
 })
 export class CustomersComponent implements OnInit {
 
-  customers: CustomerFinder[];
+  customers: Customer[];
   constructor(private customerService: CustomersService) { 
     this.getCustomers();
 

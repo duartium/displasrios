@@ -119,7 +119,7 @@ export class OrderComponent implements OnInit {
     }
  }
 
- removeProduct(id: string){
+ removeProduct(id: number){
     console.log('ELIMINAR', id);
  }
 

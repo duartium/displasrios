@@ -19,7 +19,7 @@ const routes = [
       children: [
         { path: '', component: AdminDashboardComponent },
         { path: 'clientes', component: CustomersComponent },
-        { path: 'cliente', component: CustomerComponent },
+        { path: 'cliente/nuevo', component: CustomerComponent },
         { path: 'pedidos', component: OrdersOfDayComponent },
         { path: 'usuario', component: UserComponent },
         { path: 'usuarios', component: UsersComponent },

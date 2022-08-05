@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CustomerResponse } from '../models/Customer.model';
 import { CustomerFinderResp, CustomersFinderResp } from '../models/CustomerFinder.model';
 import { environment } from './../../environments/environment';
 
@@ -21,6 +22,6 @@ export class CustomersService {
   }
 
   getAll(){
-    return this.http.get<CustomersFinderResp>(this.apiUrl);
+    return this.http.get<CustomerResponse>(this.apiUrl);
   }
 }

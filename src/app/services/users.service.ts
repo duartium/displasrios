@@ -23,5 +23,9 @@ export class UsersService {
   getAll(){
     return this.http.get<Response<User[]>>(this.apiUrl);
   }
+
+  create(user: User){
+    return this.http.post<Response<User>>(this.apiUrl + "", user);
+  }
   
 }
