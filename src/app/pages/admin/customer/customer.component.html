@@ -23,7 +23,7 @@
                         <div *ngIf="identification.touched && identification.hasError('required')" 
                         class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
                         <div *ngIf="identification.touched && identification.hasError('minlength')" 
-                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 letras.</font></div>
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 10 dígitos.</font></div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -37,7 +37,7 @@
                 
             </div>
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>Nombres</label>
                         <input class="form-control" formControlName="names" type="text" placeholder="Nombres" 
@@ -49,7 +49,7 @@
                         class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 letras.</font></div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>Apellidos</label>
                         <input class="form-control" formControlName="surnames" type="text" placeholder="Apellidos" 
@@ -61,8 +61,6 @@
                         class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 letras.</font></div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>Email</label>
@@ -77,18 +75,30 @@
                         class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">El correo es inválido.</font></div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input class="form-control"  formControlName="address" placeholder="Dirección"
+                        [class.form-control-danger]="address.touched && (address.hasError('required') || address.hasError('address'))">
+
+                        <div *ngIf="address.touched && address.hasError('required')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
+                        <div *ngIf="address.touched && address.hasError('minlength')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 dígitos.</font></div>
+                    </div>
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-4">
                     <div class="form-group">
                         <label>Teléfono</label>
-                        <input class="form-control"  formControlName="phone_number" placeholder="Teléfono"
-                        [class.form-control-danger]="email.touched && (email.hasError('required') || email.hasError('minlength'))">
+                        <input class="form-control"  formControlName="phone" placeholder="Teléfono" maxlength="10"
+                        [class.form-control-danger]="phone.touched && (phone.hasError('required') || phone.hasError('minlength'))">
 
-                        <div *ngIf="email.touched && email.hasError('required')" 
+                        <div *ngIf="phone.touched && phone.hasError('required')" 
                         class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
-                        <div *ngIf="email.touched && email.hasError('minlength')" 
-                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 3 letras.</font></div>
-                        <div *ngIf="email.touched && email.hasError('email')" 
-                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">El correo es inválido.</font></div>
+                        <div *ngIf="phone.touched && phone.hasError('minlength')" 
+                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Mínimo 10 dígitos.</font></div>
                     </div>
                 </div>
             </div>

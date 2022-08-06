@@ -37,7 +37,7 @@ import { ProviderComponent } from './provider/provider.component';
     ReactiveFormsModule
   ],
   exports: [
-    
+    SharedModule
   ]
 })
 export class AdminModule { }

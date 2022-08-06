@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CustomerResponse } from '../models/Customer.model';
+import { ApiResponse } from '../models/ApiResponse';
+import { Customer, CustomerResponse } from '../models/Customer.model';
 import { CustomerFinderResp, CustomersFinderResp } from '../models/CustomerFinder.model';
 import { environment } from './../../environments/environment';
 
@@ -24,4 +25,9 @@ export class CustomersService {
   getAll(){
     return this.http.get<CustomerResponse>(this.apiUrl);
   }
+
+  create(customer: Customer){
+    return this.http.post<ApiResponse>(this.apiUrl, customer);
+  }
+
 }

@@ -12,4 +12,8 @@ export class LoaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showLoader(){
+    console.log('lanzo loader');
+  }
+
 }

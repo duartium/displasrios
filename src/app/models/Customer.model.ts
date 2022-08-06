@@ -8,7 +8,7 @@ export interface Customer {
     names: string,
     surnames: string,
     address: string,
-    phone_number: string,
+    phone: string,
     email: string,
     created_at: string
 }
