@@ -32,12 +32,12 @@
                     <td scope="row">{{ product.code }}</td>
                     <td>{{product.name}}</td>
                     <td>{{product.cost | currency}}</td>
-                    <td>{{product.price| currency}}</td>
+                    <td>{{product.sale_price| currency}}</td>
                     <td>{{product.stock}}</td>
-                    <td>{{product.quantity_per_pack}}</td>
-                    <td>{{product.quantity_per_bundle}}</td>
-                    <td>{{product.category.description}}</td>
-                    <td>{{product.provider.description}}</td>
+                    <td>{{product.quantity_package}}</td>
+                    <td>{{product.quantity_lump}}</td>
+                    <td>{{product.category_name}}</td>
+                    <td>{{product.provider_name}}</td>
                 </tr>
             </tbody>
         </table>

@@ -8,14 +8,21 @@ export interface Product{
     description: string;
     quantity: number;
     cost: number;
-    price: number;
+    sale_price: number;
     stock: number;
-    quantity_per_pack: number;
-    quantity_per_bundle: number;
+    quantity_package: number;
+    quantity_lump: number;
     discount: number;
     iva_tariff: number;
     total: number;
+    category_id: number;
+    category_name: string;
+    provider_id: number;
+    provider_name: string;
+    user_creation: string;
+}
+
+export interface ProductCreation extends Product{
     category: Category;
     provider: ItemCatalogue;
-    user_creation: string;
 }
