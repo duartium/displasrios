@@ -26,9 +26,7 @@ import { AdminModule } from './pages/admin/admin.module';
 import { RouterModule } from '@angular/router';
 
 
-const maskConfig: Partial<IConfig> = {
-  validation: false,
-};
+
 
 @NgModule({
   declarations: [
@@ -41,6 +39,7 @@ const maskConfig: Partial<IConfig> = {
     OrderReceivableCardboxComponent,
     OrderReceivableComponent,
     OrdersOfDayComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -54,7 +53,7 @@ const maskConfig: Partial<IConfig> = {
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
-    NgxMaskModule.forRoot(maskConfig),
+    
     SharedModule,
     AdminModule,
     RouterModule

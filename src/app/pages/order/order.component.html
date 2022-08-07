@@ -120,7 +120,7 @@
                 <div class="row">
                     <div class="col-6 form-group ">
                         <label for="cliente_paga">Cliente Paga</label>
-                        <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  mask="separator.2" separatorLimit =" 10000 " thousandSeparator=","
+                        <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  mask="separator.2" separatorLimit ="10000" thousandSeparator=","
                         [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')">
                         
                         <div *ngIf="customerPayment.hasError('required')" 

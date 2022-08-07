@@ -9,8 +9,12 @@ import { AdminRoutingModule } from '../pages/admin/admin-routing-module';
 import { RouterModule } from '@angular/router';
 import { OrderReceivableCardboxComponent } from '../components/order-receivable-cardbox/order-receivable-cardbox.component';
 import { LoaderComponent } from '../components/loader/loader.component';
+import { NumericFieldDirective } from '../directives/numeric-field.directive';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
 
-
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   declarations: [
@@ -19,12 +23,14 @@ import { LoaderComponent } from '../components/loader/loader.component';
     NavbarBottomComponent,
     RideSidebarComponent,
     SidebarComponent,
-    LoaderComponent
+    LoaderComponent,
+    NumericFieldDirective
   ],
   imports: [
     CommonModule,
     RouterModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    NgxMaskModule.forRoot(maskConfig),
   ],
   exports: [
     HeaderMobileComponent,
@@ -32,7 +38,9 @@ import { LoaderComponent } from '../components/loader/loader.component';
     NavbarBottomComponent,
     RideSidebarComponent,
     SidebarComponent,
-    LoaderComponent
+    LoaderComponent,
+    NumericFieldDirective,
+    NgxMaskModule
   ], schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

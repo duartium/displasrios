@@ -60,31 +60,31 @@
                 <div class="col-xs-12 col-sm-12 col-md-2">
                     <div class="form-group">
                         <label>Stock Inicial</label>
-                        <input class="form-control" formControlName="stock" placeholder="Stock Inicial" type="email">
+                        <input class="form-control" formControlName="stock" placeholder="Stock Inicial" maxlength="9" appNumericField>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-2">
                     <div class="form-group">
                         <label>Costo</label>
-                        <input class="form-control" formControlName="cost" placeholder="Costo" type="email">
+                        <input class="form-control" formControlName="cost" placeholder="Costo" mask="separator.2" separatorLimit ="10000" thousandSeparator="">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-2">
                     <div class="form-group">
                         <label>Precio Venta</label>
-                        <input class="form-control" formControlName="sale_price" placeholder="Precio Venta" type="email">
+                        <input class="form-control" formControlName="sale_price" placeholder="Precio Venta" mask="separator.2" separatorLimit =" 10000 " thousandSeparator="">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-2">
                     <div class="form-group">
                         <label>Cant por Paquete</label>
-                        <input class="form-control" formControlName="quantity_package" placeholder="Cant. X Paquete" type="email">
+                        <input class="form-control" formControlName="quantity_package" placeholder="Cant. X Paquete" maxlength="9" appNumericField>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-2">
                     <div class="form-group">
                         <label>Cant por Bulto</label>
-                        <input class="form-control" formControlName="quantity_lump" placeholder="Cant X Bulto" type="email">
+                        <input class="form-control" formControlName="quantity_lump" placeholder="Cant X Bulto" maxlength="9" appNumericField>
                     </div>
                 </div>
                 
