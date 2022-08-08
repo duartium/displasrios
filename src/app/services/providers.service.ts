@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Provider } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiResponse } from '../models/ApiResponse';
 
@@ -20,4 +20,9 @@ export class ProvidersService {
    getAsCatalogue(){
     return this.http.get<ApiResponse>(this.url+'/catalogue');
    }
+
+   create(provider: Provider){
+    return this.http.post<ApiResponse>(this.url, provider);
+   }
+
 }

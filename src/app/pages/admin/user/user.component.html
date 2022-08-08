@@ -1,7 +1,8 @@
 <div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/dashboard">Admin</a></li>
+            <li class="breadcrumb-item"><a routerLink="/admin">Admin</a></li>
+            <li class="breadcrumb-item"><a routerLink="/admin/usuarios">Usuarios</a></li>
             <li class="breadcrumb-item active" aria-current="page">Nuevo Usuario</li>
         </ol>
     </nav>
@@ -30,7 +31,7 @@
                     <div class="form-group">
                         <label>Nombres</label>
                         <input class="form-control" formControlName="names" type="text" placeholder="Nombres" 
-                        [class.form-control-danger]="names.touched && (names.hasError('required') || names.hasError('minlength'))">
+                        [class.form-control-danger]="names.touched && names.invalid">
 
                         <div *ngIf="names.touched && names.hasError('required')" 
                         class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
@@ -42,7 +43,7 @@
                     <div class="form-group">
                         <label>Apellidos</label>
                         <input class="form-control" formControlName="surnames" type="text" placeholder="Apellidos" 
-                        [class.form-control-danger]="surnames.touched && (surnames.hasError('required') || surnames.hasError('minlength'))">
+                        [class.form-control-danger]="surnames.touched && surnames.invalid">
 
                         <div *ngIf="surnames.touched && surnames.hasError('required')" 
                         class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
@@ -57,7 +58,7 @@
                     <div class="form-group">
                         <label>Email</label>
                         <input class="form-control"  formControlName="email" placeholder="Email" type="email"
-                        [class.form-control-danger]="email.touched && (email.hasError('required') || email.hasError('minlength'))">
+                        [class.form-control-danger]="email.touched && email.invalid">
 
                         <div *ngIf="email.touched && email.hasError('required')" 
                         class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>

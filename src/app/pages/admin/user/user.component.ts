@@ -63,28 +63,29 @@ export class UserComponent implements OnInit {
 
   createUser(){
     //this.renderer.setStyle(this.mainModal.nativeElement, 'display', 'normal');
+    document.getElementById("loader").style.display = "";
 
-    this.frmUser.markAllAsTouched();
     console.log(this.frmUser);
 
-    if(!this.frmUser.invalid){
-      this.frmUser.reset();
-      //this.renderer.setStyle(this.mainModal.nativeElement, 'display', '');
-      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Corrija los datos e intente nuevamente.'});
+    if(this.frmUser.invalid){
+      this.frmUser.markAllAsTouched();
+      document.getElementById("loader").style.display = "none";
+      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Corrija los datos del usuario e intente nuevamente.'});
       return;
     }
       
     this.userService.create(this.frmUser.value).subscribe(resp => {
       console.log(resp);
       if(resp.success){
+        this.frmUser.reset();
         Swal.fire({ icon: 'error', title: 'Notificación', text: 'Usuario creado. Se enviaron las credenciales al correo electrónico '+this.email.value});
       }else{
         Swal.fire({ icon: 'error', title: 'Notificación', text: resp.message});
       }
-      //this.renderer.setStyle(this.mainModal.nativeElement, 'display', '');
+      document.getElementById("loader").style.display = "none";
     }, (err) => {
-      Swal.fire({ icon: 'error', title: 'Notificación', text: err.error});
-      //this.renderer.setStyle(this.mainModal.nativeElement, 'display', '');
+      document.getElementById("loader").style.display = "none";
+      Swal.fire({ icon: 'error', title: 'Notificación', text: err.message});
     });
 
   }
