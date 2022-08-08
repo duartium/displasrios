@@ -16,7 +16,6 @@ import * as bootstrap from "bootstrap";
 import * as $ from "jquery";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { OrdersReceivableComponent } from './pages/orders-receivable/orders-receivable.component';
 import { OrderReceivableCardboxComponent } from './components/order-receivable-cardbox/order-receivable-cardbox.component';
 import { OrderReceivableComponent } from './pages/order-receivable/order-receivable.component';
@@ -24,8 +23,6 @@ import { OrdersOfDayComponent } from './pages/admin/orders-of-day/orders-of-day.
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './pages/admin/admin.module';
 import { RouterModule } from '@angular/router';
-
-
 
 
 @NgModule({
@@ -39,7 +36,6 @@ import { RouterModule } from '@angular/router';
     OrderReceivableCardboxComponent,
     OrderReceivableComponent,
     OrdersOfDayComponent,
-    
   ],
   imports: [
     BrowserModule,

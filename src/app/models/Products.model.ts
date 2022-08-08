@@ -12,7 +12,7 @@ export interface Product{
     stock: number;
     quantity_package: number;
     quantity_lump: number;
-    discount: number;
+    discount: string;
     iva_tariff: number;
     total: number;
     category_id: number;

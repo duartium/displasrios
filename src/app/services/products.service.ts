@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ApiResponse } from '../models/ApiResponse';
 import { ProductsFinderResp } from '../models/ProductFinder.model';
 import { Product } from '../models/Products.model';
 import { Response } from '../models/Response.model';
@@ -18,6 +19,10 @@ export class ProductsService {
 
   getAll(){
     return this.http.get<Response<Product[]>>(`${environment.API_URL}/products`);
+  }
+
+  create(product: Product){
+      return this.http.post<Response<string>>(`${environment.API_URL}/products`, product);
   }
   
 }

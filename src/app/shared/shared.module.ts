@@ -11,6 +11,8 @@ import { OrderReceivableCardboxComponent } from '../components/order-receivable-
 import { LoaderComponent } from '../components/loader/loader.component';
 import { NumericFieldDirective } from '../directives/numeric-field.directive';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { AlphanumericFieldDirective } from '../directives/alphanumeric-field.directive';
+import { ProductCodeFieldDirective } from '../directives/product-code-field.directive';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -24,7 +26,9 @@ const maskConfig: Partial<IConfig> = {
     RideSidebarComponent,
     SidebarComponent,
     LoaderComponent,
-    NumericFieldDirective
+    NumericFieldDirective,
+    AlphanumericFieldDirective,
+    ProductCodeFieldDirective,
   ],
   imports: [
     CommonModule,
@@ -40,7 +44,9 @@ const maskConfig: Partial<IConfig> = {
     SidebarComponent,
     LoaderComponent,
     NumericFieldDirective,
-    NgxMaskModule
+    NgxMaskModule,
+    AlphanumericFieldDirective,
+    ProductCodeFieldDirective,
   ], schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
