@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
     
             this.userService.getProfile().subscribe(resp => {
               const userProfile: User = resp.data;
-              
-              if(userProfile.role == 1){
+              console.log(userProfile.role);
+              if(userProfile.role === 1){
                 this.router.navigate(['admin/pedidos']);
                 document.getElementById("loader").style.display = "none";
               }else{

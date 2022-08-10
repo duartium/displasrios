@@ -29,6 +29,7 @@ const maskConfig: Partial<IConfig> = {
     NumericFieldDirective,
     AlphanumericFieldDirective,
     ProductCodeFieldDirective,
+    OrderReceivableCardboxComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +48,7 @@ const maskConfig: Partial<IConfig> = {
     NgxMaskModule,
     AlphanumericFieldDirective,
     ProductCodeFieldDirective,
+    OrderReceivableCardboxComponent
   ], schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

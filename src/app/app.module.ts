@@ -33,7 +33,6 @@ import { RouterModule } from '@angular/router';
     OrderComponent,
     ModalComponent,
     OrdersReceivableComponent,
-    OrderReceivableCardboxComponent,
     OrderReceivableComponent,
     OrdersOfDayComponent,
   ],
