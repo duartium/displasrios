@@ -20,7 +20,7 @@ export class OrderComponent implements OnInit {
   
   finder = 'customer';
   filterClientFinder = "nombres";
-  textClientFinder = "";
+  textClientFinder = "asda";
   textProductFinder = "";
   modalTitle = 'Buscar cliente';
   customerSelected: CustomerFinder;
@@ -156,9 +156,9 @@ export class OrderComponent implements OnInit {
     this.iva.setValue(this.total.value * 0.12);
   }
 
-  changeFilterCustomer(e){
-      this.textClientFinder = "";
-      this.customers = [];
+  changeFilterCustomer(){
+      // this.textClientFinder = "";
+      // this.customers = [];
   }
 
   showOrderDetails(){
@@ -166,6 +166,8 @@ export class OrderComponent implements OnInit {
   }
 
   findCustomer(){
+      console.log(this.filterClientFinder);
+      console.log(this.textClientFinder);
       document.getElementById("loader").style.display = "";
       
 

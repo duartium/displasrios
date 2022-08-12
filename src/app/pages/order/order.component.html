@@ -157,7 +157,6 @@
 
             </form>
         </div>
-        
     </div>
 </div>
 <app-navbar-bottom></app-navbar-bottom>
@@ -167,21 +166,22 @@
             <label for="">Filtros</label>
             <div style="display: block;">
                 <div class="custom-control custom-radio" >
-                    <input id="rb_identificacion" [ngModel]="filterClientFinder" type="radio" name="filter_client" class="custom-control-input"
-                    value="identification" (change)="changeFilterCustomer($event)">
+                    <input id="rb_identificacion" [(ngModel)]="filterClientFinder" type="radio" name="filter_client" class="custom-control-input"
+                    value="identification" (change)="changeFilterCustomer()">
                     <label class="custom-control-label" for="rb_identificacion">Identificación</label>
                 </div>
                 <div class="custom-control custom-radio" >
-                    <input id="rb_nombres" type="radio"  [ngModel]="filterClientFinder" name="filter_client" class="custom-control-input"
-                    value="nombres" (change)="changeFilterCustomer($event)">
+                    <input id="rb_nombres" type="radio"  [(ngModel)]="filterClientFinder" name="filter_client" class="custom-control-input"
+                    value="nombres" (change)="changeFilterCustomer()">
                     <label class="custom-control-label" for="rb_nombres">Nombres</label>
                 </div>
             </div>
         </div>
 
         <div class="input-group mb-3">
-            <input #idtextClientFinder type="text" class="form-control" name="textClientFinder" 
-            (keyup.enter)="findCustomer()" [ngModel]="textClientFinder" autocomplete="off">
+            <input  type="text" class="form-control" 
+            (keyup.enter)="findCustomer()" [(ngModel)]="textClientFinder" autocomplete="off">
+            
             <div class="input-group-append">
               <button class="btn btn-primary btn-search" type="button" id="btn_find_client" (click)="findCustomer()"><i class="fa fa-search"></i></button>
             </div>
@@ -198,7 +198,7 @@
     <div *ngIf="finder=='product'">
         <div class="input-group mb-3">
             <input type="text" class="form-control" name="textProductFinder" placeholder="Nombre de producto"
-            (keyup.enter)="findProduct()" [ngModel]="textProductFinder" autocomplete="off">
+            (keyup.enter)="findProduct()" [(ngModel)]="textProductFinder" autocomplete="off">
             <div class="input-group-append">
               <button class="btn btn-primary btn-search" type="button" id="btn_find_client" (click)="findProduct()"><i class="fa fa-search"></i></button>
             </div>
