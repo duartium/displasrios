@@ -270,6 +270,16 @@ export class OrderComponent implements OnInit {
     }
   }
 
+  setDefaultDiscountValue(){
+    if(this.discount.value == "")
+      this.discount.setValue(0);
+  }
+
+  setDefaultCustomerPaymentValue(){
+    if(this.customerPayment.value == "")
+      this.customerPayment.setValue(0);
+  }
+
   addProduct(){
     
     this.modalTitle = "Buscar Producto";
@@ -288,6 +298,9 @@ export class OrderComponent implements OnInit {
     $("#main-modal").modal("show");
   }
 
+  get isDiscountGreatherThanTotal(){
+    return this.discount.value > this.total.value;
+  }
   
   orderRegister(){
     
@@ -300,6 +313,11 @@ export class OrderComponent implements OnInit {
 
     if(this.total.value == 0){
       Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese al menos 1 producto para continuar.'});
+      return;
+    }
+
+    if(this.isDiscountGreatherThanTotal){
+      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'El descuento no puede ser mayor al total a pagar.'});
       return;
     }
 

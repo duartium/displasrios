@@ -121,7 +121,7 @@
                     <div class="col-6 form-group ">
                         <label for="cliente_paga">Cliente Paga</label>
                         <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  (click)="clearWhenIsZero(1)" mask="separator.2" separatorLimit ="10000" thousandSeparator=","
-                        [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')">
+                        [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')" (blur)="setDefaultCustomerPaymentValue()">
                         
                         <div *ngIf="customerPayment.hasError('required')" 
                         class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
@@ -129,10 +129,11 @@
 
                     <div class="col-6 form-group">
                         <label for="discount">Descuento</label>
-                        <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()" (click)="clearWhenIsZero(2)" mask="separator.2" separatorLimit =" 10000 " thousandSeparator=",">
+                        <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()" (click)="clearWhenIsZero(2)" mask="separator.2" separatorLimit =" 10000 " thousandSeparator=","
+                        [class.form-control-danger]="isDiscountGreatherThanTotal" (blur)="setDefaultDiscountValue()">
 
-                        <!-- <div class="form-control-feedback" 
-                        *ngIf="frmOrder.discount.touched && frmOrder.discount.invalid">Sorry, that username's taken. Try another?</div> -->
+                        <div class="form-control-feedback has-danger" 
+                        *ngIf="isDiscountGreatherThanTotal">El descuento no puede ser mayor al total</div>
                     </div>
                 </div>
 
