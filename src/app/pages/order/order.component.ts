@@ -130,7 +130,13 @@ export class OrderComponent implements OnInit {
  }
 
  removeProduct(id: number){
-    console.log('ELIMINAR', id);
+    
+    const items = this.productItems;
+    items.removeAt(items.value.findIndex(el => el.id === id));
+    
+    this.productsOrder.splice(this.productsOrder.findIndex(x => x.id === id), 1);
+    console.log('despues',this.productsOrder);
+    this.calculateTotals();
  }
 
 
@@ -252,20 +258,21 @@ export class OrderComponent implements OnInit {
         return;
       }
 
-      this.productSelected.quantity = parseInt(input_prod.value);
       const _productItems = this.productItems;
-
+      
       //verifica si ya ha sido agregado el producto
       let index = this.productsOrder.findIndex(x => x.id === this.productSelected.id);
       
       if(index > -1){ //existe producto
         const currentQuantity = this.productsOrder[index].quantity;
         const newQuantity = currentQuantity + parseInt(input_prod.value);
+        this.productSelected.quantity = newQuantity;
         this.productsOrder[index].quantity = newQuantity;
 
         let indexFormArray =_productItems.value.findIndex((y: ProductSimpleItem) => y.id === this.productSelected.id);
         _productItems.at(indexFormArray).get('quantity').setValue(newQuantity);
       }else{
+        this.productSelected.quantity = parseInt(input_prod.value);
         this.productsOrder.push(productSelected);
 
         const prod = this.fb.group({
@@ -278,6 +285,8 @@ export class OrderComponent implements OnInit {
       }
       this.calculateTotals();
       this.detailsOpened = true;
+
+      input_prod.value = "1"; //establezco el input a su valor inicial
       $("#main-modal").modal("hide");
   }
 
