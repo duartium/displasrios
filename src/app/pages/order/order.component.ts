@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormsModule, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
 import { ProductFinder } from 'src/app/models/ProductFinder.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ToastrService } from 'ngx-toastr';
 import { FullOrderDto } from 'src/app/Dtos/FullOrderDto.model';
-import { ProductOrderDetail } from 'src/app/models/Product.model';
 import Swal from 'sweetalert2';
 import { SaleService } from 'src/app/services/sale.service';
 import { data } from 'jquery';
@@ -38,30 +37,34 @@ export class OrderComponent implements OnInit {
   }[];
 
   frmOrder: FormGroup;
-
   catalogs = [];
 
   constructor(private customerService: CustomersService,
     private fb: FormBuilder,  private productService: ProductsService,
     private toastr: ToastrService,
     private saleService: SaleService) { 
-        
-      this.frmOrder = this.fb.group({
-        id_client:  this.fb.control(-1, [Validators.required]),
-        items: this.fb.array([]),
-        customer_payment:  this.fb.control(0, [Validators.required, Validators.minLength(1)]),
-        change: this.fb.control(0, [Validators.required]),
-        payment_method:  this.fb.control('1', [Validators.required]),
-        payment_mode:  this.fb.control('2', [Validators.required]),
-        discount:  this.fb.control(0, [Validators.required]),
-        subtotal: this.fb.control(0, [Validators.required]),
-        iva: this.fb.control(0, [Validators.required]),
-        total: this.fb.control(0, [Validators.required])
-      });
+      this.frmOrder = this.defaultForm;
     }
+
+   
 
   ngOnInit(): void {
      
+  }
+
+  get defaultForm(){
+    return new FormGroup({
+      id_client:  this.fb.control(-1, [Validators.required]),
+      items: this.fb.array([]),
+      customer_payment:  this.fb.control(0, [Validators.required, Validators.minLength(1)]),
+      change: this.fb.control(0, [Validators.required]),
+      payment_method:  this.fb.control('1', [Validators.required]),
+      payment_mode:  this.fb.control('2', [Validators.required]),
+      discount:  this.fb.control(0, [Validators.required]),
+      subtotal: this.fb.control(0, [Validators.required]),
+      iva: this.fb.control(0, [Validators.required]),
+      total: this.fb.control(0, [Validators.required])
+    });
   }
 
   get idClient(){
@@ -119,6 +122,10 @@ export class OrderComponent implements OnInit {
     }
  }
 
+ removeAllItemsProducts(){
+  this.productItems.reset();
+ }
+
  removeProduct(id: number){
     console.log('ELIMINAR', id);
  }
@@ -146,6 +153,8 @@ export class OrderComponent implements OnInit {
       let currentValue: number = parseFloat(this.customerPayment.value);
       if(currentValue > parseFloat(this.total.value)){
         this.change.setValue(currentValue - parseFloat(this.total.value));
+      }else{
+        this.change.setValue(0);
       }
   }
 
@@ -248,6 +257,19 @@ export class OrderComponent implements OnInit {
       $("#main-modal").modal("hide");
   }
 
+  clearWhenIsZero(flag: number){
+    console.log(this.customerPayment.value);
+    if(flag == 1){
+      if(this.customerPayment.value == "0"){
+        this.customerPayment.setValue("");
+      }
+    }else{
+      if(this.discount.value == "0"){
+        this.discount.setValue("");
+     }
+    }
+  }
+
   addProduct(){
     
     this.modalTitle = "Buscar Producto";
@@ -271,17 +293,11 @@ export class OrderComponent implements OnInit {
     
     console.log('READY FOR SEND', this.frmOrder.value);
     
-    // if((this.productItems.value as FormArray).controls.length == 0){
-    //   Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Agregue al menos un producto al pedido.'});
-    //   return;
-    // }
-    console.log(this.idClient.value);
     if(this.idClient.value <= 0){
       Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Seleccione el cliente que realiza el pedido.'});
       return;
     }
 
-    console.log('TOTAL', this.total.value);
     if(this.total.value == 0){
       Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese al menos 1 producto para continuar.'});
       return;
@@ -289,6 +305,11 @@ export class OrderComponent implements OnInit {
 
     if(this.customerPayment.value == 0){
       Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese el monto que el cliente paga.'});
+      return;
+    }
+
+    if(parseFloat(this.customerPayment.value) < parseFloat(this.total.value)){
+      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'El monto de pago no puede ser menor que el total a pagar.'});
       return;
     }
 
@@ -320,7 +341,14 @@ export class OrderComponent implements OnInit {
         console.log('RESPUESTA ORDER', resp);
         document.getElementById("loader").style.display = "none";
         if(resp.success){
-          this.frmOrder.reset();
+          this.frmOrder.reset(this.defaultForm.value);
+          this.quantity_cart = 0;
+          this.customerSelected = null;
+          this.removeAllItemsProducts();
+          this.frmOrder.get('items').reset();
+          this.productsOrder.splice(0);
+          console.log(this.productItems);
+
           Swal.fire({ icon: 'success', title: 'Enviado', text: `Se ha generado el pedido nº ${resp.data}`});
         }else{
             Swal.fire({ icon: 'warning', title: 'Pedido Fallido', text: 'Lo sentimos, hubo un problema al registrar tu pedido, vuelve a intentarlo más tarde.'});

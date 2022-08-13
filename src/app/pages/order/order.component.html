@@ -42,7 +42,7 @@
                     <button type="button" class="btn btn-success" (click)="addProduct()"><i class="fa fa-plus-circle"></i> Agregar Producto</button>
                 </div>
 
-                <div class="row" *ngIf="productItems?.length > 0">
+                <div class="row" *ngIf="productsOrder?.length > 0">
                     <div class="col-12">
                         
                         <div class="card mb-3" >
@@ -120,7 +120,7 @@
                 <div class="row">
                     <div class="col-6 form-group ">
                         <label for="cliente_paga">Cliente Paga</label>
-                        <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  mask="separator.2" separatorLimit ="10000" thousandSeparator=","
+                        <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  (click)="clearWhenIsZero(1)" mask="separator.2" separatorLimit ="10000" thousandSeparator=","
                         [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')">
                         
                         <div *ngIf="customerPayment.hasError('required')" 
@@ -129,7 +129,7 @@
 
                     <div class="col-6 form-group">
                         <label for="discount">Descuento</label>
-                        <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()" mask="separator.2" separatorLimit =" 10000 " thousandSeparator=",">
+                        <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()" (click)="clearWhenIsZero(2)" mask="separator.2" separatorLimit =" 10000 " thousandSeparator=",">
 
                         <!-- <div class="form-control-feedback" 
                         *ngIf="frmOrder.discount.touched && frmOrder.discount.invalid">Sorry, that username's taken. Try another?</div> -->
