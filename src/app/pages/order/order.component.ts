@@ -9,6 +9,7 @@ import { FullOrderDto } from 'src/app/Dtos/FullOrderDto.model';
 import Swal from 'sweetalert2';
 import { SaleService } from 'src/app/services/sale.service';
 import { data } from 'jquery';
+import { ProductSimpleItem } from 'src/app/models/ProductItem.model';
 
 @Component({
   selector: 'app-order',
@@ -30,11 +31,13 @@ export class OrderComponent implements OnInit {
   detailsOpened: boolean = false;
   //fullOrderDto: FullOrderDto;
   quantity_cart: number = 0;
-  arrayItems: {
-    id: number,
-    quantity: number,
-    price: number
-  }[];
+  // arrayItems: {
+  //   id: number,
+  //   quantity: number,
+  //   price: number
+  // }[];
+  arrayItems: ProductSimpleItem[];
+  
 
   frmOrder: FormGroup;
   catalogs = [];
@@ -238,22 +241,43 @@ export class OrderComponent implements OnInit {
   selectedProduct(productSelected: ProductFinder){
       this.productSelected = productSelected;
       let input_prod = document.getElementById(`input_prod_${productSelected.id}`) as HTMLInputElement;
+      
+      if(input_prod.value.trim().length == 0){
+        Swal.fire("Notificación", "No ha ingresado la cantidad de productos que desea agregar.");
+        return;
+      }
+
+      if(parseInt(input_prod.value) == 0){
+        Swal.fire("Notificación", "La cantidad debe ser mayor a cero.");
+        return;
+      }
 
       this.productSelected.quantity = parseInt(input_prod.value);
-      this.productsOrder.push(productSelected);
+      const _productItems = this.productItems;
 
-      const prod = this.fb.group({
-        id: [productSelected.id, Validators.required],
-        quantity: [parseInt(input_prod.value), Validators.required],
-        price: [parseFloat(productSelected.sale_price.toString()), Validators.required]
-      });
-
-      const elementProduct = this.productItems;
-
-      elementProduct.push(prod);
-
+      //verifica si ya ha sido agregado el producto
+      let index = this.productsOrder.findIndex(x => x.id === this.productSelected.id);
       
+      if(index > -1){ //existe producto
+        const currentQuantity = this.productsOrder[index].quantity;
+        const newQuantity = currentQuantity + parseInt(input_prod.value);
+        this.productsOrder[index].quantity = newQuantity;
+
+        let indexFormArray =_productItems.value.findIndex((y: ProductSimpleItem) => y.id === this.productSelected.id);
+        _productItems.at(indexFormArray).get('quantity').setValue(newQuantity);
+      }else{
+        this.productsOrder.push(productSelected);
+
+        const prod = this.fb.group({
+          id: [productSelected.id, Validators.required],
+          quantity: [parseInt(input_prod.value), Validators.required],
+          price: [parseFloat(productSelected.sale_price.toString()), Validators.required]
+        });
+  
+        _productItems.push(prod);
+      }
       this.calculateTotals();
+      this.detailsOpened = true;
       $("#main-modal").modal("hide");
   }
 
