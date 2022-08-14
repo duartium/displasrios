@@ -6,6 +6,7 @@ export interface FullOrderDto {
     payment_method: number;
     payment_mode: number;
     customer_payment: number;
+    deadline: number,
     change: number;
     discount: number;
     subtotal: number;

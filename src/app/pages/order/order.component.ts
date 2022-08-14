@@ -59,10 +59,11 @@ export class OrderComponent implements OnInit {
     return new FormGroup({
       id_client:  this.fb.control(-1, [Validators.required]),
       items: this.fb.array([]),
-      customer_payment:  this.fb.control(0, [Validators.required, Validators.minLength(1)]),
+      customer_payment:  this.fb.control(0, [Validators.required]),
       change: this.fb.control(0, [Validators.required]),
       payment_method:  this.fb.control('1', [Validators.required]),
       payment_mode:  this.fb.control('2', [Validators.required]),
+      deadline:  this.fb.control(0, [Validators.required]),
       discount:  this.fb.control(0, [Validators.required]),
       subtotal: this.fb.control(0, [Validators.required]),
       iva: this.fb.control(0, [Validators.required]),
@@ -108,6 +109,10 @@ export class OrderComponent implements OnInit {
 
   get productItems(){
     return this.frmOrder.get('items') as FormArray;
+  }
+
+  get deadline(){
+    return this.frmOrder.get('deadline');
   }
 
   addItem(item) {
@@ -293,13 +298,14 @@ export class OrderComponent implements OnInit {
   clearWhenIsZero(flag: number){
     console.log(this.customerPayment.value);
     if(flag == 1){
-      if(this.customerPayment.value == "0"){
+      if(this.customerPayment.value == "0")
         this.customerPayment.setValue("");
-      }
-    }else{
-      if(this.discount.value == "0"){
+    }else if(flag == 2){
+      if(this.discount.value == "0")
         this.discount.setValue("");
-     }
+    }else if(flag == 3){
+      if(this.deadline.value == "1")
+        this.deadline.setValue("");
     }
   }
 
@@ -311,6 +317,19 @@ export class OrderComponent implements OnInit {
   setDefaultCustomerPaymentValue(){
     if(this.customerPayment.value == "")
       this.customerPayment.setValue(0);
+  }
+
+  setDefaultDeadlineValue(){
+    if(this.deadline.value == "")
+      this.deadline.setValue(1);
+  }
+
+  setInitialDeadlineValue(){
+    if(this.PaymentMethod.value == "1019"){//CRÉDITO
+      this.deadline.setValue(1);
+    }else{
+      this.deadline.setValue(0);
+    }
   }
 
   addProduct(){
@@ -337,7 +356,7 @@ export class OrderComponent implements OnInit {
   
   orderRegister(){
     
-    console.log('READY FOR SEND', this.frmOrder.value);
+    console.log('READY FOR SEND', this.frmOrder);
     
     if(this.idClient.value <= 0){
       Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Seleccione el cliente que realiza el pedido.'});
@@ -349,19 +368,22 @@ export class OrderComponent implements OnInit {
       return;
     }
 
-    if(this.isDiscountGreatherThanTotal){
-      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'El descuento no puede ser mayor al total a pagar.'});
-      return;
-    }
+    if(this.PaymentMethod.value == "1"){//CONTADO
 
-    if(this.customerPayment.value == 0){
-      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese el monto que el cliente paga.'});
-      return;
-    }
+      if(this.isDiscountGreatherThanTotal){
+        Swal.fire({ icon: 'warning', title: 'Notificación', text: 'El descuento no puede ser mayor al total a pagar.'});
+        return;
+      }
+  
+      if(this.customerPayment.value == 0){
+        Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese el monto que el cliente paga.'});
+        return;
+      }
 
-    if(parseFloat(this.customerPayment.value) < parseFloat(this.total.value)){
-      Swal.fire({ icon: 'warning', title: 'Notificación', text: 'El monto de pago no puede ser menor que el total a pagar.'});
-      return;
+      if(parseFloat(this.customerPayment.value) < parseFloat(this.total.value)){
+        Swal.fire({ icon: 'warning', title: 'Notificación', text: 'El monto de pago no puede ser menor que el total a pagar.'});
+        return;
+      }
     }
 
     if(!this.frmOrder.valid){
@@ -378,6 +400,7 @@ export class OrderComponent implements OnInit {
         items: this.productItems.value,
         payment_method: parseInt(this.PaymentMethod.value),
         payment_mode: parseInt(this.PaymentMode.value),
+        deadline: parseInt(this.deadline.value),
         discount: parseFloat(this.discount.value),
         subtotal: this.subtotal.value,
         iva: this.iva.value,

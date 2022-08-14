@@ -90,15 +90,23 @@
                     <label for="">Método de Pago</label>
                     <div style="display: block;">
                         <div class="custom-control custom-radio" >
-                            <input type="radio" id="rb_contado" name="payment_method" class="custom-control-input"
+                            <input type="radio" id="rb_contado" name="payment_method" (change)="setInitialDeadlineValue()" class="custom-control-input"
                             formControlName="payment_method" value="1">
                             <label class="custom-control-label" for="rb_contado" >Contado</label>
                         </div>
                         <div class="custom-control custom-radio" >
                             <input type="radio" id="rb_credito" name="payment_method" class="custom-control-input"
-                            formControlName="payment_method" value="1019">
+                            formControlName="payment_method" value="1019" (change)="setInitialDeadlineValue()">
                             <label class="custom-control-label" for="rb_credito">Crédito</label>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row form-group" *ngIf="PaymentMethod.value == 1019">
+                    <div class="col-5">
+                        <label for="deadline">Plazo en Días</label>
+                        <input type="text" class="form-control" formControlName="deadline" (click)="clearWhenIsZero(3)" 
+                        [class.form-control-danger]="deadline.touched && deadline.invalid" (blur)="setDefaultDeadlineValue()" appNumericField>
                     </div>
                 </div>
 
@@ -117,6 +125,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-6 form-group ">
                         <label for="cliente_paga">Cliente Paga</label>
