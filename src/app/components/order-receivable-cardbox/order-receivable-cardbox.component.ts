@@ -15,6 +15,7 @@ export class OrderReceivableCardboxComponent {
 
 
   goToDetail(id: string){
+    console.log(id);
     this.router.navigate(['/pedido-cobrar', id]);
   }
 

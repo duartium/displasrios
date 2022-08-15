@@ -64,6 +64,7 @@ export class OrderComponent implements OnInit {
       payment_method:  this.fb.control('1', [Validators.required]),
       payment_mode:  this.fb.control('2', [Validators.required]),
       deadline:  this.fb.control(0, [Validators.required]),
+      num_payment_receipt: this.fb.control(''),
       discount:  this.fb.control(0, [Validators.required]),
       subtotal: this.fb.control(0, [Validators.required]),
       iva: this.fb.control(0, [Validators.required]),
@@ -113,6 +114,10 @@ export class OrderComponent implements OnInit {
 
   get deadline(){
     return this.frmOrder.get('deadline');
+  }
+
+  get numPaymentReceipt(){
+    return this.frmOrder.get('num_payment_receipt');
   }
 
   addItem(item) {
@@ -324,6 +329,11 @@ export class OrderComponent implements OnInit {
       this.deadline.setValue(1);
   }
 
+  setDefaultNumPaymentReceiptValue(){
+    if(this.numPaymentReceipt.value == "")
+      this.numPaymentReceipt.setValue(0);
+  }
+
   setInitialDeadlineValue(){
     if(this.PaymentMethod.value == "1019"){//CRÉDITO
       this.deadline.setValue(1);
@@ -368,6 +378,13 @@ export class OrderComponent implements OnInit {
       return;
     }
 
+    if(this.PaymentMode.value == "3"){
+      if(this.numPaymentReceipt.value.toString().trim().length == 0){
+        Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese el número de comprobante de la transferencia realizada.'});
+        return;
+      }
+    }
+
     if(this.PaymentMethod.value == "1"){//CONTADO
 
       if(this.isDiscountGreatherThanTotal){
@@ -401,6 +418,7 @@ export class OrderComponent implements OnInit {
         payment_method: parseInt(this.PaymentMethod.value),
         payment_mode: parseInt(this.PaymentMode.value),
         deadline: parseInt(this.deadline.value),
+        num_payment_receipt: this.numPaymentReceipt.value,
         discount: parseFloat(this.discount.value),
         subtotal: this.subtotal.value,
         iva: this.iva.value,

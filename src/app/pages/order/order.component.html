@@ -126,6 +126,14 @@
                     </div>
                 </div>
 
+                <div class="row form-group" *ngIf="PaymentMode.value == 3">
+                    <div class="col-7">
+                        <label for="num_payment_receipt">Nro. Comprobante</label>
+                        <input type="text" class="form-control" formControlName="num_payment_receipt"
+                        [class.form-control-danger]="numPaymentReceipt.touched && numPaymentReceipt.invalid" appNumericField>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-6 form-group ">
                         <label for="cliente_paga">Cliente Paga</label>
