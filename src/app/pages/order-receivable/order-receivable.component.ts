@@ -91,6 +91,10 @@ export class OrderReceivableComponent implements OnInit {
       this.customerPayment.setValue("");
   }
 
+  registerVisit(){
+    
+  }
+
   getOrderReceivable(){
 
     this.orderService.GetOrderReceivable(parseInt(this.idOrder)).subscribe(resp => {
