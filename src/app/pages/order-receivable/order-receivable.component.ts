@@ -1,3 +1,4 @@
+import { ReturnStatement } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,11 +20,13 @@ export class OrderReceivableComponent implements OnInit {
   frmOrderReceivable: FormGroup;
   orderReceivable: FullOrderReceivable;
   orderPaymentRequest: OrderPaymentRequest;
+  pendingBalance: number;
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
     private orderService: OrderService) { 
+      
 
       this.frmOrderReceivable = fb.group({
         id_invoice: fb.control(0, [Validators.required]),
@@ -33,6 +36,7 @@ export class OrderReceivableComponent implements OnInit {
 
       this.idOrder = this.activatedRoute.snapshot.paramMap.get('id');
       this.getOrderReceivable();
+      
     }
 
   ngOnInit(): void {
@@ -64,12 +68,27 @@ export class OrderReceivableComponent implements OnInit {
   setOrderChange(){
       if(this.customerPayment.value.length == 0){
           this.change.setValue(0);
+          this.pendingBalance = 0;
           return;
       }
         
       let currentValue: number = parseFloat(this.customerPayment.value);
-      const value = this.orderReceivable.balance - currentValue;
-      this.change.setValue(value);
+      
+      const value = Math.abs(currentValue - this.orderReceivable.balance);
+
+      if(currentValue >= this.orderReceivable.balance){//pago con vuelto
+        this.pendingBalance = 0;
+        this.orderReceivable.balance
+        this.change.setValue(value);
+      }else{ //pago con saldo pendiente
+        this.pendingBalance = value;
+      }
+      
+  }
+
+  clearWhenIsZero(){
+    if(this.customerPayment.value == "0")
+      this.customerPayment.setValue("");
   }
 
   getOrderReceivable(){
@@ -77,12 +96,19 @@ export class OrderReceivableComponent implements OnInit {
     this.orderService.GetOrderReceivable(parseInt(this.idOrder)).subscribe(resp => {
         this.orderReceivable =  resp.data;
         console.log('this.orderReceivable',this.orderReceivable);
+        this.pendingBalance = this.orderReceivable.balance;
     });
   }
 
   registerPayment(){
     document.getElementById("loader").style.display = "";
     
+    if(this.frmOrderReceivable.invalid || this.customerPayment.value == "" || parseFloat(this.customerPayment.value) == 0){
+      document.getElementById("loader").style.display = "none";
+      Swal.fire('Notificación', 'Datos inválidos. Registre el valor que paga el cliente para continuar.', 'warning');
+      return;
+    }
+
     this.orderPaymentRequest = {
       customer_payment: Math.round(parseFloat(this.customerPayment.value)),
       id_order: parseInt(this.idOrder),
@@ -104,6 +130,9 @@ export class OrderReceivableComponent implements OnInit {
             });
         }
 
+    }, (err) => {
+        document.getElementById("loader").style.display = "none";
+        Swal.fire('Notificación', err.message, 'error');
     });
   }
 
