@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FullOrderReceivable, OrderPaymentRequest } from 'src/app/Dtos/OrderReceivableDto.model';
 import { Payment } from 'src/app/models/Payment.model';
+import { VisitCreation } from 'src/app/models/VisitCreation.model';
 import { OrderService } from 'src/app/services/order.service';
 import Swal from 'sweetalert2';
 
@@ -21,6 +22,8 @@ export class OrderReceivableComponent implements OnInit {
   orderReceivable: FullOrderReceivable;
   orderPaymentRequest: OrderPaymentRequest;
   pendingBalance: number;
+  currentScreen: 'PAYMENT' | 'VISIT' = 'PAYMENT';
+  observations: string = '';
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -92,14 +95,39 @@ export class OrderReceivableComponent implements OnInit {
   }
 
   registerVisit(){
+
+    if(this.observations.trim().length === 0){
+      Swal.fire('Notificación', 'Ingrese las observaciones de la visita para registrarla.', 'warning');
+      return;
+    }
+
+    document.getElementById("loader").style.display = "";
+
+    const visit: VisitCreation = { id_order: parseInt(this.idOrder),  observations: this.observations};
     
+    this.orderService.RecordVisit(visit).subscribe(resp => {
+      if(resp.success){
+        Swal.fire({ title: "Notificación", text: "Se registró la visita", icon: "success"})
+        .then(resp => {
+            this.goToBack();
+        });
+      }else{
+        Swal.fire("Notificación",resp.message,"warning");
+      }
+
+      document.getElementById("loader").style.display = "none";
+
+    }, (err) => {
+      document.getElementById("loader").style.display = "none";
+        Swal.fire('Notificación', err.message, 'error');
+    });
   }
 
   getOrderReceivable(){
 
     this.orderService.GetOrderReceivable(parseInt(this.idOrder)).subscribe(resp => {
         this.orderReceivable =  resp.data;
-        console.log('this.orderReceivable',this.orderReceivable);
+        console.log('resp.data',resp.data);
         this.pendingBalance = this.orderReceivable.balance;
     });
   }

@@ -5,7 +5,13 @@
         <h2 style="color: #fff;">{{orderReceivable.balance | currency}}</h2>
         <small>{{orderReceivable.full_names}}</small>
     </div>
-    <div class="detail-order-receivable">
+    <div class="row">
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" (click)="currentScreen = 'PAYMENT'">COBRAR</button>
+            <button type="button" class="btn btn-primary" (click)="currentScreen = 'VISIT'">VISITA</button>
+        </div>
+    </div>
+    <div class="detail-order-receivable" *ngIf="currentScreen == 'PAYMENT'">
         <div class="row">
             <div class="col-6">
                 <strong>Fecha Emisión</strong>
@@ -82,12 +88,24 @@
                 <div class="col-6 form-group my-3 text-right">
                     <button type="submit" class="btn btn-primary"><i class="dw dw-money-2"></i> Cobrar</button>
                 </div>
-                <div class="col-12 form-group mt-5 my-3 text-center">
-                    <button type="button" class="btn btn-outline-primary" (click)="registerVisit()"><i class="dw dw-notepad-1"></i> Registrar visita</button>
-                </div>
+               
                 
             </div>
         </form>
+    </div>
+
+    <div class="record-visit" *ngIf="currentScreen == 'VISIT'">
+        <div class="row mb-5">
+            <h3 class="ml-3">Registro de Visita</h3>
+            <div class="col-12 form-group mt3">
+                <label for="cliente_paga">Observaciones</label>
+                <textarea type="text" [(ngModel)]="observations" class="form-control">
+                </textarea>
+            </div>
+            <div class="col-12 form-group mt-5 my-3 text-center">
+                <button type="button" class="btn btn-outline-primary" (click)="registerVisit()"><i class="dw dw-notepad-1"></i> Registrar visita</button>
+            </div>
+        </div>
     </div>
 </div>
 <app-modal [modalTitle]="modalTitle">

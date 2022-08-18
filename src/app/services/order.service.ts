@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FullOrderReceivableResp, OrderPaymentRequest, OrderReceivableResp, SummaryOrdersOfDayResp } from '../Dtos/OrderReceivableDto.model';
 import { ApiResponse } from '../models/ApiResponse';
+import { VisitCreation } from '../models/VisitCreation.model';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -30,6 +31,10 @@ export class OrderService {
   
   registerPayment(orderPayment: OrderPaymentRequest){
     return this.http.post<ApiResponse>(this.url + '/pay', orderPayment);
+  }
+
+  RecordVisit(visit: VisitCreation){
+    return this.http.post<ApiResponse>(this.url + '/record-visit', visit);
   }
 
   
