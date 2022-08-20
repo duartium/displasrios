@@ -1,16 +1,34 @@
 <div class="wrap-order-receivable">
-    <p class="pt-4 px-3" (click)="goToBack()"><i class="dw dw-left-arrow1" style="font-size: 28px; color:#fff"></i></p>
+    <div class="row">
+        <div class="col-4">
+            <p class="pt-4 px-3" (click)="goToBack()"><i class="dw dw-left-arrow1" style="font-size: 28px; color:#fff"></i></p>
+        </div>
+        <div class="col-8 text-right">
+            <p class="pt-4 px-4" style="margin-bottom: 0.2rem;" (click)="showMenuConfig()"><i class="icon-copy dw dw-settings text-white" style="font-size: 1.5rem;"></i></p>
+
+            <div #orderConfig class="order-config-options" style="display: none;">
+                <ul>
+                    <li><i class="icon-copy dw dw-edit1"></i><span> Editar Pedido</span></li>
+                    <li><i class="icon-copy dw dw-delete-3"></i><span> Anular Pedido</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <div class="header-order-receivable pt-2">
         <small>TOTAL A PAGAR</small><br>
         <h2 style="color: #fff;">{{orderReceivable.balance | currency}}</h2>
         <small>{{orderReceivable.full_names}}</small>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <button type="button" class="btn btn-primary" (click)="currentScreen = 'PAYMENT'">COBRAR</button>
-            <button type="button" class="btn btn-primary" (click)="currentScreen = 'VISIT'">VISITA</button>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <button type="button" class="btn btn-primary" (click)="currentScreen = 'PAYMENT'">COBRAR</button>
+                <button type="button" class="btn btn-primary" (click)="currentScreen = 'VISIT'">VISITA</button>
+            </div>
         </div>
+        
     </div>
+   
     <div class="detail-order-receivable" *ngIf="currentScreen == 'PAYMENT'">
         <div class="row">
             <div class="col-6">
@@ -94,19 +112,38 @@
         </form>
     </div>
 
-    <div class="record-visit" *ngIf="currentScreen == 'VISIT'">
-        <div class="row mb-5">
-            <h3 class="ml-3">Registro de Visita</h3>
-            <div class="col-12 form-group mt3">
-                <label for="cliente_paga">Observaciones</label>
-                <textarea type="text" [(ngModel)]="observations" class="form-control">
-                </textarea>
+    <div class="record-visit">
+        <div  *ngIf="currentScreen == 'VISIT'">
+            <div class="row mb-5">
+                <h3 class="ml-3">Registro de Visita</h3>
+                <div class="col-12 form-group mt3">
+                    <label for="cliente_paga">Observaciones</label>
+                    <textarea type="text" [(ngModel)]="observations" class="form-control">
+                    </textarea>
+                </div>
+                <div class="col-12 form-group mt-5 my-3 text-center">
+                    <button type="button" class="btn btn-outline-primary" (click)="registerVisit()"><i class="dw dw-notepad-1"></i> Registrar visita</button>
+                </div>
             </div>
-            <div class="col-12 form-group mt-5 my-3 text-center">
-                <button type="button" class="btn btn-outline-primary" (click)="registerVisit()"><i class="dw dw-notepad-1"></i> Registrar visita</button>
+        </div>
+
+        <div  *ngIf="orderReceivable.visits.length > 0 && currentScreen == 'VISIT'">
+            <div class="row mb-5">
+                <h3 class="ml-3">Historial de Visitas</h3>
+                <div *ngFor="let visit of orderReceivable.visits">
+                    <div class="col-4 form-group mt3" >
+                        <strong>{{visit.date}}</strong>
+                    </div>
+                    <div class="col-8 form-group mt3">
+                        <span>{{visit.observations}}</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    
+    
+    
 </div>
 <app-modal [modalTitle]="modalTitle">
     <div>

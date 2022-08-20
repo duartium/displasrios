@@ -1,6 +1,7 @@
 import { ApiResponse } from "../models/ApiResponse";
 import { Payment } from "../models/Payment.model";
 import { ProductResume } from "../models/Product.model";
+import { Visit } from "../models/Visit.model";
 
 export interface OrderReceivableDto{
     id: number;
@@ -19,7 +20,8 @@ export interface FullOrderReceivable{
     balance: number;
     days_debt: number;
     payments: Payment[];
-    products: ProductResume[]
+    products: ProductResume[];
+    visits: Visit[];
 }
 
 export interface OrderPaymentRequest{

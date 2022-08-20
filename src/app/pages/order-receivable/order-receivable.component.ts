@@ -1,9 +1,7 @@
-import { ReturnStatement } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FullOrderReceivable, OrderPaymentRequest } from 'src/app/Dtos/OrderReceivableDto.model';
-import { Payment } from 'src/app/models/Payment.model';
 import { VisitCreation } from 'src/app/models/VisitCreation.model';
 import { OrderService } from 'src/app/services/order.service';
 import Swal from 'sweetalert2';
@@ -13,7 +11,8 @@ import Swal from 'sweetalert2';
   templateUrl: './order-receivable.component.html',
   styleUrls: ['./order-receivable.component.css']
 })
-export class OrderReceivableComponent implements OnInit {
+export class OrderReceivableComponent implements OnInit, AfterViewInit{
+  @ViewChild('orderConfig') orderConfig: ElementRef;
 
   modalTitle: string = "PAGOS";
   detailsOpened: boolean = false;
@@ -28,9 +27,9 @@ export class OrderReceivableComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private orderService: OrderService) { 
+    private orderService: OrderService,
+    private render: Renderer2) { 
       
-
       this.frmOrderReceivable = fb.group({
         id_invoice: fb.control(0, [Validators.required]),
         change: fb.control(0, [Validators.required]),
@@ -41,10 +40,14 @@ export class OrderReceivableComponent implements OnInit {
       this.getOrderReceivable();
       
     }
+  ngAfterViewInit(): void {
+    
+  }
 
   ngOnInit(): void {
     
     this.frmOrderReceivable.get('id_invoice').setValue(this.idOrder);
+    
   }
 
   get change(){
@@ -61,6 +64,16 @@ export class OrderReceivableComponent implements OnInit {
 
   showOrderDetails(){
     this.detailsOpened = !this.detailsOpened;
+  }
+
+  showMenuConfig(){
+    if((this.orderConfig.nativeElement as HTMLElement).style.display === 'block'){
+      this.render.setStyle(this.orderConfig.nativeElement, 'display', 'none');
+      this.render.setStyle(this.orderConfig.nativeElement, 'opacity', 0);
+    }else{
+      this.render.setStyle(this.orderConfig.nativeElement, 'display', 'block');
+      this.render.setStyle(this.orderConfig.nativeElement, 'opacity', 1);
+    }
   }
 
   showModal(){
