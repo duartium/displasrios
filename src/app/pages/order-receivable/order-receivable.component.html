@@ -9,7 +9,7 @@
             <div #orderConfig class="order-config-options" style="display: none;">
                 <ul>
                     <li><i class="icon-copy dw dw-edit1"></i><span> Editar Pedido</span></li>
-                    <li><i class="icon-copy dw dw-delete-3"></i><span> Anular Pedido</span></li>
+                    <li (click)="cancelOrder()"><i class="icon-copy dw dw-delete-3"></i><span> Anular Pedido</span></li>
                 </ul>
             </div>
         </div>

@@ -37,5 +37,8 @@ export class OrderService {
     return this.http.post<ApiResponse>(this.url + '/record-visit', visit);
   }
 
+  CancelOrder(id: string){
+    return this.http.delete<ApiResponse>(this.url + '/cancel-order/'+id);
+  }
   
 }

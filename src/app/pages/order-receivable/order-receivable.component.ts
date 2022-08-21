@@ -145,6 +145,34 @@ export class OrderReceivableComponent implements OnInit, AfterViewInit{
     });
   }
 
+  cancelOrder(){
+    Swal.fire({
+      title: '¿Está seguro de anular el pedido?',
+      showDenyButton: true,
+      confirmButtonText: 'Sí, anular',
+      denyButtonText: 'No',
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.orderService.CancelOrder(this.idOrder).subscribe(resp => {
+          if(resp.success){
+            Swal.fire('¡Pedido Anulado!', '', 'success')
+            .then(() => {
+              this.goToBack();
+            });
+          }else{
+            Swal.fire('Error', 'No se pudo cancelar el pedido: '+resp.message, 'warning');
+          }
+        }, (err) => {
+          Swal.fire('Error', 'No se pudo cancelar el pedido: '+err.message, 'error');
+        });
+
+      
+      }
+      this.showMenuConfig();
+    })
+  }
+
   registerPayment(){
     document.getElementById("loader").style.display = "";
     
