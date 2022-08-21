@@ -102,57 +102,80 @@
                     </div>
                 </div>
 
-                <div class="row form-group" *ngIf="PaymentMethod.value == 1019">
+                <div class="row" *ngIf="PaymentMethod.value == 1019">
                     <div class="col-5">
-                        <label for="deadline">Plazo en Días</label>
+                        <div class="form-group">
+                            <label for="deadline">Plazo en Días</label>
                         <input type="text" class="form-control" formControlName="deadline" (click)="clearWhenIsZero(3)" 
                         [class.form-control-danger]="deadline.touched && deadline.invalid" (blur)="setDefaultDeadlineValue()" appNumericField>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Forma de Pago</label>
-                    <div style="display: block;">
-                        <div class="custom-control custom-radio" >
-                            <input type="radio" id="rb_efectivo" name="payment_mode" class="custom-control-input" 
-                            formControlName="payment_mode" value="2">
-                            <label class="custom-control-label" for="rb_efectivo" >Efectivo</label>
-                        </div>
-                        <div class="custom-control custom-radio" >
-                            <input type="radio" id="rb_transferencia" name="payment_mode" class="custom-control-input"
-                            formControlName="payment_mode" value="3">
-                            <label class="custom-control-label" for="rb_transferencia" >Transferencia</label>
                         </div>
                     </div>
-                </div>
-
-                <div class="row form-group" *ngIf="PaymentMode.value == 3">
                     <div class="col-7">
-                        <label for="num_payment_receipt">Nro. Comprobante</label>
-                        <input type="text" class="form-control" formControlName="num_payment_receipt"
-                        [class.form-control-danger]="numPaymentReceipt.touched && numPaymentReceipt.invalid" appNumericField>
+                        <div class="form-group">
+                            <label for="">¿Realiza abono?</label>
+                            <div style="display: block;">
+                                <div class="custom-control custom-radio" >
+                                    <input type="radio" id="rb_yes_advance" name="is_payment_advance" class="custom-control-input"
+                                     value="1" formControlName="is_payment_advance">
+                                    <label class="custom-control-label" for="rb_yes_advance" >Sí</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="rb_no_advance" name="is_payment_advance" class="custom-control-input"
+                                     value="0" formControlName="is_payment_advance">
+                                    <label class="custom-control-label" for="rb_no_advance">No</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
+                <div #wrapper_payment_details *ngIf="PaymentMethod.value == 1 || isPaymentAdvance.value == '1'">
 
-                <div class="row">
-                    <div class="col-6 form-group ">
-                        <label for="cliente_paga">Cliente Paga</label>
-                        <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  (click)="clearWhenIsZero(1)" mask="separator.2" separatorLimit ="10000" thousandSeparator=","
-                        [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')" (blur)="setDefaultCustomerPaymentValue()">
-                        
-                        <div *ngIf="customerPayment.hasError('required')" 
-                        class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
+                    <div class="form-group" >
+                        <label for="">Forma de Pago</label>
+                        <div style="display: block;">
+                            <div class="custom-control custom-radio" >
+                                <input type="radio" id="rb_efectivo" name="payment_mode" class="custom-control-input" 
+                                formControlName="payment_mode" value="2">
+                                <label class="custom-control-label" for="rb_efectivo" >Efectivo</label>
+                            </div>
+                            <div class="custom-control custom-radio" >
+                                <input type="radio" id="rb_transferencia" name="payment_mode" class="custom-control-input"
+                                formControlName="payment_mode" value="3">
+                                <label class="custom-control-label" for="rb_transferencia" >Transferencia</label>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-6 form-group">
-                        <label for="discount">Descuento</label>
-                        <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()" (click)="clearWhenIsZero(2)" mask="separator.2" separatorLimit =" 10000 " thousandSeparator=","
-                        [class.form-control-danger]="isDiscountGreatherThanTotal" (blur)="setDefaultDiscountValue()">
-
-                        <div class="form-control-feedback has-danger" 
-                        *ngIf="isDiscountGreatherThanTotal">El descuento no puede ser mayor al total</div>
+                    <div class="row form-group" *ngIf="PaymentMode.value == 3">
+                        <div class="col-7">
+                            <label for="num_payment_receipt">Nro. Comprobante</label>
+                            <input type="text" class="form-control" formControlName="num_payment_receipt"
+                            [class.form-control-danger]="numPaymentReceipt.touched && numPaymentReceipt.invalid" appNumericField>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-6 form-group ">
+                            <label for="cliente_paga">Cliente Paga</label>
+                            <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  (click)="clearWhenIsZero(1)" mask="separator.2" separatorLimit ="10000" thousandSeparator=","
+                            [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')" (blur)="setDefaultCustomerPaymentValue()">
+                            
+                            <div *ngIf="customerPayment.hasError('required')" 
+                            class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
+                        </div>
+    
+                        <div class="col-6 form-group">
+                            <label for="discount">Descuento</label>
+                            <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()" (click)="clearWhenIsZero(2)" mask="separator.2" separatorLimit =" 10000 " thousandSeparator=","
+                            [class.form-control-danger]="isDiscountGreatherThanTotal" (blur)="setDefaultDiscountValue()">
+    
+                            <div class="form-control-feedback has-danger" 
+                            *ngIf="isDiscountGreatherThanTotal">El descuento no puede ser mayor al total</div>
+                        </div>
                     </div>
                 </div>
+                
 
                <div class="row">
                     <div class="col-6 form-group">

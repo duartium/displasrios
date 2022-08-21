@@ -58,7 +58,7 @@ export class OrderComponent implements OnInit {
   get defaultForm(){
     return new FormGroup({
       id_client:  this.fb.control(-1, [Validators.required]),
-      items: this.fb.array([]),
+      items: new FormArray([]),
       customer_payment:  this.fb.control(0, [Validators.required]),
       change: this.fb.control(0, [Validators.required]),
       payment_method:  this.fb.control('1', [Validators.required]),
@@ -68,8 +68,13 @@ export class OrderComponent implements OnInit {
       discount:  this.fb.control(0, [Validators.required]),
       subtotal: this.fb.control(0, [Validators.required]),
       iva: this.fb.control(0, [Validators.required]),
-      total: this.fb.control(0, [Validators.required])
+      total: this.fb.control(0, [Validators.required]),
+      is_payment_advance: this.fb.control("0",[])
     });
+  }
+
+  get isPaymentAdvance(){
+    return this.frmOrder.get('is_payment_advance');
   }
 
   get idClient(){
@@ -154,6 +159,10 @@ export class OrderComponent implements OnInit {
     this.quantity_cart = 0;
     
     let subtotal: number = 0;
+    console.log('this.productItems.value', this.productItems.value);
+    if(this.productItems.value.length == 0)
+      return
+
     this.productItems.value.forEach(prod => {
         this.quantity_cart += parseInt(prod.quantity);
         let total_line = parseFloat(prod.price) * parseInt(prod.quantity);
@@ -339,6 +348,7 @@ export class OrderComponent implements OnInit {
       this.deadline.setValue(1);
     }else{
       this.deadline.setValue(0);
+      this.isPaymentAdvance.setValue('0');
     }
   }
 
@@ -385,7 +395,7 @@ export class OrderComponent implements OnInit {
       }
     }
 
-    if(this.PaymentMethod.value == "1"){//CONTADO
+    if(this.PaymentMethod.value == "1" || this.isPaymentAdvance.value == '1'){//CONTADO o REALIZA UN ABONO
 
       if(this.isDiscountGreatherThanTotal){
         Swal.fire({ icon: 'warning', title: 'Notificación', text: 'El descuento no puede ser mayor al total a pagar.'});
@@ -393,14 +403,23 @@ export class OrderComponent implements OnInit {
       }
   
       if(this.customerPayment.value == 0){
-        Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese el monto que el cliente paga.'});
-        return;
-      }
+        
+        if(this.isPaymentAdvance.value == '1'){
+          Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese el monto que el cliente paga como abono. Debe ser mayor a cero.'});
+          return;
+        }
 
-      if(parseFloat(this.customerPayment.value) < parseFloat(this.total.value)){
-        Swal.fire({ icon: 'warning', title: 'Notificación', text: 'El monto de pago no puede ser menor que el total a pagar.'});
+        Swal.fire({ icon: 'warning', title: 'Notificación', text: 'Ingrese el monto que el cliente paga. Debe ser mayor a cero.'});
         return;
       }
+      
+      if(this.PaymentMethod.value == "1" ){ //Solo si es al CONTADO
+        if(parseFloat(this.customerPayment.value) < parseFloat(this.total.value)){
+          Swal.fire({ icon: 'warning', title: 'Notificación', text: 'El monto de pago no puede ser menor que el total a pagar.'});
+          return;
+        }
+      }
+      
     }
 
     if(!this.frmOrder.valid){
@@ -436,8 +455,9 @@ export class OrderComponent implements OnInit {
           this.frmOrder.reset(this.defaultForm.value);
           this.quantity_cart = 0;
           this.customerSelected = null;
-          this.removeAllItemsProducts();
-          this.frmOrder.get('items').reset();
+          this.productItems.clear();
+          // this.removeAllItemsProducts();
+          // this.frmOrder.get('items').reset();
           this.productsOrder.splice(0);
           console.log(this.productItems);
 
