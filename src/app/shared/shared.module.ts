@@ -13,6 +13,7 @@ import { NumericFieldDirective } from '../directives/numeric-field.directive';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { AlphanumericFieldDirective } from '../directives/alphanumeric-field.directive';
 import { ProductCodeFieldDirective } from '../directives/product-code-field.directive';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -29,7 +30,8 @@ const maskConfig: Partial<IConfig> = {
     NumericFieldDirective,
     AlphanumericFieldDirective,
     ProductCodeFieldDirective,
-    OrderReceivableCardboxComponent
+    OrderReceivableCardboxComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,

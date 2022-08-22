@@ -22,6 +22,15 @@ export interface FullOrderReceivable{
     payments: Payment[];
     products: ProductResume[];
     visits: Visit[];
+    collector_name: string;
+    payment_method: string;
+    way_to_pay: string;
+    deadline: number;
+    subtotal: number;
+    subtotal0: number;
+    subtotal2: number;
+    iva: number;
+    discount: number;
 }
 
 export interface OrderPaymentRequest{
@@ -43,7 +52,7 @@ export interface SummaryOrdersOfDayResp extends ApiResponse{
 }
 
 export interface SummaryOrderOfDay{
-    id: number;
+    id_order: number;
     order_number: string;
     full_names: string;
     total_amount: string;

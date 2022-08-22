@@ -24,6 +24,7 @@
                     <th scope="col">Recaudador</th>
                     <th scope="col">Total</th>
                     <th scope="col">Etapa</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody *ngFor="let order of summaryOrders">
@@ -34,6 +35,7 @@
                     <td>{{order.username}}</td>
                     <td>{{order.total_amount}}</td>
                     <td><span class="badge badge-primary">Primary</span></td>
+                    <td><button class="btn btn-sm btn-info" (click)="GoToOrder(order.id_order)"><i class="icon-copy dw dw-eye" ></i> Ver Detalle</button></td>
                 </tr>
             </tbody>
         </table>

@@ -8,6 +8,9 @@
 h1, h2, h3, h4, h5{
     color:  #7538b9;
 }
+.bg-primary{
+    background-color: #7538b9 !important;
+}
 .btn-primary{
     background-color: #7538b9 !important;
     border-color: #56238e !important;
@@ -111,4 +114,12 @@ h1, h2, h3, h4, h5{
 
 .uppercase{
     text-transform: uppercase;
+}
+
+.invoice-totals th{
+    text-align: left;
+}
+
+.invoice-totals td{
+    text-align: right;
 }

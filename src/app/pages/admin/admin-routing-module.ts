@@ -5,6 +5,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminComponent } from './admin.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomersComponent } from './customers/customers.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrdersOfDayComponent } from './orders-of-day/orders-of-day.component';
 import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
@@ -21,6 +22,7 @@ const routes = [
         { path: 'clientes', component: CustomersComponent },
         { path: 'cliente/nuevo', component: CustomerComponent },
         { path: 'pedidos', component: OrdersOfDayComponent },
+        { path: 'pedido/:id', component: OrderDetailComponent },
         { path: 'usuario', component: UserComponent },
         { path: 'usuarios', component: UsersComponent },
         { path: 'productos', component: ProductsComponent },

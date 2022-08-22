@@ -1,0 +1,152 @@
+<div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+            <li class="breadcrumb-item"><a href="/admin/pedidos">Pedidos del día</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Pedido</li>
+        </ol>
+    </nav>
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Pedido Nº{{order.order_number}}</h4>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <p>{{order.date}}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <p>{{order.full_names}}</p>
+                </div>
+            </div>
+           
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="form-group">
+                    <label>Saldo Pendiente</label>
+                    <p>{{order.balance | currency}}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="form-group">
+                    <label>Total</label>
+                    <p>{{order.total_amount | currency}}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="form-group">
+                    <label>Recaudador</label>
+                    <p>{{order.collector_name}}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="form-group">
+                    <label>Forma Pago</label>
+                    <p>{{order.way_to_pay}}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="form-group">
+                    <label>Método Pago</label>
+                    <p>{{order.payment_method}}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <div class="form-group">
+                    <label>Plazo</label>
+                    <p>{{order.days_debt}}</p>
+                </div>
+            </div>
+        </div>
+
+        <table class="table mt-3 table-hover">
+            <thead style="text-transform: uppercase;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre de Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let product of order.products; let i = index;">
+                <tr>
+                    <td>{{i + 1}}</td>
+                    <td>{{product.name}}</td>
+                    <td style="text-align: center;">{{product.quantity}}</td>
+                    <td style="text-align: right;">{{product.price | currency}}</td>
+                    <td style="text-align: right;">{{product.total | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table mt-1 table-hover col-md-6 offset-md-6">
+            <tbody class="invoice-totals">
+                <tr>
+                    <th scope="col">SUBTOTAL 12%</th>
+                    <td>{{order.subtotal2}}</td>
+                </tr>
+                <tr >
+                    <th scope="col">SUBTOTAL 0%</th>
+                    <td>{{order.subtotal0}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">TOTAL DESCUENTO</th>
+                    <td>{{order.discount }}</td>
+                </tr>
+                <tr>
+                    <th scope="col">IVA 12%</th>
+                    <td>{{order.iva}}</td>
+                </tr>
+                <tr>
+                    <th scope="col">TOTAL</th>
+                    <td>{{order.total_amount}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-5">
+                <h4>Pagos</h4>
+                <div class="wrapper-visits">
+                    <div class="pd-20 card-box mb-30" *ngFor="let payment of order.payments">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-5 bg-success text-white text-center pt-2" style="border-radius: 7px;">
+                                <span ><i class="icon-copy dw dw-credit-card" style="font-size: 2rem;"></i></span><br>
+                                <label>{{payment.date}}</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-7 bg-light text-center" style="border-radius: 7px;">
+                                <h4>{{payment.amount | currency}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-7">
+                <h4>Visitas</h4>
+                <div class="wrapper-visits">
+                    <div class="pd-20 card-box mb-30" *ngFor="let visit of order.visits">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 bg-primary text-white text-center pt-2" style="border-radius: 7px;">
+                                <span ><i class="icon-copy dw dw-pagoda" style="font-size: 2rem;"></i></span><br>
+                                <label>{{visit.date}}</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 bg-light" style="border-radius: 7px;">
+                                <p>{{visit.observations}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>

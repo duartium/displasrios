@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SummaryOrderOfDay } from 'src/app/Dtos/OrderReceivableDto.model';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -10,7 +11,8 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrdersOfDayComponent implements OnInit {
 
   summaryOrders: SummaryOrderOfDay[];
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getSummaryOrdersOfDay();
@@ -23,6 +25,11 @@ export class OrdersOfDayComponent implements OnInit {
             console.log(resp.data);
         }
     });
+  }
+
+  GoToOrder(id: number){
+    this.router.navigate(['/admin/pedido/'+id]);
+    console.log('pok');
   }
 
 }
