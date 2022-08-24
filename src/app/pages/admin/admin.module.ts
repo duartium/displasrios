@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProvidersComponent } from './providers/providers.component';
 import { ProviderComponent } from './provider/provider.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { DailySalesComponent } from './reports/daily-sales/daily-sales.component';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
     ProductsComponent, 
     ProductComponent, 
     ProvidersComponent, 
-    ProviderComponent, OrderDetailComponent
+    ProviderComponent, 
+    OrderDetailComponent, 
+    DailySalesComponent
   ],
   imports: [
     CommonModule,
