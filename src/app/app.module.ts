@@ -23,6 +23,7 @@ import { OrdersOfDayComponent } from './pages/admin/orders-of-day/orders-of-day.
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './pages/admin/admin.module';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
