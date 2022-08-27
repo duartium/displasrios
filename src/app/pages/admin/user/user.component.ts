@@ -25,12 +25,16 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.getProfiles();
 
-    this.frmUser = this.fb.group({
+    this.frmUser = this.defaultForm;
+  }
+
+  get defaultForm(){
+    return this.fb.group({
       identification: this.fb.control('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       names: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       surnames: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       email: this.fb.control('', [Validators.required, Validators.email, Validators.minLength(3)]),
-      id_profile: this.fb.control(-1, [Validators.required, Validators.email, Validators.minLength(3)])
+      id_profile: this.fb.control(-1, [Validators.required])
     });
   }
 
@@ -77,13 +81,15 @@ export class UserComponent implements OnInit {
     this.userService.create(this.frmUser.value).subscribe(resp => {
       console.log(resp);
       if(resp.success){
+        Swal.fire({ icon: 'success', title: 'Notificación', text: 'Usuario creado. Se enviaron las credenciales al correo electrónico '+this.email.value});
         this.frmUser.reset();
-        Swal.fire({ icon: 'error', title: 'Notificación', text: 'Usuario creado. Se enviaron las credenciales al correo electrónico '+this.email.value});
       }else{
+        console.log('SUCCESS FALSE', resp);
         Swal.fire({ icon: 'error', title: 'Notificación', text: resp.message});
       }
       document.getElementById("loader").style.display = "none";
     }, (err) => {
+      console.log('ERR', err);
       document.getElementById("loader").style.display = "none";
       Swal.fire({ icon: 'error', title: 'Notificación', text: err.message});
     });

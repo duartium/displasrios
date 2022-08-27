@@ -6,9 +6,28 @@
 </nav>
 
 <div class="bg-white pd-20 card-box mb-30">
-    <h1>PRUEBA BROU</h1>
-    <div style="width:100%;">
-        <button (click)="refresh()" class="btn btn-primary">PRUEBA</button>
-        <canvas id="myChart" width="700" height="250" #mychart></canvas>
+    <h3>INGRESOS POR VENDEDORES</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for=""></label>
+                <select name="" id="sel_" class="form-control">
+                    <option value="">MES ACTUAL</option>
+                </select>
+                
+            </div>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control date-picker" placeholder="Select Date" type="text">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <table></table>
+        </div>
+        <div class="col-md-9">
+            <button (click)="refresh()" class="btn btn-primary">PRUEBA</button>
+            <canvas id="myChart" width="700" height="350" #mychart></canvas>
+        </div>
     </div>
 </div>

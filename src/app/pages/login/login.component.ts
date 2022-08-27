@@ -58,11 +58,11 @@ export class LoginComponent implements OnInit {
             this.userService.getProfile().subscribe(resp => {
               const userProfile: User = resp.data;
               console.log(userProfile);
-              if(userProfile.role === 1){
-                this.router.navigate(['admin/pedidos']);
+              if(userProfile.role === 1){//recaudador
+                this.router.navigate(['pedidos-cobrar']);
                 document.getElementById("loader").style.display = "none";
               }else{
-                this.router.navigate(['pedidos-cobrar']);
+                this.router.navigate(['admin/pedidos']);
                 document.getElementById("loader").style.display = "none";
               }
               

@@ -17,7 +17,7 @@ export class DailySalesComponent implements OnInit, AfterViewInit {
   constructor(){}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
 
 
