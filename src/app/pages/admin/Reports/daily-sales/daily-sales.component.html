@@ -7,26 +7,61 @@
 
 <div class="bg-white pd-20 card-box mb-30">
     <h3>INGRESOS POR VENDEDORES</h3>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label for=""></label>
-                <select name="" id="sel_" class="form-control">
-                    <option value="">MES ACTUAL</option>
-                </select>
-                
+    <form ngSubmit="getReportBySellers()" [formGroup]="frmFiltersReport">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="date_from">Fecha Desde</label>
+                    <input class="form-control" (click)="d.open()"
+                            formControlName="dateFrom" ngbDatepicker #d="ngbDatepicker" readonly/>
+                    <!-- <div *ngIf="dateFrom.touched && dateFrom.invalid" class="form-control-feedback has-danger">
+                        <font  style="vertical-align: inherit;">Fecha desde obligatoria</font>
+                    </div> -->
+                </div>
             </div>
-            <div class="col-sm-12 col-md-10">
-                <input class="form-control date-picker" placeholder="Select Date" type="text">
+                
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="date_from">Fecha Hasta</label>
+                    <input class="form-control" (click)="duntil.open()"
+                        formControlName="dateUntil" ngbDatepicker #duntil="ngbDatepicker" readonly />
+                    <!-- <div *ngIf="dateUntil" class="form-control-feedback has-danger">
+                        <font  style="vertical-align: inherit;">Fecha hasta obligatoria</font>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <button (click)="generate()" class="btn btn-primary" style="margin-top: 1.9rem">GENERAR</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
     <div class="row">
-        <div class="col-md-3">
-            <table></table>
+        <div class="col-md-3 bg-primary>
+            <div class="table-responsive">
+                <table class="table table-hovered">
+                    <thead>
+                        <tr>
+                            <th>Recaudador</th>
+                            <th>Total Ventas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>asd</td>
+                            <td>234.32</td>
+                        </tr>
+                        <tr>
+                            <th>TOTAL VENTAS</th>
+                            <th>234.32</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-md-9">
-            <button (click)="refresh()" class="btn btn-primary">PRUEBA</button>
             <canvas id="myChart" width="700" height="350" #mychart></canvas>
         </div>
     </div>

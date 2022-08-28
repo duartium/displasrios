@@ -11,7 +11,7 @@ import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProvidersComponent } from './providers/providers.component';
 import { ProviderComponent } from './provider/provider.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
@@ -35,6 +35,7 @@ import { DailySalesComponent } from './reports/daily-sales/daily-sales.component
   ],
   imports: [
     CommonModule,
+    FormsModule,
     SharedModule,
     RouterModule,
     AdminRoutingModule,

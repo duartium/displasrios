@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Chart } from 'chart.js';
 
 @Component({
@@ -8,16 +10,37 @@ import { Chart } from 'chart.js';
 })
 export class DailySalesComponent implements OnInit, AfterViewInit {
 
-  name = 'Angular   6';
   canvas: any;
   ctx: any;
   myChart: Chart;
   @ViewChild('mychart') mychart;
   data: any = [];
-  constructor(){}
+  
+  dateIni: NgbDateStruct = { year: new Date().getFullYear(), month: new Date().getMonth(), day: new Date().getDay() };
+  dateFin: NgbDateStruct = { year: new Date().getFullYear(), month: new Date().getMonth(), day: new Date().getDay() };
+  frmFiltersReport: FormGroup;
 
+  constructor(private readonly calendar: NgbCalendar,
+    private fb: FormBuilder) {
+      this.frmFiltersReport = this.defaultForm;
+    }
   ngOnInit(): void {
-    
+    console.log('init');
+  }
+
+  get defaultForm(){
+    return this.fb.group({
+      dateFrom: this.fb.control(this.dateIni, [Validators.required]),
+      dateUntil: this.fb.control(this.dateFin, [Validators.required]),
+    });
+  }
+
+  get dateForm(){
+    return this.frmFiltersReport.get('dateFrom');
+  }
+
+  get dateUntil(){
+    return this.frmFiltersReport.get('dateUntil');
   }
 
 
@@ -58,6 +81,13 @@ export class DailySalesComponent implements OnInit, AfterViewInit {
     this.myChart.update();
   }
 
+  getReportBySellers(){
+    
+  }
+
+  generate(){
+
+  }
 
 
 }

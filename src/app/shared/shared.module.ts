@@ -14,6 +14,7 @@ import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { AlphanumericFieldDirective } from '../directives/alphanumeric-field.directive';
 import { ProductCodeFieldDirective } from '../directives/product-code-field.directive';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -38,6 +39,7 @@ const maskConfig: Partial<IConfig> = {
     RouterModule,
     AdminRoutingModule,
     NgxMaskModule.forRoot(maskConfig),
+    NgbModule
   ],
   exports: [
     HeaderMobileComponent,
@@ -50,7 +52,9 @@ const maskConfig: Partial<IConfig> = {
     NgxMaskModule,
     AlphanumericFieldDirective,
     ProductCodeFieldDirective,
-    OrderReceivableCardboxComponent
+    OrderReceivableCardboxComponent,
+    NgbModule,
+    CommonModule
   ], schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
