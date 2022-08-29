@@ -7,27 +7,21 @@
 
 <div class="bg-white pd-20 card-box mb-30">
     <h3>INGRESOS POR VENDEDORES</h3>
-    <form ngSubmit="getReportBySellers()" [formGroup]="frmFiltersReport">
+    <!-- <form ngSubmit="getReportBySellers()" [formGroup]="frmFiltersReport"> -->
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="date_from">Fecha Desde</label>
-                    <input class="form-control" (click)="d.open()"
-                            formControlName="dateFrom" ngbDatepicker #d="ngbDatepicker" readonly/>
-                    <!-- <div *ngIf="dateFrom.touched && dateFrom.invalid" class="form-control-feedback has-danger">
-                        <font  style="vertical-align: inherit;">Fecha desde obligatoria</font>
-                    </div> -->
+                    <input class="form-control" (click)="d.open()" [(ngModel)]="dateIni"
+                         ngbDatepicker #d="ngbDatepicker" readonly/>
                 </div>
             </div>
                 
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="date_from">Fecha Hasta</label>
-                    <input class="form-control" (click)="duntil.open()"
-                        formControlName="dateUntil" ngbDatepicker #duntil="ngbDatepicker" readonly />
-                    <!-- <div *ngIf="dateUntil" class="form-control-feedback has-danger">
-                        <font  style="vertical-align: inherit;">Fecha hasta obligatoria</font>
-                    </div> -->
+                    <input class="form-control" (click)="duntil.open()" [(ngModel)]="dateFin"
+                        ngbDatepicker #duntil="ngbDatepicker" readonly />
                 </div>
             </div>
 
@@ -37,9 +31,9 @@
                 </div>
             </div>
         </div>
-    </form>
-    <div class="row">
-        <div class="col-md-3 bg-primary>
+    <!-- </form> -->
+    <div class="row mt-3">
+        <div class="col-md-4">
             <div class="table-responsive">
                 <table class="table table-hovered">
                     <thead>
@@ -49,19 +43,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>asd</td>
-                            <td>234.32</td>
+                        <tr *ngFor="let sale of salesBySeller" >
+                            <td>{{sale.user}}</td>
+                            <td style="text-align: right;">{{sale.total | currency}}</td>
                         </tr>
                         <tr>
                             <th>TOTAL VENTAS</th>
-                            <th>234.32</th>
+                            <th style="text-align: right;">{{totalSale | currency}}</th>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <canvas id="myChart" width="700" height="350" #mychart></canvas>
         </div>
     </div>
