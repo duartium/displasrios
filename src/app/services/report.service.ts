@@ -16,8 +16,8 @@ export class ReportService {
     return this.http.get<ApiResponse>(`${this.url}/income-per-sellers?dateFrom=${request.dateFrom}&dateUntil=${request.dateUntil}`);
   }
 
-  GetTotalSalesToday(idUser: number){
-    return this.http.get<ApiResponse>(`${this.url}/get-total-sales-today/${idUser}`);
+  GetTotalSalesToday(){
+    return this.http.get<ApiResponse>(`${this.url}/get-total-sales-today`);
   }
 
 }

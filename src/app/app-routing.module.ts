@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { OrderReceivableComponent } from './pages/order-receivable/order-receivable.component';
 import { OrderComponent } from './pages/order/order.component';
 import { OrdersReceivableComponent } from './pages/orders-receivable/orders-receivable.component';
+import { GeneralComponent } from './pages/report-seller/general/general.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'pedido', component: OrderComponent},
   { path: 'pedido-cobrar/:id', component: OrderReceivableComponent},
   { path: 'pedidos-cobrar', component: OrdersReceivableComponent},
+  { path: 'reporte/ventas-hoy', component: GeneralComponent },
   { path: 'pagina-no-encontrada', component: PageNotFoundComponent},
   { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
   { path: '**', component: LoginComponent},

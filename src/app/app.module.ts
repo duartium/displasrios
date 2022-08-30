@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { GeneralComponent } from './pages/report-seller/general/general.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -37,6 +38,7 @@ registerLocaleData(localeEs, 'es');
     OrdersReceivableComponent,
     OrderReceivableComponent,
     OrdersOfDayComponent,
+    GeneralComponent,
   ],
   imports: [
     BrowserModule,
