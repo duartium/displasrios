@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiResponse } from '../models/ApiResponse';
 import { IncomeBySellersRequest } from '../models/IncomeBySellers.model';
+import { SellerPersonalReport } from '../models/reports/sellerPersonalReport.model';
+import { Response } from '../models/Response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,10 @@ export class ReportService {
 
   GetTotalSalesToday(){
     return this.http.get<ApiResponse>(`${this.url}/get-total-sales-today`);
+  }
+
+  GetSellerPersonalReport(){
+    return this.http.get<Response<SellerPersonalReport>>(`${this.url}/get-seller-personal-report`);
   }
 
 }
