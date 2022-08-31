@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormsModule, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
 import { ProductFinder } from 'src/app/models/ProductFinder.model';
+import { ProductSimpleItem } from 'src/app/models/ProductItem.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { ToastrService } from 'ngx-toastr';
-import { FullOrderDto } from 'src/app/Dtos/FullOrderDto.model';
-import Swal from 'sweetalert2';
 import { SaleService } from 'src/app/services/sale.service';
-import { data } from 'jquery';
-import { ProductSimpleItem } from 'src/app/models/ProductItem.model';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
+import { FullOrderDto } from 'src/app/Dtos/FullOrderDto.model';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+  selector: 'app-point-of-sale',
+  templateUrl: './point-of-sale.component.html',
+  styleUrls: ['./point-of-sale.component.css']
 })
-export class OrderComponent implements OnInit {
-  
+export class PointOfSaleComponent implements OnInit {
+  closeResult = '';
+
   finder = 'customer';
   filterClientFinder = "nombres";
   textClientFinder = "";
@@ -29,30 +31,44 @@ export class OrderComponent implements OnInit {
   products: ProductFinder[] = [];
   productsOrder: ProductFinder[] = [];
   detailsOpened: boolean = false;
-  //fullOrderDto: FullOrderDto;
-  quantity_cart: number = 0;
-  // arrayItems: {
-  //   id: number,
-  //   quantity: number,
-  //   price: number
-  // }[];
   arrayItems: ProductSimpleItem[];
-  
-
   frmOrder: FormGroup;
   catalogs = [];
+  quantity_cart: number = 0;
+  
+  @ViewChild('content', {read: TemplateRef}) modalMain: TemplateRef<any>;
 
   constructor(private customerService: CustomersService,
     private fb: FormBuilder,  private productService: ProductsService,
     private toastr: ToastrService,
-    private saleService: SaleService) { 
+    private saleService: SaleService,
+    private modalService: NgbModal) { 
       this.frmOrder = this.defaultForm;
     }
 
-   
+  
+
+
 
   ngOnInit(): void {
-     
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   get defaultForm(){
@@ -353,12 +369,10 @@ export class OrderComponent implements OnInit {
   }
 
   addProduct(){
-    
     this.modalTitle = "Buscar Producto";
     this.finder = "product";
-    $("#main-modal").modal("show");
+    this.modalService.open(this.modalMain);
     //this.toastr.success('Hello world!', 'Toastr fun!');
-
   }
 
   showFinder(){
@@ -367,7 +381,8 @@ export class OrderComponent implements OnInit {
     this.customers = [];
     this.textClientFinder = "";
     
-    $("#main-modal").modal("show");
+    
+    this.modalService.open(this.modalMain);
   }
 
   get isDiscountGreatherThanTotal(){

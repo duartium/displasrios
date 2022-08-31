@@ -9,7 +9,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { OrderComponent } from './pages/order/order.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { ModalComponent } from './components/modal/modal.component';
 import * as bootstrap from "bootstrap";
 import * as $ from "jquery";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,7 +33,6 @@ registerLocaleData(localeEs, 'es');
     DashboardComponent,
     LoginComponent,
     OrderComponent,
-    ModalComponent,
     OrdersReceivableComponent,
     OrderReceivableComponent,
     OrdersOfDayComponent,

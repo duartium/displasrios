@@ -16,6 +16,8 @@ import { ProvidersComponent } from './providers/providers.component';
 import { ProviderComponent } from './provider/provider.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { DailySalesComponent } from './reports/daily-sales/daily-sales.component';
+import { PointOfSaleComponent } from './point-of-sale/point-of-sale.component';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { DailySalesComponent } from './reports/daily-sales/daily-sales.component
     ProvidersComponent, 
     ProviderComponent, 
     OrderDetailComponent, 
-    DailySalesComponent
+    DailySalesComponent,
+    PointOfSaleComponent,
   ],
   imports: [
     CommonModule,
@@ -39,10 +42,10 @@ import { DailySalesComponent } from './reports/daily-sales/daily-sales.component
     SharedModule,
     RouterModule,
     AdminRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
-    SharedModule
+    SharedModule,
   ]
 })
 export class AdminModule { }

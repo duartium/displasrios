@@ -15,6 +15,7 @@ import { AlphanumericFieldDirective } from '../directives/alphanumeric-field.dir
 import { ProductCodeFieldDirective } from '../directives/product-code-field.directive';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../components/modal/modal.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -32,7 +33,8 @@ const maskConfig: Partial<IConfig> = {
     AlphanumericFieldDirective,
     ProductCodeFieldDirective,
     OrderReceivableCardboxComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +56,8 @@ const maskConfig: Partial<IConfig> = {
     ProductCodeFieldDirective,
     OrderReceivableCardboxComponent,
     NgbModule,
-    CommonModule
+    CommonModule,
+    ModalComponent
   ], schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
