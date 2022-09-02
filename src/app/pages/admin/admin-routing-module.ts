@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminComponent } from './admin.component';
+import { CustomerDebtsComponent } from './customer-debts/customer-debts.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomersComponent } from './customers/customers.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
@@ -34,6 +35,7 @@ const routes = [
         { path: 'proveedor/nuevo', component: ProviderComponent },
         { path: 'punto-venta', component: PointOfSaleComponent },
         { path: 'reporte/ventas-diarias', component: DailySalesComponent },
+        { path: 'deuda-clientes', component: CustomerDebtsComponent },
       ] 
     }
   ]

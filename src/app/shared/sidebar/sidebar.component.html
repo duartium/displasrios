@@ -41,6 +41,14 @@
                         <li><a routerLink="/admin/pedidos/historial" routerLinkActive="active">Historial</a></li>
                     </ul>
                 </li>
+                <li class="dropdown" #acordion_ctas_cobrar>
+                    <a href="javascript:;" class="dropdown-toggle" (click)="openSubmenu('ctas_cobrar')">
+                        <span class="micon dw dw-analytics-21"></span><span class="mtext">Cuentas Cobrar</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a routerLink="/admin/deuda-clientes" routerLinkActive="active">Deuda Clientes</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown" #acordion_reportes>
                     <a href="javascript:;" class="dropdown-toggle" (click)="openSubmenu('reportes')">
                         <span class="micon dw dw-bar-chart"></span><span class="mtext">Reporte</span>
@@ -59,14 +67,7 @@
                         <li><a href="knob-chart.html">Egresos</a></li>
                     </ul>
                 </li>
-                <li class="dropdown" #acordion_ctas_cobrar>
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-analytics-21"></span><span class="mtext">Cuentas Cobrar</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="highchart.html"></a></li>
-                    </ul>
-                </li>
+                
             </ul>
         </div>
     </div>

@@ -9,8 +9,9 @@ export class SidebarComponent implements OnInit {
   @ViewChild("acordion_admin") acordion_admin: ElementRef;
   @ViewChild("acordion_pedidos") acordion_pedidos: ElementRef;
   @ViewChild("acordion_reportes") acordion_reportes: ElementRef;
+  @ViewChild("acordion_ctas_cobrar") acordion_ctas_cobrar: ElementRef;
   
-
+  
   constructor(private renderer2: Renderer2) { }
 
   ngOnInit(): void {
@@ -26,6 +27,8 @@ export class SidebarComponent implements OnInit {
     case 'pedidos': element = this.acordion_pedidos;
         break;
     case 'reportes': element = this.acordion_reportes;
+        break;
+    case 'ctas_cobrar': element = this.acordion_ctas_cobrar;
         break;
         
   }  
