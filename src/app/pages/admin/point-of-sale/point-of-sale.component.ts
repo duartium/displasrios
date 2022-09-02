@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
 import { ProductFinder } from 'src/app/models/ProductFinder.model';
@@ -19,7 +19,6 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 })
 export class PointOfSaleComponent implements OnInit {
   closeResult = '';
-
   finder = 'customer';
   filterClientFinder = "nombres";
   textClientFinder = "";
@@ -276,7 +275,8 @@ export class PointOfSaleComponent implements OnInit {
       this.detailsOpened = true;
       this.customerSelected = customerSelected;
       this.idClient.setValue(customerSelected.id);
-      $("#main-modal").modal("hide");
+      // $("#main-modal").modal("hide");
+      this.modalService.dismissAll();
   }
 
   selectedProduct(productSelected: ProductFinder){

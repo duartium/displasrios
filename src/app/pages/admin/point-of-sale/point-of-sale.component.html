@@ -16,15 +16,21 @@
         <div class="row">
             <div class="col-md-12">
                 <form [formGroup]="frmOrder" (ngSubmit)="orderRegister()">
-                    <div class="col-md-3">
-                        <div class="form-group mb-0 mt-4" *ngIf="!customerSelected">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control search-input" placeholder="Buscar cliente"
-                                (click)="showFinder()">
-                                <div class="input-group-append">
-                                  <span class="input-group-text  bg-primary" id="basic-addon1"><i class="icon-copy dw dw-search2" style="color:#fff;"></i></span>
-                                </div>
-                              </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group mb-0 mt-4" *ngIf="!customerSelected">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control search-input" placeholder="Buscar cliente"
+                                    (click)="showFinder()">
+                                    <div class="input-group-append">
+                                      <span class="input-group-text  bg-primary" id="basic-addon1"><i class="icon-copy dw dw-search2" style="color:#fff;"></i></span>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-3 my-4 text-center">
+                            <button type="button" class="btn btn-success" (click)="addProduct()"><i class="fa fa-plus-circle"></i> Agregar Producto</button>
                         </div>
                     </div>
                     
@@ -42,13 +48,13 @@
                             </div>
                         </div>
                         <div class="col-2 p-2" class="text-center">
-                            <span  (click)="showFinder()"><i class="icon-copy dw dw-exchange"></i><!--<small style="display:block">Cambiar</small>--></span>
+                            <span  (click)="showFinder()" style="cursor: pointer;"><i class="icon-copy dw dw-exchange"></i><!--<small style="display:block">Cambiar</small>--></span>
                         </div>
+
+
                     </div>
                    
-                    <div class="form-group my-4 text-center">
-                        <button type="button" class="btn btn-success" (click)="addProduct()"><i class="fa fa-plus-circle"></i> Agregar Producto</button>
-                    </div>
+                    
     
                     <div class="row" *ngIf="productsOrder?.length > 0">
                         <div class="col-12">
@@ -94,7 +100,7 @@
                         </div>
                       </div>
     
-                    <div class="row">
+                    <div class="row mt-2">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="">Método de Pago</label>
@@ -111,17 +117,21 @@
                                     </div>
                                 </div>
                             </div>
+
+                            
                         </div>
+
+
         
-                        <div class="" *ngIf="PaymentMethod.value == 1019">
-                            <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="PaymentMethod.value == 1019">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="deadline">Plazo en Días</label>
                                 <input type="text" class="form-control" formControlName="deadline" (click)="clearWhenIsZero(3)" 
                                 [class.form-control-danger]="deadline.touched && deadline.invalid" (blur)="setDefaultDeadlineValue()" appNumericField>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">¿Realiza abono?</label>
                                     <div style="display: block;">
@@ -140,9 +150,9 @@
                             </div>
                         </div>
                         
-                        <div #wrapper_payment_details *ngIf="PaymentMethod.value == 1 || isPaymentAdvance.value == '1'">
+                        <div class="col-md-3" #wrapper_payment_details *ngIf="PaymentMethod.value == 1 || isPaymentAdvance.value == '1'">
                             
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <div class="form-group" >
                                     <label for="">Forma de Pago</label>
                                     <div style="display: block;">
@@ -160,36 +170,36 @@
                                 </div>
                             </div>
         
-                            <div class="form-group" *ngIf="PaymentMode.value == 3">
-                                <div class="col-7">
+                            <div class="col-12" *ngIf="PaymentMode.value == 3">
+                                <div class="form-group">
                                     <label for="num_payment_receipt">Nro. Comprobante</label>
                                     <input type="text" class="form-control" formControlName="num_payment_receipt"
                                     [class.form-control-danger]="numPaymentReceipt.touched && numPaymentReceipt.invalid" appNumericField>
                                 </div>
                             </div>
-            
-                            <div class="col-md-3 form-group ">
-                                <label for="cliente_paga">Cliente Paga</label>
-                                <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  (click)="clearWhenIsZero(1)" mask="separator.2" separatorLimit ="10000" thousandSeparator=","
-                                [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')" (blur)="setDefaultCustomerPaymentValue()">
-                                
-                                <div *ngIf="customerPayment.hasError('required')" 
-                                class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
-                            </div>
-        
-                            <div class="col-md-3 form-group">
-                                <label for="discount">Descuento</label>
-                                <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()" (click)="clearWhenIsZero(2)" mask="separator.2" separatorLimit =" 10000 " thousandSeparator=","
-                                [class.form-control-danger]="isDiscountGreatherThanTotal" (blur)="setDefaultDiscountValue()">
-        
-                                <div class="form-control-feedback has-danger" 
-                                *ngIf="isDiscountGreatherThanTotal">El descuento no puede ser mayor al total</div>
-                            </div>
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label for="cliente_paga">Cliente Paga</label>
+                            <input type="text" class="form-control" formControlName="customer_payment" (keyup)="setOrderChange()"  (click)="clearWhenIsZero(1)" mask="separator.2" separatorLimit ="10000" thousandSeparator=","
+                            [class.form-control-danger]="customerPayment.touched && customerPayment.hasError('required')" (blur)="setDefaultCustomerPaymentValue()">
+                            
+                            <div *ngIf="customerPayment.hasError('required')" 
+                            class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div>
+                        </div>
+    
+                        <div class="col-md-3 form-group">
+                            <label for="discount">Descuento</label>
+                            <input type="text" class="form-control" formControlName="discount" (change)="applyDiscount()" (click)="clearWhenIsZero(2)" mask="separator.2" separatorLimit =" 10000 " thousandSeparator=","
+                            [class.form-control-danger]="isDiscountGreatherThanTotal" (blur)="setDefaultDiscountValue()">
+    
+                            <div class="form-control-feedback has-danger" 
+                            *ngIf="isDiscountGreatherThanTotal">El descuento no puede ser mayor al total</div>
                         </div>
                     </div>
                     
     
-                   <div class="row">
+                   <div class="row mt-2">
                         <div class="col-md-3 form-group">
                             <label>SUBTOTAL</label><br> 
                             <h3>{{subtotal.value | currency}}</h3>
@@ -218,19 +228,20 @@
 <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">{{modalTitle}}</h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     <div class="modal-body">
         <div *ngIf="finder=='customer'">
             <div class="form-group">
                 <label for="">Filtros</label>
-                <div style="display: block;">
-                    <div class="custom-control custom-radio" >
+                <div style="display: inline-block;" class="col-md-12">
+                    <div class=" custom-radio">
                         <input id="rb_identificacion" [(ngModel)]="filterClientFinder" type="radio" name="filter_client" class="custom-control-input"
                         value="identification" (change)="changeFilterCustomer()">
                         <label class="custom-control-label" for="rb_identificacion">Identificación</label>
                     </div>
-                    <div class="custom-control custom-radio" >
+                    <div class="custom-control custom-radio">
                         <input id="rb_nombres" type="radio"  [(ngModel)]="filterClientFinder" name="filter_client" class="custom-control-input"
                         value="nombres" (change)="changeFilterCustomer()">
                         <label class="custom-control-label" for="rb_nombres">Nombres</label>
@@ -248,8 +259,8 @@
             </div>
             <hr>
             <ul class="list-group list-group-flush">
-                <li *ngFor="let customer of customers" class="list-group-item" 
-                (click)="selectedClient(customer)">{{customer.full_names}}</li>
+                <li *ngFor="let customer of customers" class="list-group-item " 
+                (click)="selectedClient(customer)" style="cursor:pointer; ">{{customer.full_names}}</li>
             </ul>
             <hr>
             <small class="form-text text-muted">Se encontraron {{customers.length}} registros</small>
@@ -268,9 +279,9 @@
                 <table class="table table-sm">
                     <tbody>
                       <tr *ngFor="let product of products" >
-                        <td><button class="btn btn-success" type="button" id="btn_find_client" (click)="selectedProduct(product)"><i class="fa fa-plus"></i></button></td>
-                        <td><input id="input_prod_{{product.id}}" class="form-control quantity-field"  value="1" appNumericField></td>
-                        <td>{{product.name}}</td>
+                        <td style="width: 10%;"><button class="btn btn-success" type="button" id="btn_find_client" (click)="selectedProduct(product)"><i class="fa fa-plus"></i></button></td>
+                        <td style="width: 15%;"><input id="input_prod_{{product.id}}" class="form-control quantity-field"  value="1" appNumericField></td>
+                        <td style="width: 75%;">{{product.name}}</td>
                       </tr>
                     </tbody>
                   </table>

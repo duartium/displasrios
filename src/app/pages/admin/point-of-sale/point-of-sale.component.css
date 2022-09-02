@@ -1,0 +1,5 @@
+.list-group-item:hover{
+    transition: ease-in-out;
+    background-color: #9935b3;
+    color: #ffF;
+}
