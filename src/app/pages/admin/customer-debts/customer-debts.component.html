@@ -1,1 +1,91 @@
-<p>customer-debts works!</p>
+<div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin/inicio">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Deudas de Clientes</li>
+        </ol>
+    </nav>
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4 class="text-blue h4 pb-3">Deuda de Clientes</h4>
+            </div>
+            <div class="pull-right">
+                
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Búsqueda Por</label>
+                    <select  class="form-control" [(ngModel)]="searchTypeSelected" style="width: 100%; height: 38px;" aria-hidden="true">
+                        <option *ngFor="let search of searchType" [ngValue]="search.id">
+                            {{ search.description }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group" *ngIf="searchTypeSelected == 1">
+                    <label>Cédula</label>
+                    <input class="form-control" type="text" [(ngModel)]="identification" maxlength="10" appNumericField>
+
+                    <!-- <div *ngIf="identification.trim().length == 0" 
+                    class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div> -->
+                </div>
+                <div class="form-group" *ngIf="searchTypeSelected == 2">
+                    <label>Nombres</label>
+                    <input class="form-control uppercase" type="text" [(ngModel)]="names" maxlength="150" appNamesField>
+
+                    <!-- <div *ngIf="names.length == 0" 
+                    class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Este campo es obligatorio</font></div> -->
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <button class="btn btn-primary" style="margin-top:1.9rem">BUSCAR</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-2">
+                <strong>Última Visita</strong><br>
+                <span>8239/12/12</span>
+            </div>
+            <div class="col-md-2">
+                <strong>Total de Deuda</strong><br>
+                <span>8239.32</span>
+            </div>
+            <div class="col-md-8 text-center">
+                NOMBRE COMLETO DEL CLIENTE
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Pedidos pendientes de pago</h5>
+                <table class="table ">
+                    <thead style="text-transform: uppercase;">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Fecha/Hora</th>
+                            <th scope="col">Recaudador</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let deb of customerDebs">
+                        <tr>
+                            <th scope="row">{{deb.order_number}}</th>
+                            <td>{{deb.date}}</td>
+                            <td>{{deb.full_names}}</td>
+                            <td>{{deb.username}}</td>
+                            <td>{{deb.total_amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>

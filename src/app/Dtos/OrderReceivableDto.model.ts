@@ -59,3 +59,19 @@ export interface SummaryOrderOfDay{
     date: string;
     username: string;
 }
+
+export interface CustomerDebs{
+    id_order: number;
+    order_number: string;
+    full_names: string;
+    total_amount: string;
+    date: string;
+    username: string;
+}
+
+export interface SummaryCustomerDebs{
+    total: number;
+    lastVisit: string;
+    debs: CustomerDebs[]
+}
+
