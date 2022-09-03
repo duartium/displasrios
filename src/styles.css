@@ -124,3 +124,196 @@ h1, h2, h3, h4, h5{
 .invoice-totals td{
     text-align: right;
 }
+
+/* Datatable*/
+table>tfoot {
+    display: table-header-group;
+}
+table>tfoot input {
+  width: 100%;
+}
+
+table>tfoot input.form-control {
+    height: 2em;
+  }
+
+table>tbody>tr[role=row]>td:first-child{
+    width: 12% !important;
+}
+
+table>tbody>tr[role=row]>td span.btn{
+    margin-left: 2px;
+}
+
+
+
+
+table > tbody > tr.child span.dtr-title {
+  display: inline-block;
+  min-width: 75px;
+  font-weight: 700
+}
+
+
+table.dtr-inline.collapsed>tbody>tr>td.child, table.dtr-inline.collapsed>tbody>tr>td.dataTables_empty, table.dtr-inline.collapsed>tbody>tr>th.child {
+    cursor: default!important
+}
+
+table.dtr-inline.collapsed>tbody>tr>td.child:before, table.dtr-inline.collapsed>tbody>tr>td.dataTables_empty:before, table.dtr-inline.collapsed>tbody>tr>th.child:before {
+    display: none!important
+}
+
+table.dtr-inline.collapsed>tbody>tr[role=row]>td:first-child, table.dtr-inline.collapsed>tbody>tr[role=row]>th:first-child {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer
+}
+
+table.dtr-inline.collapsed>tbody>tr[role=row]>td:first-child:before, table.dtr-inline.collapsed>tbody>tr[role=row]>th:first-child:before {
+    top: 12px;
+    left: 4px;
+    height: 14px;
+    width: 14px;
+    display: block;
+    position: absolute;
+    color: #fff;
+    border: 0px solid #fff;
+    border-radius: 14px;
+    box-shadow: 0 0 0px #444;
+    box-sizing: content-box;
+    text-align: center;
+    text-indent: 0!important;
+    font-family: Courier New, Courier, monospace;
+    line-height: 14px;
+    content: "+";
+    background-color: #4e4e4e
+}
+
+table.dtr-inline.collapsed>tbody>tr.parent>td:first-child:before, table.dtr-inline.collapsed>tbody>tr.parent>th:first-child:before {
+    content: "-";
+    background-color: #d33333
+}
+
+table.dtr-inline.collapsed.compact>tbody>tr>td:first-child, table.dtr-inline.collapsed.compact>tbody>tr>th:first-child {
+    padding-left: 27px
+}
+
+table.dtr-inline.collapsed.compact>tbody>tr>td:first-child:before, table.dtr-inline.collapsed.compact>tbody>tr>th:first-child:before {
+    top: 5px;
+    left: 4px;
+    height: 14px;
+    width: 14px;
+    border-radius: 14px;
+    line-height: 14px;
+    text-indent: 3px
+}
+
+
+.dt-buttons>.btn-group>button.dropdown-toggle::after {
+    content: none !important;
+}
+
+.dt-buttons>.btn-group>.btn {
+    border-radius: 0.25rem !important;
+    color: #2f2f2f;
+    background-color: #ffffff;
+    border-color: #000000;
+}
+
+.dt-button.dropdown-item.active {
+    background-color: #2f2f2f;
+}
+
+.dt-buttons>.btn {
+    border-radius: 0.25rem !important;
+    color: #2f2f2f;
+    background-color: #ffffff;
+    border-color: #000000;
+}
+
+.btn-group, .btn-group-vertical {
+    display: inline-block !important;
+}
+
+.dataTables_filter {
+    float: right;
+}
+
+.dt-buttons {
+    float: left;
+    margin-bottom: 7px!important;
+}
+
+
+
+.dt-button-collection>.dropdown-menu {
+    height: 200px !important;
+    overflow-y: auto !important;
+}
+
+.dataTables_paginate {
+    float: right;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.5em 0.8em;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    border-color:transparent !important;
+    background: none !important; 
+    padding: 0.5em 0.8em;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.page-item.active .page-link {
+    border: transparent;
+    background-color: #2f2f2f;
+}
+
+table thead>tr>td.sorting, table thead>tr>td.sorting_asc, table thead>tr>td.sorting_desc, table thead>tr>th.sorting, table thead>tr>th.sorting_asc, table thead>tr>th.sorting_desc {
+    padding-right: 30px
+}
+
+table thead>tr>td:active, table thead>tr>th:active {
+    outline: none
+}
+
+table thead .sorting, table thead .sorting_asc, table thead .sorting_asc_disabled, table thead .sorting_desc, table thead .sorting_desc_disabled {
+    cursor: pointer;
+    position: relative
+}
+
+table thead .sorting:after, table thead .sorting:before, table thead .sorting_asc:after, table thead .sorting_asc:before, table thead .sorting_asc_disabled:after, table thead .sorting_asc_disabled:before, table thead .sorting_desc:after, table thead .sorting_desc:before, table thead .sorting_desc_disabled:after, table thead .sorting_desc_disabled:before {
+    position: absolute;
+    bottom: .9em;
+    display: block;
+    opacity: .3
+}
+
+table thead .sorting:before, table thead .sorting_asc:before, table thead .sorting_asc_disabled:before, table thead .sorting_desc:before, table thead .sorting_desc_disabled:before {
+    top: 2px;
+    right: 1em;
+    content: "\2191";
+    color: #fff;
+    font-weight: 900;
+}
+
+table thead .sorting:after, table thead .sorting_asc:after, table thead .sorting_asc_disabled:after, table thead .sorting_desc:after, table thead .sorting_desc_disabled:after {
+    top: 2px;
+    right: .5em;
+    content: "\2193";
+    color: #fff;
+    font-weight: 900;
+}
+
+table thead .sorting_asc:before, table thead .sorting_desc:after {
+    opacity: 1
+}
+
+table thead .sorting_asc_disabled:before, table thead .sorting_desc_disabled:after {
+    opacity: 0
+}
+
+
+
+
+
+
