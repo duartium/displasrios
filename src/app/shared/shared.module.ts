@@ -9,6 +9,7 @@ import { AdminRoutingModule } from '../pages/admin/admin-routing-module';
 import { RouterModule } from '@angular/router';
 import { OrderReceivableCardboxComponent } from '../components/order-receivable-cardbox/order-receivable-cardbox.component';
 import { LoaderComponent } from '../components/loader/loader.component';
+import { DatatableCustomComponent } from '../components/datatable-custom/datatable-custom.component';
 import { NumericFieldDirective } from '../directives/numeric-field.directive';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { AlphanumericFieldDirective } from '../directives/alphanumeric-field.directive';
@@ -16,6 +17,7 @@ import { ProductCodeFieldDirective } from '../directives/product-code-field.dire
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../components/modal/modal.component';
+import { DataTablesModule } from 'angular-datatables';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -34,14 +36,16 @@ const maskConfig: Partial<IConfig> = {
     ProductCodeFieldDirective,
     OrderReceivableCardboxComponent,
     PageNotFoundComponent,
-    ModalComponent
+    ModalComponent,
+    DatatableCustomComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     AdminRoutingModule,
     NgxMaskModule.forRoot(maskConfig),
-    NgbModule
+    NgbModule,
+    DataTablesModule
   ],
   exports: [
     HeaderMobileComponent,
@@ -57,7 +61,9 @@ const maskConfig: Partial<IConfig> = {
     OrderReceivableCardboxComponent,
     NgbModule,
     CommonModule,
-    ModalComponent
+    ModalComponent,
+    DatatableCustomComponent,
+    DataTablesModule
   ], schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

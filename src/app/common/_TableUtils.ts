@@ -4,7 +4,7 @@ import { DataTableDirective } from "angular-datatables";
 export class _TableUtils {
 
   public static renderSearchDT(dtElement, dtTrigger): void {
-    dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    dtElement?.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first
       dtInstance.destroy();
       // Call the dtTrigger to rerender again
@@ -59,6 +59,7 @@ export class _TableUtils {
 
   public static searchInputDT(dtElement){
     dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // dtInstance.columns.adjust();
       dtInstance.columns().every(function () {
         const that = this;
         $('input', this.footer()).on('keyup change', function () {
@@ -83,6 +84,14 @@ export class _TableUtils {
     });
   }
 
+  public static resize(dtElement){
+    dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.columns.adjust();
+    });
+  }
+
+
+
   public static getLabelVacio(data,type){
 
     if(type =="display" && (data == null || data == undefined) )
@@ -105,165 +114,34 @@ export class _TableUtils {
     return data;
   }
 
-  public static getDefaultConfigurationSinBoton() {
-    return {
-      rowCallback: function () { },
-      columns: [],
-      columnDefs: [],
-      destroy: true,
-      searching: false,
-      deferRender: true,
-      aLengthMenu: [
-        [5, 10, 50, 100, -1],
-        ["5 filas", "10 filas", "50 filas", "100 filas", "Todos"]
-      ],
-      order: [[1, "desc"]],
-      fixedHeader: true,
-      colReorder: {
-        enable: false,
-        fixedColumnsLeft: 1
-      },
-      dom: 'frti',
-      autoWidth: false,
-      buttons: [
-        {
-          extend: "pageLength",
-          text: "<i class='fa fa-list-ol' style='font-size:1.35em;'></i>",
-          titleAttr: "Registros por página",
-        },
-        {
-          extend: "colvis",
-          text: "<i class='fa fa-columns ' style='font-size:1.35em;'></i>",
-          titleAttr: "Columnas",
-        },
-        {
-          titleAttr: "Habilitar ajustes columnas",
-          text: "<i class='fa fa-align-left' style='font-size:1.35em;'></i>",
-          action: function (e, dt, node, config) {
-            dt.colReorder.enable(true);
-          }
-        },
-        {
-          titleAttr: "Deshabilitar ajustes columnas",
-          text: "<i class='fa fa-align-justify' style='font-size:1.35em;'></i>",
-          action: function (e, dt, node, config) {
-            dt.colReorder.disable();
-          }
-        },
-        {
-          extend: "copyHtml5",
-          text: "<i class='fa fa-copy' style='font-size:1.35em;'></i>",
-          titleAttr: "Copiar contenido",
-          exportOptions: {
-            //columns: ':visible',
-            orthogonal: 'export'
-          }
-        },
-        {
-          extend: "csvHtml5",
-          text: "<i class='fa fa-file' style='font-size:1.35em;'></i>",
-          titleAttr: "Descargar CSV",
-          exportOptions: {
-            //columns: ':visible',
-            charset: 'ISO-8859-1',
-            orthogonal: 'export',
-            dom: true
-          }
-        },
-        {
-          extend: "excelHtml5",
-          text: "<i class='fa fa-file-excel-o' style='font-size:1.35em;'></i>",
-          titleAttr: "Descargar Excel",
-          exportOptions: {
-            //columns: ':visible',
-            orthogonal: 'export'
-          }
-        },
-        {
-          extend: "pdfHtml5",
-          text: "<i class='fa fa-file-pdf-o' style='font-size:1.35em;'></i>",
-          titleAttr: "Descargar PDF",
-          exportOptions: {
-            columns: ':visible',
-            orthogonal: 'export'
-          },
-          orientation: 'landscape'
-        },
-        {
-          extend: "print",
-          text: "<i class='fa fa-print' style='font-size:1.35em;'></i>",
-          titleAttr: "Imprimir",
-          className: "btn btn-secondary",
-          exportOptions: {
-            columns: ':visible',
-            orthogonal: 'export'
-          },
-          customize: function (win) {
+ 
 
-            var last = null;
-            var current = null;
-            var bod = [];
-
-            var css = '@page { size: landscape; }',
-              head = win.document.head || win.document.getElementsByTagName('head')[0],
-              style = win.document.createElement('style');
-
-            style.type = 'text/css';
-            style.media = 'print';
-
-            if (style.styleSheet) {
-              style.styleSheet.cssText = css;
-            }
-            else {
-              style.appendChild(win.document.createTextNode(css));
-            }
-
-            head.appendChild(style);
-          }
-        }],
-      processing: true,
-      responsive: true,
-      // responsive: {
-      //   details: {
-      //       type: 'column',
-      //       target: 'td:nth-child(2), th:nth-child(2)'
-      //   }
-      // },
-      language: {
-        processing: "Procesando...",
-        search: "",
-        searchPlaceholder: "Buscar",
-        lengthMenu: "Mostrar _MENU_ registros",
-        info: "Mostrando desde _START_ al _END_ de _TOTAL_ elementos",
-        infoEmpty: "Mostrando ningún elemento.",
-        infoFiltered: "(filtrado _MAX_ elementos total)",
-        infoPostFix: "",
-        loadingRecords: "Cargando registros...",
-        zeroRecords: "No se encontraron registros",
-        emptyTable: "No hay datos disponibles en la tabla",
-        paginate: {
-          first: "Primero",
-          previous: "Anterior",
-          next: "Siguiente",
-          last: "Último"
-        },
-      },
-    }
-  }
-
-  public static getDefaultConfiguration(fnConsulta?) {
+  public static getDefaultConfiguration() {
     return {
       rowCallback: function () { },
       withOption: function () { },
       data: [],
       columns: [],
-      columnDefs: [],
+      columnDefs:  [
+        { // Date columns
+          "targets": "_all",
+          "render": function (data, type, row) {
+            return _TableUtils.getLabelVacio(data, type);
+          }
+        }
+      ],
       destroy: true,
       searching: true,
       deferRender: true,
       orderCellsTop: true,
-      fixedHeader: true,
-      initComplete: function () { },
+      fixedColumns: true,
+      fixedHeader: {
+        header: true,
+        headerOffset: 70,
+        },
+        scrollX:true,
+      initComplete: function(settings, json) { 
+      },
       aLengthMenu: [
         [ 10, 50, 100, 200, -1],
         ["10 filas", "50 filas", "100 filas",  "200 filas", "Todos"]
@@ -271,7 +149,7 @@ export class _TableUtils {
       order: [[1, "desc"]],
       colReorder: {
         enable: false,
-        fixedColumnsLeft: 1
+        //fixedColumnsLeft: 1
       },
       dom: 'Brtip',
       autoWidth: false,
@@ -334,7 +212,7 @@ export class _TableUtils {
           text: "<i class='fa fa-file-pdf-o' style='font-size:1.35em;'></i>",
           titleAttr: "Descargar PDF",
           exportOptions: {
-            columns: ':visible',
+           // columns: ':visible',
             orthogonal: 'export'
           },
           orientation: 'landscape'
@@ -374,7 +252,9 @@ export class _TableUtils {
         {
           text: "<i class='fa fa-refresh ' style='font-size:1.35em;'></i>",
           titleAttr: "Recargar",
-          action: function () { }
+          action: function () {
+            
+          }
         }
       ],
       processing: true,

@@ -18,7 +18,7 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { DailySalesComponent } from './reports/daily-sales/daily-sales.component';
 import { PointOfSaleComponent } from './point-of-sale/point-of-sale.component';
 import { CustomerDebtsComponent } from './customer-debts/customer-debts.component';
-import { DataTablesModule } from 'angular-datatables';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +44,6 @@ import { DataTablesModule } from 'angular-datatables';
     RouterModule,
     AdminRoutingModule,
     ReactiveFormsModule,
-    DataTablesModule,
   ],
   exports: [
     SharedModule,

@@ -1,0 +1,9 @@
+<table class="table responsive table-striped table-bordered table-condensed cf table-sm row-border table-hover" cellspacing="0" width="100%" style="width:100%" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <tfoot>
+        <tr>
+          <th *ngFor="let item of dtOptions.columns; index as i;">
+            <input class="form-control" type="text" placeholder="{{item.title}}" />
+          </th>
+        </tr>
+      </tfoot>
+  </table>

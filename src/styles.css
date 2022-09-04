@@ -126,6 +126,25 @@ h1, h2, h3, h4, h5{
 }
 
 /* Datatable*/
+
+
+.dataTables_scroll {
+    display: flex;
+    flex-direction: column;
+  }
+.dataTables_scroll .dataTables_scrollHead {
+    order: 1;
+    width:100%;
+}
+
+.dataTables_scroll .dataTables_scrollBody{
+    order: 3;
+}
+
+.dataTables_scroll .dataTables_scrollFoot{
+    order: 1;
+}
+
 table>tfoot {
     display: table-header-group;
 }
@@ -255,12 +274,12 @@ table.dtr-inline.collapsed.compact>tbody>tr>td:first-child:before, table.dtr-inl
     float: right;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-    padding: 0.5em 0.8em;
+    padding: 0px !important;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     border-color:transparent !important;
     background: none !important; 
-    padding: 0.5em 0.8em;
+    padding: 0px !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.page-item.active .page-link {
