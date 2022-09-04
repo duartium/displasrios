@@ -29,9 +29,19 @@ export class DatatableCustomComponent implements OnInit {
  @Input() set setOptions(value: any) {
   this.dtOptions = value;    
   this.dtOptions.buttons[9].action = () => {
-    this.updateDataTable.emit(null);
+    this.updateDataTable.emit('update');
   }
+  this.dtOptions.rowCallback = (row: Node, data: any[] | Object, index: number) => {
+    this.dtOptions.aditionalButtons.forEach(element => {
+      $('td span.'+element.tag, row).unbind('click');
+      $('td span.'+element.tag, row).bind('click', () => {
+        this.updateDataTable.emit(element.tag);
+      });
+    });
+    return row;
+  };
 }
+
 
   ngOnInit(): void {
   }

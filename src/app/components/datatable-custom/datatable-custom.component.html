@@ -2,7 +2,8 @@
     <tfoot>
         <tr>
           <th *ngFor="let item of dtOptions.columns; index as i;">
-            <input class="form-control" type="text" placeholder="{{item.title}}" />
+            <span *ngIf="item.footer=== false">------</span>
+            <input *ngIf="item.footer === undefined || item.footer " class="form-control" type="text" placeholder="{{item.title}}" />
           </th>
         </tr>
       </tfoot>

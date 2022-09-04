@@ -104,6 +104,13 @@ export class _TableUtils {
       return data;
   }
 
+  public static getButtonBody(tag,icon){
+      return '<span class="btn btn-sm btn-circle boton-neutral texto-negro ' + tag +' "'+
+      ' style="border-width: 1px;padding: 0 5px; margin-right:5px"><i class="'+ icon+'"></i></span>';
+  }
+
+  
+
   public static getLabelEstado(data,type){
 
     if(type =="display" && (data == 1))
@@ -118,6 +125,7 @@ export class _TableUtils {
 
   public static getDefaultConfiguration() {
     return {
+      aditionalButtons:[], 
       rowCallback: function () { },
       withOption: function () { },
       data: [],
