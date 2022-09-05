@@ -1,9 +1,9 @@
 import { ApiResponse } from "./ApiResponse";
 
 export interface CustomerFinder {
-    id: number,
-    full_names: string,
-    identification: string
+    id: number;
+    full_names: string;
+    identification: string;
 }
 
 export interface CustomersFinderResp extends ApiResponse{

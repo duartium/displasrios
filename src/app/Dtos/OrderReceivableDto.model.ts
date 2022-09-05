@@ -70,8 +70,9 @@ export interface CustomerDebs{
 }
 
 export interface SummaryCustomerDebs{
-    total: number;
+    totalDebts: number;
     lastVisit: string;
-    debs: CustomerDebs[]
+    fullnames: string;
+    ordersReceivable: CustomerDebs[]
 }
 

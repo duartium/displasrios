@@ -46,21 +46,21 @@
             </div>
 
             <div class="col-md-4">
-                <button class="btn btn-primary" style="margin-top:1.9rem">BUSCAR</button>
+                <button class="btn btn-primary" style="margin-top:1.9rem" (click)="getCustoemrDebts()">BUSCAR</button>
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-2">
                 <strong>Última Visita</strong><br>
-                <span>8239/12/12</span>
+                <span>{{customerDebts.lastVisit}}</span>
             </div>
             <div class="col-md-2">
                 <strong>Total de Deuda</strong><br>
-                <span>8239.32</span>
+                <span>{{customerDebts.totalDebts}}</span>
             </div>
             <div class="col-md-8 text-center">
-                NOMBRE COMLETO DEL CLIENTE
+                {{customerDebts.fullnames}}
             </div>
         </div>
         <hr>
@@ -76,11 +76,10 @@
                             <th scope="col">Total</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let deb of customerDebs">
+                    <tbody *ngFor="let deb of customerDebts.ordersReceivable">
                         <tr>
-                            <th scope="row">{{deb.order_number}}</th>
+                            <th>{{deb.order_number}}</th>
                             <td>{{deb.date}}</td>
-                            <td>{{deb.full_names}}</td>
                             <td>{{deb.username}}</td>
                             <td>{{deb.total_amount}}</td>
                         </tr>

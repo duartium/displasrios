@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SummaryCustomerDebs } from '../Dtos/OrderReceivableDto.model';
 import { ApiResponse } from '../models/ApiResponse';
 import { Customer, CustomerResponse } from '../models/Customer.model';
 import { CustomerFinderResp, CustomersFinderResp } from '../models/CustomerFinder.model';
+import { Response } from '../models/Response.model';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -28,6 +30,10 @@ export class CustomersService {
 
   create(customer: Customer){
     return this.http.post<ApiResponse>(this.apiUrl, customer);
+  }
+
+  getDebts(identification: string){
+    return this.http.get<Response<SummaryCustomerDebs>>(this.apiUrl+ "/debts/"+identification);
   }
 
 }
