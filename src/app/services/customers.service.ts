@@ -32,8 +32,8 @@ export class CustomersService {
     return this.http.post<ApiResponse>(this.apiUrl, customer);
   }
 
-  getDebts(identification: string){
-    return this.http.get<Response<SummaryCustomerDebs>>(this.apiUrl+ "/debts/"+identification);
+  getDebts(identification: string, names: string){
+    return this.http.get<Response<SummaryCustomerDebs>>(this.apiUrl+ "/debts?identification="+identification+"&names="+names);
   }
 
 }

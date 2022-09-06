@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CustomerDebs, SummaryCustomerDebs } from 'src/app/Dtos/OrderReceivableDto.model';
 import { ItemCatalogue } from 'src/app/models/ItemCatalogue.model';
 import { CustomersService } from 'src/app/services/customers.service';
@@ -10,29 +10,44 @@ import Swal from 'sweetalert2';
   templateUrl: './customer-debts.component.html',
   styleUrls: ['./customer-debts.component.css']
 })
-export class CustomerDebtsComponent implements OnInit {
+export class CustomerDebtsComponent implements OnInit, AfterViewInit {
 
   searchType: ItemCatalogue[] = [
     { id: 1, description: "CÉDULA"},
     { id: 2, description: "NOMBRES"}
   ];
+  firstTime: boolean = true;
   names: string = "";
   identification: string = "";
   searchTypeSelected: number = 1;
   customerDebts: SummaryCustomerDebs;
-  ordersReceivable: CustomerDebs[];
+  ordersReceivable: CustomerDebs[] = [];
 
   constructor(private customerService: CustomersService) { 
     this.customerDebts = {totalDebts: 0, lastVisit: '', ordersReceivable: this.ordersReceivable, fullnames: ''};
   }
+  ngAfterViewInit(): void {
+    this.customerDebts = {totalDebts: 0, lastVisit: '', ordersReceivable: this.ordersReceivable, fullnames: ''};
+    console.log(this.customerDebts);
+    console.log('after');
+  }
 
   ngOnInit(): void {
+    
+  }
+
+  clear(){
+    this.identification = "";
+    this.names = "";
+    console.log('CLEAR');
   }
 
   getCustoemrDebts(){
     document.getElementById("loader").style.display = "";
-    
-      if(this.searchTypeSelected == 1 && this.identification.trim().length == 0){
+      console.log('identification',this.identification);
+      console.log('names',this.names);
+
+      if(this.searchTypeSelected == 1 && this.identification.trim().length < 10){
         document.getElementById("loader").style.display = "none";
         Swal.fire('Notificación', 'Ingrese el número de identificación.', 'warning');
         return;
@@ -42,12 +57,11 @@ export class CustomerDebtsComponent implements OnInit {
         return;
       }
 
-      this.customerService.getDebts(this.identification).subscribe(resp => {
+      this.customerService.getDebts(this.identification, this.names).subscribe(resp => {
         console.log('resp',resp);
+        this.firstTime = false;
           if(resp.success){
             this.customerDebts = resp.data;
-            this.identification = "";
-            this.names = "";
           }else{
             Swal.fire('Notificación', resp.message, 'warning');
           }

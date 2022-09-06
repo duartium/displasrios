@@ -66,7 +66,7 @@ export interface CustomerDebs{
     full_names: string;
     total_amount: string;
     date: string;
-    username: string;
+    collector: string;
 }
 
 export interface SummaryCustomerDebs{
