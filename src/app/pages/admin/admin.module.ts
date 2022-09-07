@@ -18,6 +18,7 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { DailySalesComponent } from './reports/daily-sales/daily-sales.component';
 import { PointOfSaleComponent } from './point-of-sale/point-of-sale.component';
 import { CustomerDebtsComponent } from './customer-debts/customer-debts.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { CustomerDebtsComponent } from './customer-debts/customer-debts.componen
     DailySalesComponent,
     PointOfSaleComponent,
     CustomerDebtsComponent,
+    ConfigurationComponent,
   ],
   imports: [
     CommonModule,
