@@ -19,6 +19,7 @@ import { DailySalesComponent } from './reports/daily-sales/daily-sales.component
 import { PointOfSaleComponent } from './point-of-sale/point-of-sale.component';
 import { CustomerDebtsComponent } from './customer-debts/customer-debts.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
+import { CashRegisterComponent } from './cash-register/cash-register.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
     PointOfSaleComponent,
     CustomerDebtsComponent,
     ConfigurationComponent,
+    CashRegisterComponent,
   ],
   imports: [
     CommonModule,

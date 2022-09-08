@@ -22,10 +22,10 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es';
+import localeEs from '@angular/common/locales/en';
 import { GeneralComponent } from './pages/report-seller/general/general.component';
 
-registerLocaleData(localeEs, 'es');
+registerLocaleData(localeEs, 'en');
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ registerLocaleData(localeEs, 'es');
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'es' },
+    { provide: LOCALE_ID, useValue: 'en' },
   ],
   bootstrap: [AppComponent]
 })

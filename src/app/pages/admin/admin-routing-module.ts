@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminComponent } from './admin.component';
+import { CashRegisterComponent } from './cash-register/cash-register.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { CustomerDebtsComponent } from './customer-debts/customer-debts.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -38,6 +39,7 @@ const routes = [
         { path: 'reporte/ventas-diarias', component: DailySalesComponent },
         { path: 'deuda-clientes', component: CustomerDebtsComponent },
         { path: 'configuracion', component: ConfigurationComponent },
+        { path: 'arqueo-caja', component: CashRegisterComponent },
       ] 
     }
   ]
