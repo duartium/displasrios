@@ -36,6 +36,10 @@ export class CashRegisterComponent implements OnInit {
     return this.frmCaja.get('apertura');
   }
 
+  get cierre(){
+    return this.frmCaja.get('cierre');
+  }
+
   openCashRegister(){
       this.apertura.markAsTouched();
 
@@ -47,28 +51,18 @@ export class CashRegisterComponent implements OnInit {
             Swal.fire("Notificación", "Lo sentimos, no se pudo aperturar caja.", "warning");
           }
 
-          Swal.fire({
-            title: 'Apertura de caja exitosa',
-            text: '¿Desea ir a punto de venta?',
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: 'Sí',
-            denyButtonText: 'No',
-            customClass: {
-              actions: 'my-actions',
-              cancelButton: 'order-1 right-gap',
-              confirmButton: 'order-2',
-              denyButton: 'order-3',
-            }
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.router.navigateByUrl('/admin/punto-venta');
-            }
+          Swal.fire("", "Apertura de caja exitosa", "success")
+          .then(() => {
+            this.router.navigateByUrl('/admin/punto-venta');
           }); 
           
       }, (err) => {
 
       });
+  }
+
+  closeCashRegister(){
+    
   }
 
   isOpenedCash(){

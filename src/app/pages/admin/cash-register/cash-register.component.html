@@ -37,16 +37,29 @@
               <li [ngbNavItem]="2" >
                 <a ngbNavLink><h4 class="text-blue h4">Cierre</h4></a>
                 <ng-template ngbNavContent>
-                  <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-                    farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-                    ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-                    helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
-                    8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-                    stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label >Cierre de caja de todos los valores de recaudación y ventas de motorizados y local comercial.</label><br>
+                       <label class="mt-3">Total en caja de mis ventas de hoy</label>
+                       <div class="col-md-3" style="padding:0">
+                            <div class="form-group">
+                                <input type="text" formControlName="cierre" class="form-control" style="font-size: 2rem;"
+                                mask="separator.2" separatorLimit ="10000" thousandSeparator="" 
+                                [class.form-control-danger]="cierre.invalid && cierre.touched">
+
+                                <div *ngIf="cierre.invalid && cierre.touched" 
+                                class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Campo obligatorio</font></div>
+                            </div>    
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" (click)="openCashRegister()">CERRAR</button>    
+                            </div>
+                       </div>
+                    </div>
+                  </div>
                 </ng-template>
               </li>
               <li [ngbNavItem]="3">
-                <a ngbNavLink><h4 class="text-blue h4">Arqueo de Caja</h4></a>
+                <a ngbNavLink><h4 class="text-blue h4">Recepción Recaudación/Ventas</h4></a>
                 <ng-template ngbNavContent>
                   <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi.
                     Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio.
