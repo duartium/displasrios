@@ -39,7 +39,7 @@ const routes = [
         { path: 'reporte/ventas-diarias', component: DailySalesComponent },
         { path: 'deuda-clientes', component: CustomerDebtsComponent },
         { path: 'configuracion', component: ConfigurationComponent },
-        { path: 'arqueo-caja', component: CashRegisterComponent },
+        { path: 'caja', component: CashRegisterComponent },
       ] 
     }
   ]

@@ -7,52 +7,59 @@
     </nav>
 
     <div class="pd-20 card-box mb-30 minh70">
-       <div class="tab">
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-            <li [ngbNavItem]="1">
-              <a ngbNavLink ><h4 class="text-blue h4">Apertura</h4></a>
-              <ng-template ngbNavContent>
-                <div class="row">
-                    <div class="col-md-12">
-                       <label class="mt-3">Vas a iniciar el día con valor en caja de</label>
-                       <div class="col-md-3" style="padding:0">
-                            <div class="form-group">
-                                <input type="text" class="form-control" style="font-size: 2rem;"
-                                mask="separator.2" separatorLimit ="10000" thousandSeparator="">
-                            </div>    
-                            <div class="form-group">
-                                <button class="btn btn-primary" (click)="openCashRegister()">APERTURAR</button>    
-                            </div>
-                       </div>
-                    </div>
-                </div>
-              </ng-template>
-            </li>
-            <li [ngbNavItem]="2">
-              <a ngbNavLink><h4 class="text-blue h4">Cierre</h4></a>
-              <ng-template ngbNavContent>
-                <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-                  farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-                  ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-                  helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
-                  8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-                  stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-              </ng-template>
-            </li>
-            <li [ngbNavItem]="3">
-              <a ngbNavLink><h4 class="text-blue h4">Arqueo de Caja</h4></a>
-              <ng-template ngbNavContent>
-                <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi.
-                  Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio.
-                  Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna,
-                  egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec
-                  tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et
-                  magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget
-                  neque. Phasellus nec tortor vel tellus pulvinar feugiat.</p>
-              </ng-template>
-            </li>
-          </ul>
-       </div>
+      <form [formGroup]="frmCaja">
+        <div class="tab">
+          <!-- < ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs" []> -->
+          <ul ngbNav #nav="ngbNav"  class="nav-tabs" [(activeId)]="active">
+              <li [ngbNavItem]="1"  *ngIf="!isOpenendCash">
+                <a ngbNavLink ><h4 class="text-blue h4">Apertura</h4></a>
+                <ng-template ngbNavContent>
+                  <div class="row">
+                      <div class="col-md-12">
+                         <label class="mt-3">Vas a iniciar el día con valor en caja de</label>
+                         <div class="col-md-3" style="padding:0">
+                              <div class="form-group">
+                                  <input type="text" formControlName="apertura" class="form-control" style="font-size: 2rem;"
+                                  mask="separator.2" separatorLimit ="10000" thousandSeparator="" 
+                                  [class.form-control-danger]="apertura.invalid && apertura.touched">
+
+                                  <div *ngIf="apertura.invalid && apertura.touched" 
+                                  class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Campo obligatorio</font></div>
+                              </div>    
+                              <div class="form-group">
+                                  <button type="button" class="btn btn-primary" (click)="openCashRegister()">APERTURAR</button>    
+                              </div>
+                         </div>
+                      </div>
+                  </div>
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="2" >
+                <a ngbNavLink><h4 class="text-blue h4">Cierre</h4></a>
+                <ng-template ngbNavContent>
+                  <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
+                    farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+                    ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
+                    helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
+                    8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+                    stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="3">
+                <a ngbNavLink><h4 class="text-blue h4">Arqueo de Caja</h4></a>
+                <ng-template ngbNavContent>
+                  <p>Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi.
+                    Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio.
+                    Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna,
+                    egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec
+                    tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et
+                    magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget
+                    neque. Phasellus nec tortor vel tellus pulvinar feugiat.</p>
+                </ng-template>
+              </li>
+            </ul>
+         </div>
+      </form>
           
           <div [ngbNavOutlet]="nav" class="mt-2"></div>
           

@@ -16,11 +16,11 @@ export class CashRegisterService {
   }
 
   open(initialValue: number){
-    return this.http.post(this.url + "/open", initialValue);
+    return this.http.post<ApiResponse>(this.url + "/open", initialValue);
   }
 
   close(value: number){
-    return this.http.post(this.url + "/close", value);
+    return this.http.post<ApiResponse>(this.url + "/close", value);
   }
 
 }

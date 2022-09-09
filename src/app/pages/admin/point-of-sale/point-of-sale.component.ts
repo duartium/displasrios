@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
 import { ProductFinder } from 'src/app/models/ProductFinder.model';
@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { FullOrderDto } from 'src/app/Dtos/FullOrderDto.model';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { CashRegisterService } from 'src/app/services/cash-register.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './point-of-sale.component.html',
   styleUrls: ['./point-of-sale.component.css']
 })
-export class PointOfSaleComponent implements OnInit {
+export class PointOfSaleComponent implements OnInit, AfterViewInit {
   closeResult = '';
   finder = 'customer';
   filterClientFinder = "nombres";
@@ -34,6 +35,7 @@ export class PointOfSaleComponent implements OnInit {
   frmOrder: FormGroup;
   catalogs = [];
   quantity_cart: number = 0;
+  isOpenendCash: boolean = false;
   
   @ViewChild('content', {read: TemplateRef}) modalMain: TemplateRef<any>;
 
@@ -41,15 +43,24 @@ export class PointOfSaleComponent implements OnInit {
     private fb: FormBuilder,  private productService: ProductsService,
     private toastr: ToastrService,
     private saleService: SaleService,
-    private modalService: NgbModal) { 
+    private modalService: NgbModal,
+    private cashRegisterService: CashRegisterService) { 
       this.frmOrder = this.defaultForm;
+      
+    }
+  ngAfterViewInit(): void {
+    this.isOpenedCash();
+  }
+
+    isOpenedCash(){
+      this.cashRegisterService.isOpenedCash().subscribe(resp => {
+          this.isOpenendCash = resp.data;
+          console.log(resp);
+      });
     }
 
-  
-
-
-
   ngOnInit(): void {
+    //this.isOpenedCash();
   }
 
   open(content) {
@@ -69,6 +80,8 @@ export class PointOfSaleComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+
 
   get defaultForm(){
     return new FormGroup({
