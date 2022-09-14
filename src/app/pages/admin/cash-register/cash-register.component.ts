@@ -28,6 +28,7 @@ export class CashRegisterComponent implements OnInit {
   active = 1;
   isOpenendCash: boolean;
   frmCaja: FormGroup;
+  recaudacionCompleta: boolean = false;
 
   ngOnInit(): void {
     this.isOpenedCash();
@@ -150,10 +151,15 @@ export class CashRegisterComponent implements OnInit {
 
   getCollectorsCatalog(){
     this.userService.getCollectorsCatalog().subscribe(resp => {
-      console.log(resp);
+      console.log('collectors',resp);
       this.collectors = resp.data;
 
-     
+      if(resp.data.length <= 0){
+        this.recaudacionCompleta = true; 
+        return;
+      }else{
+        this.recaudacionCompleta = false;
+      }
 
       this.collectorId.setValue(this.collectors[0].id);
     })
