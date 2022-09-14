@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ItemCatalogue } from 'src/app/models/ItemCatalogue.model';
+import { SalesSellerToday } from 'src/app/models/SalesSellerToday.model';
 import { CashRegisterService } from 'src/app/services/cash-register.service';
+import { SaleService } from 'src/app/services/sale.service';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 
@@ -16,9 +18,10 @@ export class CashRegisterComponent implements OnInit {
   constructor(private cashRegisterService: CashRegisterService,
     private fb: FormBuilder,
     private router: Router,
-    private userService: UsersService) { 
+    private userService: UsersService,
+    private saleService: SaleService) { 
       this.frmCaja = this.defaultForm;
-      
+
   }
 
   collectors: ItemCatalogue[];
@@ -74,7 +77,7 @@ export class CashRegisterComponent implements OnInit {
           }); 
           
       }, (err) => {
-
+          console.log('errOpenCashRegister', err);
       });
   }
 
@@ -106,14 +109,52 @@ export class CashRegisterComponent implements OnInit {
         
       }
     })
+  }
 
 
+  saveCollectorSalesToday(){
+    console.log(this.frmCaja);
+    if(this.collectorId.invalid){
+      Swal.fire("Seleccione el vendedor", "", "warning");
+      return;
+    }
+
+    if(this.totalDia.invalid){
+      this.totalDia.markAsTouched();
+      Swal.fire("Ingrese el valor de los ingresos de hoy del vendedor", "", "warning");
+      return;
+    }
+
+    document.getElementById("loader").style.display = "";
+    let salesToday: SalesSellerToday = {
+        idUser: parseInt(this.collectorId.value),
+        amount: parseFloat(this.totalDia.value)
+    } 
+
+    this.saleService.saveCollectorSalesToday(salesToday).subscribe(resp => {
+        console.log(resp);
+        if(resp.success){
+          this.totalDia.setValue('');
+          this.totalDia.markAsUntouched();
+          this.getCollectorsCatalog();
+          Swal.fire("Los ingresos del día del vendedor fueron registrados", "", "success");
+        }else{
+          Swal.fire("No se pudo registrar los ingresos del vendedor", "", "warning");
+        }
+        document.getElementById("loader").style.display = "none";
+    }, (err) => {
+      document.getElementById("loader").style.display = "none";
+      Swal.fire("No se pudo registrar los ingresos del vendedor", "", "error");
+    });
   }
 
   getCollectorsCatalog(){
     this.userService.getCollectorsCatalog().subscribe(resp => {
       console.log(resp);
       this.collectors = resp.data;
+
+     
+
       this.collectorId.setValue(this.collectors[0].id);
     })
   }

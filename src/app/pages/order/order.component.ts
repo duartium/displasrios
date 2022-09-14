@@ -203,11 +203,8 @@ export class OrderComponent implements OnInit {
   }
 
   findCustomer(){
-      console.log(this.filterClientFinder);
-      console.log(this.textClientFinder);
       document.getElementById("loader").style.display = "";
       
-
       if(this.filterClientFinder === "identification"){
         this.customerService.getByIdentification(this.textClientFinder)
         .subscribe(resp => {
