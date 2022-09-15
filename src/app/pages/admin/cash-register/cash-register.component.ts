@@ -66,6 +66,7 @@ export class CashRegisterComponent implements OnInit {
 
       if(this.apertura.invalid) return;
       
+      document.getElementById("loader").style.display = "";
       this.cashRegisterService.open(parseFloat(this.apertura.value)).subscribe(resp => {
         console.log('cashRegisterService', resp);  
         if(!resp.success){
@@ -76,8 +77,9 @@ export class CashRegisterComponent implements OnInit {
           .then(() => {
             this.router.navigateByUrl('/admin/punto-venta');
           }); 
-          
+          document.getElementById("loader").style.display = "none";
       }, (err) => {
+          document.getElementById("loader").style.display = "none";
           console.log('errOpenCashRegister', err);
       });
   }
@@ -96,7 +98,8 @@ export class CashRegisterComponent implements OnInit {
           Swal.fire('Ingrese el valor del total en caja hoy para continuar con el cierre.', '', 'warning');
           return;
         }
-
+        
+        document.getElementById("loader").style.display = "";
         this.cashRegisterService.close(parseFloat(this.cierre.value)).subscribe(resp => {
           console.log('respcierre', resp);
           if(resp.success){
@@ -105,9 +108,13 @@ export class CashRegisterComponent implements OnInit {
           }else{
             Swal.fire('Notificación', 'No se pudo realizar el cierre. Ha ocurrido un problema interno.', 'warning')
           }
+          document.getElementById("loader").style.display = "none";
+        }, (err) => {
+          document.getElementById("loader").style.display = "none";
+          console.log(err);
+          Swal.fire('Notificación', '', 'error');
         });
 
-        
       }
     })
   }
