@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormsModule, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
 import { ProductFinder } from 'src/app/models/ProductFinder.model';
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { SaleService } from 'src/app/services/sale.service';
 import { data } from 'jquery';
 import { ProductSimpleItem } from 'src/app/models/ProductItem.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order',
@@ -17,7 +18,7 @@ import { ProductSimpleItem } from 'src/app/models/ProductItem.model';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  
+  @ViewChild('content', {read: TemplateRef}) modalMain: TemplateRef<any>;
   finder = 'customer';
   filterClientFinder = "nombres";
   textClientFinder = "";
@@ -29,13 +30,7 @@ export class OrderComponent implements OnInit {
   products: ProductFinder[] = [];
   productsOrder: ProductFinder[] = [];
   detailsOpened: boolean = false;
-  //fullOrderDto: FullOrderDto;
   quantity_cart: number = 0;
-  // arrayItems: {
-  //   id: number,
-  //   quantity: number,
-  //   price: number
-  // }[];
   arrayItems: ProductSimpleItem[];
   
 
@@ -45,7 +40,8 @@ export class OrderComponent implements OnInit {
   constructor(private customerService: CustomersService,
     private fb: FormBuilder,  private productService: ProductsService,
     private toastr: ToastrService,
-    private saleService: SaleService) { 
+    private saleService: SaleService,
+    private modalService: NgbModal) { 
       this.frmOrder = this.defaultForm;
     }
 
@@ -257,7 +253,8 @@ export class OrderComponent implements OnInit {
       this.detailsOpened = true;
       this.customerSelected = customerSelected;
       this.idClient.setValue(customerSelected.id);
-      $("#main-modal").modal("hide");
+      //$("#main-modal").modal("hide");
+      this.modalService.dismissAll();
   }
 
   selectedProduct(productSelected: ProductFinder){
@@ -303,7 +300,8 @@ export class OrderComponent implements OnInit {
       this.detailsOpened = true;
 
       input_prod.value = "1"; //establezco el input a su valor inicial
-      $("#main-modal").modal("hide");
+      //$("#main-modal").modal("hide");
+      this.modalService.dismissAll();
   }
 
   clearWhenIsZero(flag: number){
@@ -353,9 +351,9 @@ export class OrderComponent implements OnInit {
     
     this.modalTitle = "Buscar Producto";
     this.finder = "product";
-    $("#main-modal").modal("show");
+    this.modalService.open(this.modalMain);
+    //$("#main-modal").modal("show");
     //this.toastr.success('Hello world!', 'Toastr fun!');
-
   }
 
   showFinder(){
@@ -364,7 +362,8 @@ export class OrderComponent implements OnInit {
     this.customers = [];
     this.textClientFinder = "";
     
-    $("#main-modal").modal("show");
+    this.modalService.open(this.modalMain);
+    //$("#main-modal").modal("show");
   }
 
   get isDiscountGreatherThanTotal(){
