@@ -15,6 +15,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
 import { ProviderComponent } from './provider/provider.component';
 import { ProvidersComponent } from './providers/providers.component';
+import { PurchasesComponent } from './purchases/purchases.component';
 import { DailySalesComponent } from './reports/daily-sales/daily-sales.component';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
@@ -40,6 +41,7 @@ const routes = [
         { path: 'deuda-clientes', component: CustomerDebtsComponent },
         { path: 'configuracion', component: ConfigurationComponent },
         { path: 'caja', component: CashRegisterComponent },
+        { path: 'compras', component: PurchasesComponent },
       ] 
     }
   ]

@@ -1,0 +1,128 @@
+<div class="pd-ltr-20 xs-pd-20-10" style="min-height: 70vh;">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin/inicio">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Compras</li>
+        </ol>
+    </nav>
+
+    <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Compras (Entrada Almacén)</h4>
+            </div>
+        </div>
+        <form [formGroup]="frmPurchases" (ngSubmit)="registerPurchase()">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="date">Fecha</label>
+                            <input class="form-control" (click)="d.open()" formControlName="date"
+                                    ngbDatepicker #d="ngbDatepicker" readonly/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7">
+                    <div class="form-group">
+                        <label>Proveedor</label>
+                        <select class="form-control" formControlName="idProvider" style="width: 100%; height: 38px;">
+                            <option *ngFor="let provider of providersCatalog" [ngValue]="provider.id">{{ provider.description }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="date_from">Nº Comprobante</label>
+                            <input class="form-control" formControlName="numInvoice" placeholder="Nº Comprob. (Opcional)"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <label>Observaciones</label>
+                        <input class="form-control" type="text" formControlName="observations" placeholder="Observaciones (opcional)"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 offset-md-4 my-4 text-center">
+                <button type="button" class="btn btn-success" (click)="addProduct()"><i class="fa fa-plus-circle"></i> Agregar Producto</button>
+            </div>
+            <div class="row" *ngIf="productsOrder?.length > 0">
+                <div class="col-md-12">
+                    <div class="mb-3" >
+                        <div class="table-responsive p-2 mt-1" *ngIf="detailsOpened">
+                            <table class="table table-sm" style="overflow-x: auto; table-layout: fixed;
+                            word-wrap: break-word;">
+                                <thead>
+                                  <tr>
+                                    <th style="width: 40px;"></th>
+                                    <th style="width: 160px;">Producto</th>
+                                    <th style="width: 80px;" class="text-center">Total</th>
+                                    <th style="width: 60px;">Cant</th>
+                                    <th style="width: 80px;">Precio</th>
+                                  </tr>
+                                </thead>
+                                <tbody >
+                                  <tr formArrayName="items" *ngFor="let product of productsOrder; let i = index;">
+                                    <td class="px-2">
+                                        <button class="btn btn-sm" type="button" (click)="removeProduct(product.id)"><i class="dw dw-delete-3" style="color: #d9534f"></i></button>
+                                    </td>
+                                    <td [id]="product.id">{{product.name}}</td>
+                                    <td style="text-align:center">{{product.sale_price * product.quantity | currency}}</td>
+                                    <td class="text-center">{{product.quantity}}</td>
+                                    <td class="text-center">{{product.sale_price | currency}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group text-right">
+                        <label>TOTAL</label><br> 
+                        <h3>{{total.value | currency}}</h3>
+                    </div>
+               </div>
+            </div>
+            
+            
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Buscar Producto</h4>
+      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">  <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="textProductFinder" placeholder="Nombre de producto"
+            (keyup.enter)="findProduct()" [(ngModel)]="textProductFinder" autocomplete="off">
+            <div class="input-group-append">
+                <button class="btn btn-primary btn-search" type="button" id="btn_find_client" (click)="findProduct()"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+        <hr>
+        <div class="table-responsive p-2 mt-1">
+            <table class="table table-sm">
+                <tbody>
+                    <tr *ngFor="let product of products" >
+                    <td style="width: 10%;"><button class="btn btn-success" type="button" id="btn_find_client" (click)="selectedProduct(product)"><i class="fa fa-plus"></i></button></td>
+                    <td style="width: 15%;"><input id="input_prod_{{product.id}}" class="form-control quantity-field"  value="1" appNumericField></td>
+                    <td style="width: 75%;">{{product.name}}</td>
+                    </tr>
+                </tbody>
+                </table>
+        </div>
+        <hr>
+        <small class="form-text text-muted">Se encontraron {{products?.length}} registros</small>
+    </div>
+  </ng-template>

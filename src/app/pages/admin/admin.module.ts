@@ -20,6 +20,7 @@ import { PointOfSaleComponent } from './point-of-sale/point-of-sale.component';
 import { CustomerDebtsComponent } from './customer-debts/customer-debts.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { CashRegisterComponent } from './cash-register/cash-register.component';
+import { PurchasesComponent } from './purchases/purchases.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { CashRegisterComponent } from './cash-register/cash-register.component';
     CustomerDebtsComponent,
     ConfigurationComponent,
     CashRegisterComponent,
+    PurchasesComponent,
   ],
   imports: [
     CommonModule,
