@@ -205,6 +205,12 @@ export class PurchasesComponent implements OnInit {
 
   registerPurchase(){
       document.getElementById("loader").style.display = "";
+      
+      if(this.productItems.value.length == 0){
+        document.getElementById("loader").style.display = "none";
+        Swal.fire("Notificación", "Ingrese los productos de la compra.", "warning");
+        return;
+      }
 
       let purchase: PurchaseCreate = {
         idProvider: parseInt(this.idProvider.value),

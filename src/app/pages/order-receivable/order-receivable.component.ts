@@ -187,7 +187,7 @@ export class OrderReceivableComponent implements OnInit, AfterViewInit{
       id_order: parseInt(this.idOrder),
       change: Math.round(parseFloat(this.change.value))
     }
-    
+    console.log('this.orderPaymentRequest', this.orderPaymentRequest);
     this.orderService.registerPayment(this.orderPaymentRequest).subscribe(resp => {
       console.log('registerPayment', resp);
       document.getElementById("loader").style.display = "none";

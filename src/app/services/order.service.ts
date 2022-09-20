@@ -30,7 +30,7 @@ export class OrderService {
 
   
   registerPayment(orderPayment: OrderPaymentRequest){
-    return this.http.post<ApiResponse>(this.url + '/pay', orderPayment);
+    return this.http.post<ApiResponse>(this.url + '/receivable/pay', orderPayment);
   }
 
   RecordVisit(visit: VisitCreation){
