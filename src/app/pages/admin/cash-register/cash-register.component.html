@@ -5,7 +5,6 @@
             <li class="breadcrumb-item active" aria-current="page">Caja</li>
         </ol>
     </nav>
-{{recaudacionCompleta}}
     <div class="pd-20 card-box mb-30 minh70">
       <form [formGroup]="frmCaja">
         <div class="tab">
@@ -85,19 +84,45 @@
                     <div class="col-md-12">
                       <label >Cierre de caja de los ingresos de motorizados y local comercial. <br>No podrás realizar ninguna venta después de realizar el cierre.</label><br>
                        
-                       <div class="col-md-3" style="padding:0">
-                            <div class="form-group">
-                              <label class="mt-3">Total en caja de hoy</label>
-                                <input type="text" formControlName="cierre" class="form-control" style="font-size: 2rem;"
-                                mask="separator.2" separatorLimit ="10000" thousandSeparator="" 
-                                [class.form-control-danger]="cierre.invalid && cierre.touched">
+                       <div class="row">
+                            <div class="col-md-3" >
+                              <div class="form-group">
+                                <label class="mt-3">Total en caja de hoy</label>
+                                  <input type="text" formControlName="cierre" class="form-control" style="font-size: 2rem;"
+                                  mask="separator.2" separatorLimit ="10000" thousandSeparator="" 
+                                  [class.form-control-danger]="cierre.invalid && cierre.touched">
 
-                                <div *ngIf="cierre.invalid && cierre.touched" 
-                                class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Campo obligatorio</font></div>
-                            </div>    
-                            <div class="form-group">
-                                <button type="button" class="btn btn-primary" (click)="closeCashRegister()">CERRAR</button>    
-                            </div>
+                                  <div *ngIf="cierre.invalid && cierre.touched" 
+                                  class="form-control-feedback has-danger"><font  style="vertical-align: inherit;">Campo obligatorio</font></div>
+                              </div>    
+                              <div class="form-group">
+                                  <button type="button" class="btn btn-primary" (click)="closeCashRegister()">CERRAR</button>    
+                              </div>
+                        </div>
+                        <div class="col-md-9" style="padding-left:2rem">
+                              <div class="row">
+                                <div class="col-6">
+                                  <div class="form-group">
+                                    <label class="mt-3">Total Ingresos Vendedores</label>
+                                    <p>{{totalsForCashClose.totalSellersIncome | currency}}</p>  
+                                  </div>
+                                  <div class="form-group ">
+                                    <label class="mt-3">Total Ingresos Local Comercial</label>
+                                    <p>{{totalsForCashClose.totalLocal | currency}}</p>
+                                  </div>
+                                </div>
+                                <div class="form-group col-6">
+                                  <div class="form-group ">
+                                    <label class="mt-3">Total Gastos</label>
+                                    <p>{{totalsForCashClose.totalExpenses | currency}}</p>
+                                  </div>
+                                  <div class="form-group ">
+                                    <label class="mt-3">Total Egresos</label>
+                                    <p>{{totalsForCashClose.totalEgresos | currency}}</p>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
                        </div>
                     </div>
                   </div>

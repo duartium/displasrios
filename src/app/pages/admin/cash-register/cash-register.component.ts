@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TotalsCashClose } from 'src/app/Dtos/TotalsCashCloseDto.model';
 import { ItemCatalogue } from 'src/app/models/ItemCatalogue.model';
 import { SalesSellerToday } from 'src/app/models/SalesSellerToday.model';
 import { CashRegisterService } from 'src/app/services/cash-register.service';
@@ -29,10 +30,12 @@ export class CashRegisterComponent implements OnInit {
   isOpenendCash: boolean;
   frmCaja: FormGroup;
   recaudacionCompleta: boolean = false;
+  totalsForCashClose: TotalsCashClose;
 
   ngOnInit(): void {
     this.isOpenedCash();
     this.getCollectorsCatalog();
+    this.getTotalsForCashClose();
   }
 
   get defaultForm(){
@@ -119,6 +122,11 @@ export class CashRegisterComponent implements OnInit {
     })
   }
 
+  getTotalsForCashClose(){
+    this.cashRegisterService.getTotalsForCashClose().subscribe(resp => {
+        this.totalsForCashClose = resp.data;
+    });
+  }
 
   saveCollectorSalesToday(){
     console.log(this.frmCaja);

@@ -220,7 +220,7 @@ export class PurchasesComponent implements OnInit {
         observations: this.observations.value,
         items: this.productItems.value
       };
-      console.log('purchase', purchase);
+      
       this.purchaseService.register(purchase).subscribe(resp => {
         if(resp.success){
           Swal.fire('Notificación', 'Compra registrada correctamente.', 'success');
@@ -228,6 +228,7 @@ export class PurchasesComponent implements OnInit {
           this.numInvoice.setValue("");
           this.observations.setValue("");
           this.productItems.setValue([]);
+          this.productsOrder = [];
           this.total.setValue(0);
         }else{
           Swal.fire('Notificación', resp.message, 'warning');

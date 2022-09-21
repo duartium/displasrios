@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { TotalsCashClose } from '../Dtos/TotalsCashCloseDto.model';
 import { ApiResponse } from '../models/ApiResponse';
+import { Response } from '../models/Response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,10 @@ export class CashRegisterService {
 
   close(value: number){
     return this.http.post<ApiResponse>(this.url + "/close", value);
+  }
+
+  getTotalsForCashClose(){
+    return this.http.get<Response<TotalsCashClose>>(this.url + "/totals-cash-close");
   }
 
 }
