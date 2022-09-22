@@ -26,4 +26,8 @@ export class ReportService {
     return this.http.get<Response<SellerPersonalReport>>(`${this.url}/get-seller-personal-report`);
   }
 
+  GetBestCustomers(){
+    return this.http.get<ApiResponse>(`${this.url}/best-customers`);
+  }
+
 }
