@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { ApiResponse } from '../models/ApiResponse';
 import { BestCustomer } from '../models/Customer.model';
 import { IncomeBySellersRequest } from '../models/IncomeBySellers.model';
+import { MostSelledProductDto } from '../models/Products.model';
 import { SellerPersonalReport } from '../models/reports/sellerPersonalReport.model';
 import { Response } from '../models/Response.model';
 
@@ -29,6 +30,10 @@ export class ReportService {
 
   GetBestCustomers(){
     return this.http.get<Response<BestCustomer[]>>(`${this.url}/best-customers`);
+  }
+
+  GetTop10MostSelledProducts(){
+    return this.http.get<Response<MostSelledProductDto[]>>(this.url + "/most-selled-products");
   }
 
 }

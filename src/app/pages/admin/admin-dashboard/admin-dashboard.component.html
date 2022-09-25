@@ -1,78 +1,80 @@
-<div class="row minh70">
-    <div class="col-12 col-md-8">
-        <div class="pd-ltr-20 xs-pd-20-10" >
-            <div class="pd-20 card-box mb-30 ">
-                <h5>Mejores Clientes</h5>
-                <table class="table table-hovered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nombres</th>
-                            <th class="text-right">Total Compras</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let best of bestCustomers; let i = index">
-                            <td>{{i +1}}</td>
-                            <td>{{best.fullNames}}</td>
-                            <td class="text-right">{{best.totalPurchases | currency}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+<div class="min70vh">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="pd-ltr-20 xs-pd-20-10" >
+                <div class="pd-20 card-box">
+                    <h5 class="pb-3">Mejores Clientes</h5>
+                    <table class="table table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombres</th>
+                                <th class="text-right">Total Compras</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let best of bestCustomers; let i = index">
+                                <td>{{i +1}}</td>
+                                <td>{{best.fullNames}}</td>
+                                <td class="text-right">{{best.totalPurchases | currency}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-12 col-md-4">
+            <div class="card-box  pd-20 mb-20 bg-primary mt-4" >
+                <div class="d-flex justify-content-between pb-20 text-white">
+                    <div class="icon h1 text-white">
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                    </div>
+                    <div class="font-14 text-right">
+                        <!-- <div><i class="icon-copy ion-arrow-up-c"></i> 2.69%</div> -->
+                        <div style="font-size:2rem"><i class="icon-copy ion-arrow-up-c" ></i> 2.69</div>
+                        <div class="font-12">VENTAS DEL MES</div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="card-box  pd-20 mb-20 bg-warning mt-4 text-dark" >
+                <div class="d-flex justify-content-between pb-20 ">
+                    <div class="icon h1 text-white">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                    <div class="font-14 text-right">
+                        <!-- <div><i class="icon-copy ion-arrow-up-c"></i> 2.69%</div> -->
+                        <div style="font-size:2rem"><i class="icon-copy ion-arrow-up-c" ></i> 2.69</div>
+                        <div class="font-12">TOTAL PEDIDOS POR COBRAR</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="col-12 col-md-4">
-        <div class="card-box  pd-20 mb-20 bg-primary mt-4" >
-            <div class="d-flex justify-content-between pb-20 text-white">
-                <div class="icon h1 text-white">
-                    <i class="fa fa-money" aria-hidden="true"></i>
+    
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="pd-ltr-20 xs-pd-20-10" >
+                <div class="card-box mb-30 ">
+                    <h5 class="pd-20">Top 15 Productos Más Vendidos</h5>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Nombre de Producto</th>
+                                <th class="text-center"># ventas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let best of mostSelledProducts; let i = index">
+                                <td class="text-center">{{i +1}}</td>
+                                <td>{{best.name}}</td>
+                                <td class="text-center">{{best.soldUnits}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="font-14 text-right">
-                    <!-- <div><i class="icon-copy ion-arrow-up-c"></i> 2.69%</div> -->
-                    <div style="font-size:2rem"><i class="icon-copy ion-arrow-up-c" ></i> 2.69</div>
-                    <div class="font-12">VENTAS DEL MES</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-box  pd-20 mb-20 bg-warning mt-4 text-dark" >
-            <div class="d-flex justify-content-between pb-20 ">
-                <div class="icon h1 text-white">
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                </div>
-                <div class="font-14 text-right">
-                    <!-- <div><i class="icon-copy ion-arrow-up-c"></i> 2.69%</div> -->
-                    <div style="font-size:2rem"><i class="icon-copy ion-arrow-up-c" ></i> 2.69</div>
-                    <div class="font-12">TOTAL PEDIDOS POR COBRAR</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-12 col-md-8">
-        <div class="pd-ltr-20 xs-pd-20-10" >
-            <div class="pd-20 card-box mb-30 ">
-                <h5>Top 10 Productos Más Vendidos</h5>
-                <table class="table table-hovered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nombre de Producto</th>
-                            <th class="text-center"># ventas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let best of bestCustomers; let i = index">
-                            <td>{{i +1}}</td>
-                            <td>{{best.fullNames}}</td>
-                            <td class="text-center">{{best.totalPurchases | currency}}</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

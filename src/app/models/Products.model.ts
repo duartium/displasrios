@@ -26,3 +26,9 @@ export interface ProductCreation extends Product{
     category: Category;
     provider: ItemCatalogue;
 }
+
+export interface MostSelledProductDto {
+    id: number;
+    soldUnits: number;
+    name: string;
+}
