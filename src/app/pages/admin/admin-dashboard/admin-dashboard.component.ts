@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BestCustomer } from 'src/app/models/Customer.model';
 import { ReportService } from 'src/app/services/report.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { ReportService } from 'src/app/services/report.service';
 })
 export class AdminDashboardComponent implements OnInit {
 
+  bestCustomers: BestCustomer[];
   constructor(private reportService: ReportService) { }
 
   ngOnInit(): void {
@@ -16,7 +18,9 @@ export class AdminDashboardComponent implements OnInit {
 
   GetBestCustomers(){
     this.reportService.GetBestCustomers().subscribe(resp => {
-      console.log(resp);
+      
+      this.bestCustomers = resp.data;
+      console.log('this.bestCustomers', this.bestCustomers);
     });
   }
 

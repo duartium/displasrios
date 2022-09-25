@@ -16,3 +16,9 @@ export interface Customer {
 export interface CustomerResponse extends ApiResponse{
     data: Customer[]
 }
+
+export interface BestCustomer {
+    id: number;
+    totalPurchases: number;
+    fullNames: string;
+}

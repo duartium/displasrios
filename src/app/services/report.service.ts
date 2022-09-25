@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiResponse } from '../models/ApiResponse';
+import { BestCustomer } from '../models/Customer.model';
 import { IncomeBySellersRequest } from '../models/IncomeBySellers.model';
 import { SellerPersonalReport } from '../models/reports/sellerPersonalReport.model';
 import { Response } from '../models/Response.model';
@@ -27,7 +28,7 @@ export class ReportService {
   }
 
   GetBestCustomers(){
-    return this.http.get<ApiResponse>(`${this.url}/best-customers`);
+    return this.http.get<Response<BestCustomer[]>>(`${this.url}/best-customers`);
   }
 
 }
