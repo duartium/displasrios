@@ -1,5 +1,4 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, ElementRef, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/User.model';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -39,6 +38,10 @@ export class NavbarComponent implements OnInit {
         this.render.addClass(this.menuUsuarios.nativeElement, "show");
       }
       this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  closeSession(){
+    this.userService.closeSession();
   }
 
 }
