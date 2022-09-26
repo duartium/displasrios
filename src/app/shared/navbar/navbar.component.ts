@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Component, ElementRef, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/User.model';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -9,7 +10,12 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class NavbarComponent implements OnInit {
   username: string;
-  constructor(private userService: UsersService) { 
+  @ViewChild('menuUsuarios', { static: false }) menuUsuarios: ElementRef;
+  isMenuOpen: boolean;
+
+  constructor(private userService: UsersService,
+    private render: Renderer2) {
+      this.isMenuOpen = false; 
     this.setCurrentUsernama();
   }
 
@@ -24,6 +30,15 @@ export class NavbarComponent implements OnInit {
     }, (err) => {
       console.log('ERR GETPROFILE', err);
     });
+  }
+
+  showMenuUser(){
+      if(this.isMenuOpen){
+        this.render.removeClass(this.menuUsuarios.nativeElement, "show");
+      }else{
+        this.render.addClass(this.menuUsuarios.nativeElement, "show");
+      }
+      this.isMenuOpen = !this.isMenuOpen;
   }
 
 }

@@ -103,19 +103,18 @@
                 </div>
             </div>
         </div>
-        <div class="user-info-dropdown">
+        <div class="user-info-dropdown" >
             <div class="dropdown">
-                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0)" (click)="showMenuUser()" role="button" data-toggle="dropdown">
                     <span class="user-icon">
                         <img src="assets/vendors/images/photo1.png" alt="">
                     </span>
                     <span class="user-name" style="color:#56238e">{{ username }}</span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                    <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
-                    <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
-                    <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
-                    <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
+                <div #menuUsuarios class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item" href="javascript:void(0)"><i class="dw dw-user1"></i> Mi Perfil</a>
+                    <a class="dropdown-item" href="javascript:void(0)"><i class="dw dw-help"></i> Ayuda</a>
+                    <a class="dropdown-item" href="javascript:void(0)"><i class="dw dw-logout"></i> Cerrar Sesión</a>
                 </div>
             </div>
         </div>
