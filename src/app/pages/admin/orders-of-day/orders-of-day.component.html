@@ -11,30 +11,28 @@
             <div class="pull-left">
                 <h4 class="text-blue h4">Pedidos del día</h4>
             </div>
-            <div class="pull-right">
-                
-            </div>
         </div>
         <table class="table ">
             <thead style="text-transform: uppercase;">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Fecha/Hora</th>
+                    <th scope="col" class="text-center">Fecha/Hora</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Recaudador</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Etapa</th>
+                    <th scope="col" class="text-center">Total</th>
+                    <th scope="col" >ESTADO</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody *ngFor="let order of summaryOrders">
                 <tr>
                     <th scope="row">{{order.order_number}}</th>
-                    <td>{{order.date}}</td>
+                    <td class="text-center">{{order.date}}</td>
                     <td>{{order.full_names}}</td>
                     <td>{{order.username}}</td>
-                    <td>{{order.total_amount}}</td>
-                    <td><span class="badge badge-primary">Primary</span></td>
+                    <td class="text-center">{{order.total_amount}}</td>
+                    <td><span class="badge"     [ngClass]="{'badge-warning': order.stage === 'Por Pagar', 'badge-success' : order.stage === 'Pagado', 'badge-danger' : order.stage === 'Anulado' }"
+                        >{{order.stage}}</span></td>
                     <td><button class="btn btn-sm btn-info" (click)="GoToOrder(order.id_order)"><i class="icon-copy dw dw-eye" ></i> Ver Detalle</button></td>
                 </tr>
             </tbody>

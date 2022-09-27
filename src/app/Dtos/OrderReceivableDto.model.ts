@@ -56,6 +56,7 @@ export interface SummaryOrderOfDay{
     order_number: string;
     full_names: string;
     total_amount: string;
+    stage: string;
     date: string;
     username: string;
 }
