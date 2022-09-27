@@ -8,11 +8,15 @@
     </nav>
 
     <div class="pd-20 card-box mb-30">
-        <div class="clearfix mb-20">
+        <div class="clearfix mb-20 mt-3">
             <div class="pull-left">
-                <h4 class="text-blue h4">Pedido Nº{{order.order_number}}</h4>
+                <a  routerLink="/admin/pedidos" routerLinkActive="active" class="btn btn-primary">
+                    <i class="fa fa-arrow-left"></i><span class="mtext"> Regresar</span>
+                </a>
             </div>
-            
+            <div class="pull-right">
+                <h4 class="text-blue h4" style="font-weight: bold;">Pedido Nº{{order.order_number}}</h4>
+            </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-2">
@@ -93,10 +97,10 @@
                     <th scope="col">SUBTOTAL 12%</th>
                     <td>{{order.subtotal2}}</td>
                 </tr>
-                <tr >
+                <!-- <tr >
                     <th scope="col">SUBTOTAL 0%</th>
                     <td>{{order.subtotal0}}</td>
-                </tr>
+                </tr> -->
                 <tr>
                     <th scope="col">TOTAL DESCUENTO</th>
                     <td>{{order.discount }}</td>

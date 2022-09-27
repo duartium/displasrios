@@ -32,7 +32,7 @@ export class OrderDetailComponent implements OnInit {
   GetOrderById(id: number){
     this.orderService.GetOrderReceivable(id).subscribe(resp => {
         this.order = resp.data;
-        console.log(this.order);
+        console.log('order',this.order);
     });
   }
 
