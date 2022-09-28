@@ -21,6 +21,9 @@ import { CustomerDebtsComponent } from './customer-debts/customer-debts.componen
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { CashRegisterComponent } from './cash-register/cash-register.component';
 import { PurchasesComponent } from './purchases/purchases.component';
+import { OrdersOfDayComponent } from './orders-of-day/orders-of-day.component';
+import { OrdersReceivableComponent } from '../orders-receivable/orders-receivable.component';
+import { OrderReceivableComponent } from '../order-receivable/order-receivable.component';
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { PurchasesComponent } from './purchases/purchases.component';
     ConfigurationComponent,
     CashRegisterComponent,
     PurchasesComponent,
+    OrdersOfDayComponent,
+    OrdersReceivableComponent,
+    OrderReceivableComponent,
   ],
   imports: [
     CommonModule,

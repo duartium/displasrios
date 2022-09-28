@@ -141,24 +141,20 @@
             </div>
         </div>
     </div>
-    
-    
-    
 </div>
-<app-modal [modalTitle]="modalTitle">
-    <div>
-        <div class="table-responsive p-2 mt-1">
-            <table class="table table-sm">
-                <thead>
-                    <tr><th>Fecha</th><th>Monto</th></tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let payment of orderReceivable.payments">
-                    <td>{{payment.date}}</td>
-                    <td>{{payment.amount | currency}}</td>
-                  </tr>
-                </tbody>
-            </table>
-        </div>
+
+<ng-template #content let-modal>
+    <div class="p-2 mt-1">
+        <table class="table table-sm">
+            <thead>
+                <tr><th>Fecha</th><th>Monto</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let payment of orderReceivable.payments">
+                <td>{{payment.date}}</td>
+                <td>{{payment.amount | currency}}</td>
+              </tr>
+            </tbody>
+        </table>
     </div>
-</app-modal>
+</ng-template>

@@ -13,9 +13,6 @@ import * as bootstrap from "bootstrap";
 import * as $ from "jquery";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { OrdersReceivableComponent } from './pages/orders-receivable/orders-receivable.component';
-import { OrderReceivableComponent } from './pages/order-receivable/order-receivable.component';
-import { OrdersOfDayComponent } from './pages/admin/orders-of-day/orders-of-day.component';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './pages/admin/admin.module';
 import { RouterModule } from '@angular/router';
@@ -33,9 +30,6 @@ registerLocaleData(localeEs, 'en');
     DashboardComponent,
     LoginComponent,
     OrderComponent,
-    OrdersReceivableComponent,
-    OrderReceivableComponent,
-    OrdersOfDayComponent,
     GeneralComponent,
   ],
   imports: [
