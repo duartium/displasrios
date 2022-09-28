@@ -271,37 +271,48 @@ export class OrderComponent implements OnInit {
         return;
       }
 
-      const _productItems = this.productItems;
+      this.productService.getCurrentStock(this.productSelected.id).subscribe(resp => {
+          console.log('currentStock',resp);
+          const currentStock = resp.data;
+          if(parseInt(input_prod.value) > currentStock){
+              Swal.fire("Stock insuficiente", "Disponibles: "+currentStock, "warning");
+              return;
+          }
+
+
+          const _productItems = this.productItems;
       
-      //verifica si ya ha sido agregado el producto
-      let index = this.productsOrder.findIndex(x => x.id === this.productSelected.id);
+          //verifica si ya ha sido agregado el producto
+          let index = this.productsOrder.findIndex(x => x.id === this.productSelected.id);
+          
+          if(index > -1){ //existe producto
+            const currentQuantity = this.productsOrder[index].quantity;
+            const newQuantity = currentQuantity + parseInt(input_prod.value);
+            this.productSelected.quantity = newQuantity;
+            this.productsOrder[index].quantity = newQuantity;
+    
+            let indexFormArray =_productItems.value.findIndex((y: ProductSimpleItem) => y.id === this.productSelected.id);
+            _productItems.at(indexFormArray).get('quantity').setValue(newQuantity);
+          }else{
+            this.productSelected.quantity = parseInt(input_prod.value);
+            this.productsOrder.push(productSelected);
+    
+            const prod = this.fb.group({
+              id: [productSelected.id, Validators.required],
+              quantity: [parseInt(input_prod.value), Validators.required],
+              price: [parseFloat(productSelected.sale_price.toString()), Validators.required]
+            });
       
-      if(index > -1){ //existe producto
-        const currentQuantity = this.productsOrder[index].quantity;
-        const newQuantity = currentQuantity + parseInt(input_prod.value);
-        this.productSelected.quantity = newQuantity;
-        this.productsOrder[index].quantity = newQuantity;
+            _productItems.push(prod);
+          }
+          this.calculateTotals();
+          this.detailsOpened = true;
+    
+          input_prod.value = "1"; //establezco el input a su valor inicial
+          //$("#main-modal").modal("hide");
+          this.modalService.dismissAll();
 
-        let indexFormArray =_productItems.value.findIndex((y: ProductSimpleItem) => y.id === this.productSelected.id);
-        _productItems.at(indexFormArray).get('quantity').setValue(newQuantity);
-      }else{
-        this.productSelected.quantity = parseInt(input_prod.value);
-        this.productsOrder.push(productSelected);
-
-        const prod = this.fb.group({
-          id: [productSelected.id, Validators.required],
-          quantity: [parseInt(input_prod.value), Validators.required],
-          price: [parseFloat(productSelected.sale_price.toString()), Validators.required]
-        });
-  
-        _productItems.push(prod);
-      }
-      this.calculateTotals();
-      this.detailsOpened = true;
-
-      input_prod.value = "1"; //establezco el input a su valor inicial
-      //$("#main-modal").modal("hide");
-      this.modalService.dismissAll();
+      });
   }
 
   clearWhenIsZero(flag: number){

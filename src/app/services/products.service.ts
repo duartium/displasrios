@@ -24,5 +24,9 @@ export class ProductsService {
   create(product: Product){
       return this.http.post<Response<string>>(`${environment.API_URL}/products`, product);
   }
+
+  getCurrentStock(id: number){
+    return this.http.get<Response<number>>(`${environment.API_URL}/products/current-stock/${id}`);
+  }
   
 }
