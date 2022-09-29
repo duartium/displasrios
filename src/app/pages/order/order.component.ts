@@ -11,6 +11,8 @@ import { SaleService } from 'src/app/services/sale.service';
 import { data } from 'jquery';
 import { ProductSimpleItem } from 'src/app/models/ProductItem.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { StockAction } from 'src/app/constants/common.constant';
+import { UpdateStock } from 'src/app/models/UpdateStock.model';
 
 @Component({
   selector: 'app-order',
@@ -144,10 +146,12 @@ export class OrderComponent implements OnInit {
     
     const items = this.productItems;
     items.removeAt(items.value.findIndex(el => el.id === id));
-    
+    console.log();
+    const currentProduct = this.productsOrder.find(x => x.id === id);
     this.productsOrder.splice(this.productsOrder.findIndex(x => x.id === id), 1);
     console.log('despues',this.productsOrder);
     this.calculateTotals();
+    this.UpdateStock(StockAction.Increase, currentProduct.id, currentProduct.quantity);
  }
 
 
@@ -307,11 +311,10 @@ export class OrderComponent implements OnInit {
           }
           this.calculateTotals();
           this.detailsOpened = true;
-    
-          input_prod.value = "1"; //establezco el input a su valor inicial
           //$("#main-modal").modal("hide");
           this.modalService.dismissAll();
-
+          this.UpdateStock(StockAction.Decrease, this.productSelected.id, parseInt(input_prod.value));
+          input_prod.value = "1"; //establezco el input a su valor inicial
       });
   }
 
@@ -365,6 +368,15 @@ export class OrderComponent implements OnInit {
     this.modalService.open(this.modalMain);
     //$("#main-modal").modal("show");
     //this.toastr.success('Hello world!', 'Toastr fun!');
+  }
+
+  UpdateStock(action: StockAction, id: number, quantity: number){
+      const updateStock: UpdateStock = { id, quantity };
+      if(action == StockAction.Increase){
+          this.productService.IncreaseStock(updateStock).subscribe(resp => console.log('increaseStock',resp));
+      }else{
+          this.productService.DecreaseStock(updateStock).subscribe(resp => console.log('decreaseStock', resp));
+      }
   }
 
   showFinder(){
