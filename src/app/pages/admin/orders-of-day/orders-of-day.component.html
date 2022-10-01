@@ -24,7 +24,7 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody *ngFor="let order of summaryOrders">
+            <tbody *ngFor="let order of summaryOrders; trackBy: identify">
                 <tr>
                     <th scope="row">{{order.order_number}}</th>
                     <td class="text-center">{{order.date}}</td>
