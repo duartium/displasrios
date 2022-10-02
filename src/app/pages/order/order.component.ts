@@ -175,19 +175,25 @@ export class OrderComponent implements OnInit {
         total += total_line;
     });
     const iva = total * 0.12;
+    const customerPayment = parseFloat(this.customerPayment.value);
     this.subtotal.setValue(total);
     this.total.setValue(total);
     this.iva.setValue(iva);
-    this.change.setValue(Math.abs(parseFloat(this.customerPayment.value) - total));
+    
+    if(customerPayment > total)
+      this.change.setValue(Math.abs(customerPayment - total));
+    else
+      this.change.setValue(0);
   }
 
   setOrderChange(){
       if(this.customerPayment.value.length == 0){
           this.change.setValue(0);
       }
-        
+      this.calculateTotals();
+
       let currentValue: number = parseFloat(this.customerPayment.value);
-      if(currentValue > parseFloat(this.total.value)){
+      if(currentValue > parseFloat(this.total.value) && parseFloat(this.total.value) > 0){
         this.change.setValue(currentValue - parseFloat(this.total.value));
       }else{
         this.change.setValue(0);
@@ -199,6 +205,22 @@ export class OrderComponent implements OnInit {
     console.log('APPLYDISCOUNT', this.discount);
     this.total.setValue(this.subtotal.value - this.discount.value);
     this.iva.setValue(this.total.value * 0.12);
+
+    const customerPayment = parseFloat(this.customerPayment.value); 
+    const total = parseFloat(this.total.value);
+    if(customerPayment > total)
+      this.change.setValue(Math.abs(customerPayment - total));
+    else
+      this.change.setValue(0);
+  }
+
+  recalculateChance(){
+    if(this.isPaymentAdvance.value == "1"){
+      this.customerPayment.setValue(0);
+      this.change.setValue(0);
+    }else{
+      this.calculateTotals();
+    }
   }
 
   changeFilterCustomer(){
@@ -363,6 +385,11 @@ export class OrderComponent implements OnInit {
   setInitialDeadlineValue(){
     if(this.PaymentMethod.value == "1019"){//CRÉDITO
       this.deadline.setValue(1);
+      //establezco en cero el campo cliente paga
+      if(this.isPaymentAdvance.value == "0"){
+          this.customerPayment.setValue(0);
+          this.calculateTotals();
+      }
     }else{
       this.deadline.setValue(0);
       this.isPaymentAdvance.setValue('0');

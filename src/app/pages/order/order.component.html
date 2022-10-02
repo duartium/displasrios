@@ -116,12 +116,12 @@
                             <div style="display: block;">
                                 <div class="custom-control custom-radio" >
                                     <input type="radio" id="rb_yes_advance" name="is_payment_advance" class="custom-control-input"
-                                     value="1" formControlName="is_payment_advance">
+                                     value="1" formControlName="is_payment_advance" (change)="recalculateChance()">
                                     <label class="custom-control-label" for="rb_yes_advance" >Sí</label>
                                 </div>
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="rb_no_advance" name="is_payment_advance" class="custom-control-input"
-                                     value="0" formControlName="is_payment_advance">
+                                     value="0" formControlName="is_payment_advance" (change)="recalculateChance()">
                                     <label class="custom-control-label" for="rb_no_advance">No</label>
                                 </div>
                             </div>
