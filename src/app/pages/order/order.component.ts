@@ -144,9 +144,10 @@ export class OrderComponent implements OnInit {
 
  removeProduct(id: number){
     
+    
     const items = this.productItems;
     items.removeAt(items.value.findIndex(el => el.id === id));
-    console.log();
+    
     const currentProduct = this.productsOrder.find(x => x.id === id);
     this.productsOrder.splice(this.productsOrder.findIndex(x => x.id === id), 1);
     console.log('despues',this.productsOrder);
@@ -158,19 +159,26 @@ export class OrderComponent implements OnInit {
   calculateTotals(){
     this.quantity_cart = 0;
     
-    let subtotal: number = 0;
+    let total: number = 0;
     console.log('this.productItems.value', this.productItems.value);
-    if(this.productItems.value.length == 0)
-      return
-
+    if(this.productItems.value.length == 0){
+      this.subtotal.setValue(0);
+      this.total.setValue(0);
+      this.iva.setValue(0);
+      this.change.setValue(0);
+      return;
+    }
+    
     this.productItems.value.forEach(prod => {
         this.quantity_cart += parseInt(prod.quantity);
         let total_line = parseFloat(prod.price) * parseInt(prod.quantity);
-        subtotal += total_line;
+        total += total_line;
     });
-    this.subtotal.setValue(subtotal);
-    this.total.setValue(this.subtotal.value);
-    this.iva.setValue(subtotal * 0.12);
+    const iva = total * 0.12;
+    this.subtotal.setValue(total);
+    this.total.setValue(total);
+    this.iva.setValue(iva);
+    this.change.setValue(Math.abs(parseFloat(this.customerPayment.value) - total));
   }
 
   setOrderChange(){
