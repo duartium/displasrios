@@ -15,13 +15,13 @@ export class NavbarComponent implements OnInit {
   constructor(private userService: UsersService,
     private render: Renderer2) {
       this.isMenuOpen = false; 
-    this.setCurrentUsernama();
+    this.setCurrentUsername();
   }
 
   ngOnInit(): void {
   }
 
-  setCurrentUsernama(){
+  setCurrentUsername(){
     this.userService.getProfile().subscribe(resp => {
       const userProfile: User = resp.data;
       this.username = userProfile.fullname;

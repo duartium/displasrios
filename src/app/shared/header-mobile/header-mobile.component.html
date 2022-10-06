@@ -1,6 +1,14 @@
 <div class="order-header">
     <img src="../../../assets/images/isotipo_displasrios.png" >
-    <div class="close-session-mobile">
-        <span class="dropdown-item" (click)="closeSession()">Salir</span>
+    <div >
+        <div class="row">
+            <div class="col-6 text-white">
+                <i class="fa fa-user mr-2"></i><span>{{username}}</span>
+            </div>
+            <div class="col-6 close-session-mobile">
+                <span class="dropdown-item" (click)="closeSession()">Salir</span>
+            </div>
+        </div>
+        
     </div>
 </div>
