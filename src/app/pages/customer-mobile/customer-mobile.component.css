@@ -1,0 +1,8 @@
+.wrap-customer-content{
+    background-color: #fff;
+    height: 70%;
+    width: 100%;
+    padding: 3rem;
+    padding-top: 1rem;
+    overflow: scroll;
+}

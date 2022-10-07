@@ -1,16 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoaderComponent } from 'src/app/components/loader/loader.component';
-import { ItemCatalogue } from 'src/app/models/ItemCatalogue.model';
 import { CustomersService } from 'src/app/services/customers.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-customer',
-  templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.css']
+  selector: 'app-customer-mobile',
+  templateUrl: './customer-mobile.component.html',
+  styleUrls: ['./customer-mobile.component.css']
 })
-export class CustomerComponent implements OnInit, AfterViewInit {
+export class CustomerMobileComponent implements OnInit {
   frmCustomer: FormGroup;
   
   constructor(private fb: FormBuilder,
@@ -18,11 +16,6 @@ export class CustomerComponent implements OnInit, AfterViewInit {
     private render: Renderer2) { 
     this.createForm();
   }
-
-  ngAfterViewInit() {
-
-  }
-
   ngOnInit(): void {
   }
 
@@ -72,7 +65,6 @@ export class CustomerComponent implements OnInit, AfterViewInit {
   }
 
   createCustomer(){
-    //this.render.setStyle(this.main_loader.nativeElement, 'display','');
     document.getElementById("loader").style.display = "";
     
       if(!this.frmCustomer.valid){
@@ -96,4 +88,5 @@ export class CustomerComponent implements OnInit, AfterViewInit {
         document.getElementById("loader").style.display = "none";
       });
   }
+
 }

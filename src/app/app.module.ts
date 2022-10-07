@@ -21,6 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/en';
 import { GeneralComponent } from './pages/report-seller/general/general.component';
+import { CustomerMobileComponent } from './pages/customer-mobile/customer-mobile.component';
 
 registerLocaleData(localeEs, 'en');
 
@@ -31,6 +32,7 @@ registerLocaleData(localeEs, 'en');
     LoginComponent,
     OrderComponent,
     GeneralComponent,
+    CustomerMobileComponent,
   ],
   imports: [
     BrowserModule,

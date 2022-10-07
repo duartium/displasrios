@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CustomerComponent } from './pages/admin/customer/customer.component';
+import { CustomerMobileComponent } from './pages/customer-mobile/customer-mobile.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OrderReceivableComponent } from './pages/order-receivable/order-receivable.component';
@@ -15,6 +17,7 @@ const routes: Routes = [
   { path: 'pedido', component: OrderComponent},
   { path: 'pedido-cobrar/:id', component: OrderReceivableComponent},
   { path: 'pedidos-cobrar', component: OrdersReceivableComponent},
+  { path: 'cliente', component: CustomerMobileComponent },
   { path: 'reporte/ventas-hoy', component: GeneralComponent },
   { path: 'pagina-no-encontrada', component: PageNotFoundComponent},
   { path: 'admin', loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) },
