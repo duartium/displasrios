@@ -73,7 +73,7 @@ export class CustomersComponent implements OnInit {
 		/*01 */	{ title: 'IDENTIFICACIÓN', data: 'identification',  className: 'text-center' },
 		/*02 */	{ title: 'NOMBRES', data: 'names',   className: 'text-center' },
 		/*03 */	{ title: 'EMAIL', data: 'email',  className: 'text-center' },
-		/*04 */	{ title: 'TELÉFONO', data: 'phone',  className: 'text-center' },
+		/*04 */	{ title: 'TELÉFONO', data: 'phone_number',  className: 'text-center' },
 		/*05 */	{ title: 'DIRECCIÓN', data: 'address',  className: 'text-center' },
 		]
 	}

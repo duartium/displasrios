@@ -81,7 +81,7 @@ export class CustomerComponent implements OnInit, AfterViewInit {
         Swal.fire('Notificación', 'Verifique que sus datos sean válidos e intente nuevamente.', 'warning');
         return;
       }
-
+      
       this.customerService.create(this.frmCustomer.value).subscribe(resp => {
           if(resp.success){
             Swal.fire('Notificación', 'Cliente creado correctamente.', 'success');
