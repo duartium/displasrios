@@ -44,10 +44,10 @@ export class LoginComponent implements OnInit {
     document.getElementById("loader").style.display = "";
 
     const authRequest: AuthRequest ={
-        username: this.frmUser.get('username').value,
-        password: this.frmUser.get('password').value
+        username: String(this.frmUser.get('username').value).toLowerCase(),
+        password: String(this.frmUser.get('password').value).toLowerCase()
     };
-
+    
       this.authService.authenticate(authRequest)
         .subscribe(resp => {
           this.tokenService.saveToken(resp.data);
