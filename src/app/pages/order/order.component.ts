@@ -13,6 +13,7 @@ import { ProductSimpleItem } from 'src/app/models/ProductItem.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StockAction } from 'src/app/constants/common.constant';
 import { UpdateStock } from 'src/app/models/UpdateStock.model';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-order',
@@ -43,7 +44,8 @@ export class OrderComponent implements OnInit {
     private fb: FormBuilder,  private productService: ProductsService,
     private toastr: ToastrService,
     private saleService: SaleService,
-    private modalService: NgbModal) { 
+    private modalService: NgbModal,
+    private emailService: EmailService) { 
       this.frmOrder = this.defaultForm;
     }
 
@@ -160,7 +162,7 @@ export class OrderComponent implements OnInit {
     this.quantity_cart = 0;
     
     let total: number = 0;
-    console.log('this.productItems.value', this.productItems.value);
+    
     if(this.productItems.value.length == 0){
       this.subtotal.setValue(0);
       this.total.setValue(0);
@@ -506,6 +508,7 @@ export class OrderComponent implements OnInit {
         console.log('RESPUESTA ORDER', resp);
         document.getElementById("loader").style.display = "none";
         if(resp.success){
+
           this.frmOrder.reset(this.defaultForm.value);
           this.quantity_cart = 0;
           this.customerSelected = null;
@@ -514,8 +517,9 @@ export class OrderComponent implements OnInit {
           // this.frmOrder.get('items').reset();
           this.productsOrder.splice(0);
           console.log(this.productItems);
-
-          Swal.fire({ icon: 'success', title: 'Enviado', text: `Se ha generado el pedido nº ${resp.data}`});
+          this.emailService.sendReceipt(resp.data.orderNumber).subscribe(resp => console.log('respEmail', resp));
+          Swal.fire({ icon: 'success', title: 'Enviado', text: `Se ha generado el pedido nº ${resp.data.orderNumber.toString().padStart(5,'0')}`});
+          
         }else{
             Swal.fire({ icon: 'warning', title: 'Pedido Fallido', text: 'Lo sentimos, hubo un problema al registrar tu pedido, vuelve a intentarlo más tarde.'});
         }

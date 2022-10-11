@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminComponent } from './admin.component';
 import { CashRegisterComponent } from './cash-register/cash-register.component';
@@ -42,6 +43,7 @@ const routes = [
         { path: 'configuracion', component: ConfigurationComponent },
         { path: 'caja', component: CashRegisterComponent },
         { path: 'compras', component: PurchasesComponent },
+        { path: 'dashboard', component: DashboardComponent },
       ] 
     }
   ]

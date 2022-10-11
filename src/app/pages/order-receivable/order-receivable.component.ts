@@ -94,7 +94,8 @@ export class OrderReceivableComponent implements OnInit, AfterViewInit{
       let currentValue: number = parseFloat(this.customerPayment.value);
       
       const value = Math.abs(currentValue - this.orderReceivable.balance);
-
+      console.log('value', value);
+      console.log('orderReceivable.balance', this.orderReceivable.balance);
       if(currentValue >= this.orderReceivable.balance){//pago con vuelto
         this.pendingBalance = 0;
         this.orderReceivable.balance
@@ -188,9 +189,11 @@ export class OrderReceivableComponent implements OnInit, AfterViewInit{
     this.orderPaymentRequest = {
       customer_payment: Math.round(parseFloat(this.customerPayment.value)),
       id_order: parseInt(this.idOrder),
-      change: Math.round(parseFloat(this.change.value))
+      change: parseFloat(this.change.value)
     }
+    
     console.log('this.orderPaymentRequest', this.orderPaymentRequest);
+    
     this.orderService.registerPayment(this.orderPaymentRequest).subscribe(resp => {
       console.log('registerPayment', resp);
       document.getElementById("loader").style.display = "none";
