@@ -516,8 +516,11 @@ export class OrderComponent implements OnInit {
           // this.removeAllItemsProducts();
           // this.frmOrder.get('items').reset();
           this.productsOrder.splice(0);
-          console.log(this.productItems);
-          this.emailService.sendReceipt(resp.data.orderNumber).subscribe(resp => console.log('respEmail', resp));
+          console.log('resp.data', resp.data);
+          
+          if(resp.data.sendMail){
+            this.emailService.sendReceipt(resp.data.orderNumber).subscribe(resp => console.log('respEmail', resp));
+          }
           Swal.fire({ icon: 'success', title: 'Enviado', text: `Se ha generado el pedido nº ${resp.data.orderNumber.toString().padStart(5,'0')}`});
           
         }else{

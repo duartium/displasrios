@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
     document.getElementById("loader").style.display = "";
 
     const authRequest: AuthRequest ={
-        username: String(this.frmUser.get('username').value).toLowerCase(),
-        password: String(this.frmUser.get('password').value).toLowerCase()
+        username: String(this.frmUser.get('username').value),
+        password: String(this.frmUser.get('password').value)
     };
     
       this.authService.authenticate(authRequest)

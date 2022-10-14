@@ -2,7 +2,7 @@ import { ApiResponse } from "./ApiResponse";
 
 export interface SaleCreated{
     orderNumber: number;
-    sendEmail: boolean;
+    sendMail: boolean;
 }
 
 export interface SaleResponse extends ApiResponse{
