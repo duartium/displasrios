@@ -183,6 +183,7 @@ export class CashRegisterComponent implements OnInit {
   isOpenedCash(){
     this.cashRegisterService.isOpenedCash().subscribe(resp => {
         this.isOpenendCash = resp.data;
+        console.log('this.isOpenendCash', this.isOpenendCash);
         if(resp.data){
           this.active = 2;
         }
