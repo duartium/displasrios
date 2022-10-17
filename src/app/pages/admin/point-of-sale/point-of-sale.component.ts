@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { FullOrderDto } from 'src/app/Dtos/FullOrderDto.model';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { CashRegisterService } from 'src/app/services/cash-register.service';
+import { EmailService } from 'src/app/services/email.service';
 
 
 @Component({
@@ -489,7 +490,8 @@ export class PointOfSaleComponent implements OnInit, AfterViewInit {
           this.productsOrder.splice(0);
           console.log(this.productItems);
 
-          Swal.fire({ icon: 'success', title: 'Enviado', text: `Se ha generado el pedido nº ${resp.data}`});
+          const numberFormatted = resp.data.orderNumber.toString().padStart(5, '0');
+          Swal.fire({ icon: 'success', title: 'Enviado', text: `Se ha generado el pedido nº ${numberFormatted}`});
         }else{
             Swal.fire({ icon: 'warning', title: 'Pedido Fallido', text: 'Lo sentimos, hubo un problema al registrar tu pedido, vuelve a intentarlo más tarde.'});
         }
