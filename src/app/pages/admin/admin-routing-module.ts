@@ -9,6 +9,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { CustomerDebtsComponent } from './customer-debts/customer-debts.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomersComponent } from './customers/customers.component';
+import { HistoricComponent } from './historic/historic.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrdersOfDayComponent } from './orders-of-day/orders-of-day.component';
 import { PointOfSaleComponent } from './point-of-sale/point-of-sale.component';
@@ -44,6 +45,7 @@ const routes = [
         { path: 'caja', component: CashRegisterComponent },
         { path: 'compras', component: PurchasesComponent },
         { path: 'dashboard', component: DashboardComponent },
+        { path: 'historial-pedidos', component: HistoricComponent },
       ] 
     }
   ]

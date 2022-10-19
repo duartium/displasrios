@@ -2,7 +2,6 @@
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/admin">Inicio</a></li>
-            <li class="breadcrumb-item" aria-current="page"><a routerLink="/admin/clientes">Nueva Venta</a></li>
             <li class="breadcrumb-item active" aria-current="page">Nueva Venta</li>
         </ol>
     </nav>
@@ -244,16 +243,20 @@
         <div *ngIf="finder=='customer'">
             <div class="form-group">
                 <label for="">Filtros</label>
-                <div style="display: inline-block;" class="col-md-12">
-                    <div class=" custom-radio">
-                        <input id="rb_identificacion" [(ngModel)]="filterClientFinder" type="radio" name="filter_client" class="custom-control-input"
-                        value="identification" (change)="changeFilterCustomer()">
-                        <label class="custom-control-label" for="rb_identificacion">Identificación</label>
+                <div class="row">
+                    <div  class="col-md-4">
+                        <div class="custom-control custom-radio">
+                            <input id="rb_identificacion" [(ngModel)]="filterClientFinder" type="radio" name="filter_client" 
+                            class="custom-control-input" value="identification" (change)="changeFilterCustomer()">
+                            <label class="custom-control-label" for="rb_identificacion">Identificación</label>
+                        </div>
                     </div>
-                    <div class="custom-control custom-radio">
-                        <input id="rb_nombres" type="radio"  [(ngModel)]="filterClientFinder" name="filter_client" class="custom-control-input"
-                        value="nombres" (change)="changeFilterCustomer()">
-                        <label class="custom-control-label" for="rb_nombres">Nombres</label>
+                    <div  class="col-md-4">
+                        <div class="custom-control custom-radio">
+                            <input id="rb_nombres" type="radio"  [(ngModel)]="filterClientFinder" name="filter_client" class="custom-control-input"
+                            value="nombres" (change)="changeFilterCustomer()">
+                            <label class="custom-control-label" for="rb_nombres">Nombres</label>
+                        </div>
                     </div>
                 </div>
             </div>

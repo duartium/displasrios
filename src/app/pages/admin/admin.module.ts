@@ -24,6 +24,7 @@ import { PurchasesComponent } from './purchases/purchases.component';
 import { OrdersOfDayComponent } from './orders-of-day/orders-of-day.component';
 import { OrdersReceivableComponent } from '../orders-receivable/orders-receivable.component';
 import { OrderReceivableComponent } from '../order-receivable/order-receivable.component';
+import { HistoricComponent } from './historic/historic.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { OrderReceivableComponent } from '../order-receivable/order-receivable.c
     OrdersOfDayComponent,
     OrdersReceivableComponent,
     OrderReceivableComponent,
+    HistoricComponent,
   ],
   imports: [
     CommonModule,

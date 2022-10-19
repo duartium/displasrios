@@ -42,7 +42,6 @@ export class PointOfSaleComponent implements OnInit, AfterViewInit {
 
   constructor(private customerService: CustomersService,
     private fb: FormBuilder,  private productService: ProductsService,
-    private toastr: ToastrService,
     private saleService: SaleService,
     private modalService: NgbModal,
     private cashRegisterService: CashRegisterService) { 
@@ -232,8 +231,6 @@ export class PointOfSaleComponent implements OnInit, AfterViewInit {
   }
 
   findCustomer(){
-      console.log(this.filterClientFinder);
-      console.log(this.textClientFinder);
       document.getElementById("loader").style.display = "";
       
 
@@ -289,7 +286,6 @@ export class PointOfSaleComponent implements OnInit, AfterViewInit {
       this.detailsOpened = true;
       this.customerSelected = customerSelected;
       this.idClient.setValue(customerSelected.id);
-      // $("#main-modal").modal("hide");
       this.modalService.dismissAll();
   }
 
