@@ -28,6 +28,13 @@ export class OrderService {
     return this.http.get<SummaryOrdersOfDayResp>(this.url + '/orders-of-day');
   }
 
+  GetSummaryOrdersByCustomer(idCustomer: number){
+    return this.http.get<SummaryOrdersOfDayResp>(this.url + '/orders-customer/'+idCustomer);
+  }
+
+  GetCollectionOfDay(){
+    return this.http.get<SummaryOrdersOfDayResp>(this.url + '/collection-of-day');
+  }
   
   registerPayment(orderPayment: OrderPaymentRequest){
     return this.http.post<ApiResponse>(this.url + '/receivable/pay', orderPayment);

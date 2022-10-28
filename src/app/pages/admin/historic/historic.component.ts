@@ -1,8 +1,11 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SummaryOrderOfDay } from 'src/app/Dtos/OrderReceivableDto.model';
 import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
 import { CustomersService } from 'src/app/services/customers.service';
+import { OrderService } from 'src/app/services/order.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,6 +18,7 @@ export class HistoricComponent implements OnInit {
   modalTitle = "Buscar Cliente";
   filterClientFinder = "nombres";
   textClientFinder = "";
+  summaryOrders: SummaryOrderOfDay[];
   @ViewChild('content', {read: TemplateRef}) modalMain: TemplateRef<any>;
   customerSelected: CustomerFinder;
   customers: CustomerFinder[] = [];
@@ -22,7 +26,9 @@ export class HistoricComponent implements OnInit {
   
   constructor(private modalService: NgbModal,
     private fb: FormBuilder,
-    private customerService: CustomersService) { 
+    private customerService: CustomersService,
+    private router: Router,
+    private orderService: OrderService) { 
       this.frmFilters = this.defaultForm;
     }
 
@@ -37,6 +43,10 @@ export class HistoricComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  GoToOrder(id: number){
+    this.router.navigate(['/admin/pedido/'+id]);
   }
 
   open(content) {
@@ -112,6 +122,15 @@ export class HistoricComponent implements OnInit {
     this.customerSelected = customerSelected;
     this.idClient.setValue(customerSelected.id);
     this.modalService.dismissAll();
-}
+    this.getSummaryOrdersByCustomer();
+  }
+
+  getSummaryOrdersByCustomer(){
+    this.orderService.GetSummaryOrdersByCustomer(parseInt(this.idClient.value)).subscribe(resp => {
+        if(resp.success){
+            this.summaryOrders = resp.data;
+        }
+    });
+  }
 
 }

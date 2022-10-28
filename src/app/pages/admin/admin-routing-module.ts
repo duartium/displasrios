@@ -5,6 +5,7 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminComponent } from './admin.component';
 import { CashRegisterComponent } from './cash-register/cash-register.component';
+import { CollectionComponent } from './collection/collection.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { CustomerDebtsComponent } from './customer-debts/customer-debts.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -46,6 +47,7 @@ const routes = [
         { path: 'compras', component: PurchasesComponent },
         { path: 'dashboard', component: DashboardComponent },
         { path: 'historial-pedidos', component: HistoricComponent },
+        { path: 'recaudacion', component: CollectionComponent },
       ] 
     }
   ]

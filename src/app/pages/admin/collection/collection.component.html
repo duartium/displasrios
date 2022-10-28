@@ -2,56 +2,17 @@
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/admin">Inicio</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Historial</li>
+            <li class="breadcrumb-item active" aria-current="page">Recaudación</li>
         </ol>
     </nav>
 
     <div class="pd-20 card-box mb-30 minh70" >
         <div class="clearfix">
             <div class="pull-left">
-                <h4 class="text-blue h4">Historial de Pedidos</h4>
+                <h4 class="text-blue h4">Recaudación del Día</h4>
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <form [formGroup]="frmFilters" (ngSubmit)="findOrders()">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group mb-0 mt-4" *ngIf="!customerSelected">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control search-input" placeholder="Buscar cliente"
-                                    (click)="showFinder()" (keyup.enter)="findCustomerModal()">
-                                    <div class="input-group-append">
-                                      <span class="input-group-text  bg-primary" id="basic-addon1"><i class="icon-copy dw dw-search2" style="color:#fff;"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div *ngIf="customerSelected" class="row mt-3">
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label >Identificación</label>
-                                <p>{{customerSelected.identification}}</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Nombres</label>
-                                <p>{{customerSelected.full_names}}</p>
-                            </div>
-                        </div>
-                        <div class="col-2 p-2" class="text-center">
-                            <span  (click)="showFinder()" style="cursor: pointer;"><i class="icon-copy dw dw-exchange"></i><!--<small style="display:block">Cambiar</small>--></span>
-                        </div>
-                    </div>
-                   
-                </form>
-            </div>
-        </div>
-
         <table class="table ">
             <thead style="text-transform: uppercase;">
                 <tr>
