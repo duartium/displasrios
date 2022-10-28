@@ -26,6 +26,7 @@ import { OrdersReceivableComponent } from '../orders-receivable/orders-receivabl
 import { OrderReceivableComponent } from '../order-receivable/order-receivable.component';
 import { HistoricComponent } from './historic/historic.component';
 import { CollectionComponent } from './collection/collection.component';
+import { SellerDebtReportComponent } from './Reports/seller-debt-report/seller-debt-report.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { CollectionComponent } from './collection/collection.component';
     OrderReceivableComponent,
     HistoricComponent,
     CollectionComponent,
+    SellerDebtReportComponent,
   ],
   imports: [
     CommonModule,

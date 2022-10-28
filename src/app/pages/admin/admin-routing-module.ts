@@ -20,6 +20,7 @@ import { ProviderComponent } from './provider/provider.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { PurchasesComponent } from './purchases/purchases.component';
 import { DailySalesComponent } from './reports/daily-sales/daily-sales.component';
+import { SellerDebtReportComponent } from './Reports/seller-debt-report/seller-debt-report.component';
 import { UserComponent } from './user/user.component';
 import { UsersComponent } from './users/users.component';
 
@@ -48,6 +49,7 @@ const routes = [
         { path: 'dashboard', component: DashboardComponent },
         { path: 'historial-pedidos', component: HistoricComponent },
         { path: 'recaudacion', component: CollectionComponent },
+        { path: 'reporte/deuda-vendedor', component: SellerDebtReportComponent },
       ] 
     }
   ]

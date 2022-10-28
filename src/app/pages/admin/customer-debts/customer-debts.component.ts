@@ -29,7 +29,6 @@ export class CustomerDebtsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.customerDebts = {totalDebts: 0, lastVisit: '', ordersReceivable: this.ordersReceivable, fullnames: ''};
     console.log(this.customerDebts);
-    console.log('after');
   }
 
   ngOnInit(): void {
@@ -39,7 +38,6 @@ export class CustomerDebtsComponent implements OnInit, AfterViewInit {
   clear(){
     this.identification = "";
     this.names = "";
-    console.log('CLEAR');
   }
 
   getCustoemrDebts(){
