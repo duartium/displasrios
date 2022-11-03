@@ -22,31 +22,4 @@
         </div>
     </form>
     <!-- </form> -->
-    <div class="row mt-3">
-        <div class="col-md-4">
-            <div class="table-responsive">
-                <table class="table table-hovered">
-                    <thead>
-                        <tr>
-                            <th>Recaudador</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let sale of salesBySeller" >
-                            <td>{{sale.user}}</td>
-                            <td style="text-align: right;">{{sale.total | currency}}</td>
-                        </tr>
-                        <tr>
-                            <th>TOTAL VENTAS</th>
-                            <th style="text-align: right;">{{totalSale | currency}}</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <canvas id="myChart" width="700" height="350" #mychart></canvas>
-        </div>
-    </div>
 </div>

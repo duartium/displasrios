@@ -11,6 +11,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class CollectionComponent implements OnInit {
 
+  textClientFinder = "";
   customerSelected: CustomerFinder;
   summaryOrders: SummaryOrderOfDay[];
   constructor(private orderService: OrderService,
