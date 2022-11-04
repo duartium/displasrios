@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SummaryOrderOfDay } from 'src/app/Dtos/OrderReceivableDto.model';
 import { CustomerFinder } from 'src/app/models/CustomerFinder.model';
@@ -15,7 +16,8 @@ export class CollectionComponent implements OnInit {
   customerSelected: CustomerFinder;
   summaryOrders: SummaryOrderOfDay[];
   constructor(private orderService: OrderService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getCollectionOfDay();
@@ -33,6 +35,10 @@ export class CollectionComponent implements OnInit {
             this.summaryOrders = resp.data;
         }
     });
+  }
+
+  GoToOrder(id: number){
+    this.router.navigate(['/admin/pedido/'+id]);
   }
 
 

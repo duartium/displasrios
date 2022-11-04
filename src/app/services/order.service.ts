@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FullOrderReceivableResp, OrderPaymentRequest, OrderReceivableResp, SummaryOrdersOfDayResp } from '../Dtos/OrderReceivableDto.model';
+import { CustomerDebs, FullOrderReceivableResp, OrderPaymentRequest, OrderReceivableResp, SummaryCustomerDebs, SummaryOrdersOfDayResp } from '../Dtos/OrderReceivableDto.model';
 import { ApiResponse } from '../models/ApiResponse';
+import { Response } from '../models/Response.model';
 import { VisitCreation } from '../models/VisitCreation.model';
 import { environment } from './../../environments/environment';
 
@@ -46,6 +47,10 @@ export class OrderService {
 
   CancelOrder(id: string){
     return this.http.delete<ApiResponse>(this.url + '/cancel-order/'+id);
+  }
+
+  GetSellerDebts(idSeller: number){
+    return this.http.get<Response<SummaryCustomerDebs>>(this.url + '/seller-debts/'+idSeller);
   }
   
 }

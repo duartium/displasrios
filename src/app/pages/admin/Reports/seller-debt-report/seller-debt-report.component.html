@@ -5,14 +5,14 @@
     </ol>
 </nav>
 
-<div class="bg-white pd-20 card-box mb-30">
+<div class="bg-white pd-20 card-box mb-30 minh70">
     <h3>Informe de Deuda por Vendedor</h3>
     <form [formGroup]="frmSellerDebtReport">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <div class="form-group" >
                     <label>Vendedor</label>
-                    <select  class="form-control" formControlName="collector_id" style="width: 100%; height: 38px;" aria-hidden="true">
+                    <select  class="form-control" formControlName="collector_id"  (change)="onSellerChange()" style="width: 100%; height: 38px;" aria-hidden="true">
                         <option *ngFor="let collector of collectors" [ngValue]="collector.id">
                             {{ collector.description }}
                         </option>
@@ -22,4 +22,47 @@
         </div>
     </form>
     <!-- </form> -->
+    <hr>
+    <div *ngIf="customerDebts.ordersReceivable?.length > 0">
+         <div class="row">
+             <div class="col-md-2">
+                 <strong>Última Visita</strong><br>
+                 <span>{{customerDebts.lastVisit}}</span>
+             </div>
+             <div class="col-md-2">
+                 <strong>Total de Deuda</strong><br>
+                 <span>{{customerDebts.totalDebts}}</span>
+             </div>
+             <div class="col-md-8 text-center">
+                 {{customerDebts.fullnames}}
+             </div>
+         </div>
+         <hr>
+         <div class="row">
+             <div class="col-md-12">
+                 <h5>Pedidos pendientes de pago</h5>
+                 <table class="table ">
+                     <thead style="text-transform: uppercase;">
+                         <tr>
+                             <th scope="col">#</th>
+                             <th scope="col">Fecha</th>
+                             <th scope="col" class="text-center">Recaudador</th>
+                             <th scope="col">Total</th>
+                         </tr>
+                     </thead>
+                     <tbody *ngFor="let deb of customerDebts.ordersReceivable">
+                         <tr>
+                             <th>{{deb.order_number}}</th>
+                             <td>{{deb.date}}</td>
+                             <td class="text-center">{{deb.collector}}</td>
+                             <td>{{deb.total_amount}}</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+    </div>
+    <div *ngIf="customerDebts.ordersReceivable?.length == 0">
+         <h5>No se encontraron resultados.</h5>
+    </div>
 </div>

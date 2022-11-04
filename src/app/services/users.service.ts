@@ -37,6 +37,8 @@ export class UsersService {
     return this.http.get<Response<ItemCatalogue[]>>(this.apiUrl+ "/collectors-catalog");
   }
 
+ 
+
   closeSession(){
     this.tokenService.removeToken();
     
