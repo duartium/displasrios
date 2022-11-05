@@ -31,6 +31,7 @@ export class CollectionComponent implements OnInit {
 
   getCollectionOfDay(){
     this.orderService.GetCollectionOfDay().subscribe(resp => {
+      console.log(resp.data);
         if(resp.success){
             this.summaryOrders = resp.data;
         }

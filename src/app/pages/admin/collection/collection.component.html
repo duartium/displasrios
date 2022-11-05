@@ -13,15 +13,14 @@
             </div>
         </div>
         
-        <table class="table ">
+        <table class="table mt-3">
             <thead style="text-transform: uppercase;">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col" class="text-center">Fecha/Hora</th>
                     <th scope="col">Cliente</th>
                     <th scope="col" class="text-center">Vendedor</th>
-                    <th scope="col" class="text-center">Total</th>
-                    <th scope="col" >ESTADO</th>
+                    <th scope="col" class="text-center">Valor</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -32,8 +31,6 @@
                     <td>{{order.full_names}}</td>
                     <td class="text-center">{{order.username}}</td>
                     <td class="text-center">{{order.total_amount | currency}}</td>
-                    <td><span class="badge"     [ngClass]="{'badge-warning': order.stage === 'Por Cobrar', 'badge-success' : order.stage === 'Pagado', 'badge-danger' : order.stage === 'Anulado' }"
-                        >{{order.stage}}</span></td>
                     <td><button class="btn btn-sm btn-info" (click)="GoToOrder(order.id_order)"><i class="icon-copy dw dw-eye" ></i> Ver Detalle</button></td>
                 </tr>
             </tbody>
