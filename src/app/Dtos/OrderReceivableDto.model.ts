@@ -14,6 +14,7 @@ export interface OrderReceivableDto{
 export interface FullOrderReceivable{
     id: number;
     order_number: string;
+    invoice_number: string;
     full_names: string;
     total_amount: string;
     date: string;

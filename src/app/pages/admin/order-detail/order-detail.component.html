@@ -15,7 +15,8 @@
                 </a>
             </div>
             <div class="pull-right">
-                <h4 class="text-blue h4" style="font-weight: bold;">Pedido Nº{{order.order_number}}</h4>
+                <h4 class="text-blue h4" style="font-weight: bold;" *ngIf="order.invoice_number.length > 0">FACTURA Nº {{order.invoice_number}}</h4>
+                <h4 class="text-blue h4" style="font-weight: bold;" *ngIf="order.invoice_number.length === 0">Pedido Nº {{order.order_number}}</h4>
             </div>
         </div>
         <div class="row">
@@ -66,6 +67,12 @@
                 <div class="form-group">
                     <label>Plazo</label>
                     <p>{{order.deadline}} días</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2" *ngIf="order.invoice_number != ''">
+                <div class="form-group">
+                    <label>Nº Pedido</label>
+                    <p>{{order.order_number}}</p>
                 </div>
             </div>
         </div>
