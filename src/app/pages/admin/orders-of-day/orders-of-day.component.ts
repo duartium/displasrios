@@ -24,6 +24,7 @@ export class OrdersOfDayComponent implements OnInit {
       this.summaryOrders.unshift(newOrder);
       console.log('summaryOrders', this.summaryOrders);
       this.cdRef.detectChanges();
+      this.getSummaryOrdersOfDay();
     });
     this.getSummaryOrdersOfDay();
   }
