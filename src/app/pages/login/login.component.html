@@ -7,30 +7,60 @@
             <img src="../../../assets/images/logo_displasrios2.png" class="logo-login">
         </div>
     </div>
+    
     <div class="wrap-form-login">
         <div class="card-box m-4 p-4 widget-style1">
-            <form [formGroup]="frmUser" (ngSubmit)="authenticate()">
+            <form [formGroup]="frmUser" (ngSubmit)="authenticate()" *ngIf="currentScreen === 1q">
                 <div class="form-group">
                     <label for="username">Usuario</label>
-                    <input type="text" class="form-control" formControlName="username" 
-                    onkeypress="javascript:this.value=this.value.toLowerCase();" autofocus>
+                    <input type="text" class="form-control input-login" formControlName="username" 
+                    onkeyup="javascript:this.value=this.value.toLowerCase();" autofocus maxlength="20">
                 </div>
                 <div class="form-group">
                         <label for="">Contraseña</label>
-                        <input type="password" class="form-control" formControlName="password">
+                        <input type="password" class="form-control input-login" formControlName="password" maxlength="50">
                 </div>
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary btn-block" [disabled]="!frmUser.valid">INICIAR SESIÓN</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!frmUser.valid">INICIAR SESIÓN</button>
+                    <span class="mt-3 linkForgotPassword" (click)="currentScreen = 2">Olvidé mi contraseña</span>
+                </div>
+            </form>
+
+            <form [formGroup]="frmResetPassword" (ngSubmit)="resetPassword()" *ngIf="currentScreen === 2">
+                <h3>Olvidé mi Contraseña</h3>
+                <p>No te preocupes, te enviaremos un código a tu correo electrónico para restablecer tu contraseña.</p>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="text" name="email" class="form-control input-login" formControlName="email" 
+                    onkeyup="javascript:this.value=this.value.toLowerCase();" autofocus maxlength="20">
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!frmResetPassword.valid">RESTABLECER CONTRASEÑA</button>
+                    <span class="mt-3 linkForgotPassword" (click)="currentScreen = 1"><i class="dw dw-left-arrow1" style="font-size: 18px; color:#7538b9"></i> Regresar al inicio de sesión</span>
+                </div>
+            </form>
+
+            <form [formGroup]="frmVerifyCode" (ngSubmit)="resetPassword()" *ngIf="currentScreen === 3">
+                <h3>Ingresa tu Código</h3>
+                <p>El código de verificación te lo hemos enviado al correo {{email.value}}.</p>
+                <div class="verify-code-input mb-3">
+                    <input type="text" name="codeChar1" class="" formControlName="codeChar1" 
+                    onkeyup="javascript:this.value=this.value.toLowerCase();" autofocus maxlength="1">
+                    <input type="text" name="codeChar2" class="" formControlName="codeChar2" 
+                    onkeyup="javascript:this.value=this.value.toLowerCase();" maxlength="1">
+                    <input type="text" name="codeChar3" class="" formControlName="codeChar3" 
+                    onkeyup="javascript:this.value=this.value.toLowerCase();" maxlength="1">
+                    <input type="text" name="codeChar4" class="" formControlName="codeChar4" 
+                    onkeyup="javascript:this.value=this.value.toLowerCase();" maxlength="1">
+                    <input type="text" name="codeChar5" class="" formControlName="codeChar5" 
+                    onkeyup="javascript:this.value=this.value.toLowerCase();" maxlength="1">
+                </div>
+                <strong class="color-primary">Tiempo de validez: 5 minutos.</strong>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!frmVerifyCode.valid">VERIFICAR</button>
+                    <span class="mt-3 linkForgotPassword" (click)="currentScreen == 1"><i class="dw dw-left-arrow1" style="font-size: 18px; color:#7538b9"></i> Regresar al inicio de sesión</span>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!-- <div class="wrap-login-mobile">
-    <div class="left">
-
-    </div>
-    <div class="right">
-
-    </div>
-</div> -->

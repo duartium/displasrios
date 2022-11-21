@@ -106,3 +106,54 @@
         text-transform: lowercase;
     }
 }
+
+.input-login{
+    padding: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.input-login:hover{
+    background-color: #FAFAFA;
+}
+
+.input-login:focus{
+    background-color: #FAFAFA;
+}
+
+.linkForgotPassword{
+    display: block;
+    padding: .5rem;
+    color: #9935b3;
+    cursor: pointer;
+    font-style: italic;
+}
+
+.linkForgotPassword:hover{
+    background-color: #FAFAFA;
+}
+
+
+button:disabled{
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+.verify-code-input{
+    display: flex;
+    justify-content: space-between
+}
+
+.verify-code-input input{
+    width: 50px;
+    padding: 0.3rem;
+    border: 1px solid #ced4da;
+    background-color: #FAFAFA;
+    border-radius: 15%;
+    text-align: center;
+    color: #9935b3;
+    font-weight: bold;
+    font-size: 1.5rem;
+}

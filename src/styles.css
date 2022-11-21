@@ -14,6 +14,10 @@ h1, h2, h3, h4, h5{
 .bg-primary{
     background-color: #7538b9 !important;
 }
+.bg-outline-primary{
+    border-color: #56238e !important;
+    color: #56238e !important;
+}
 .btn-primary{
     background-color: #7538b9 !important;
     border-color: #56238e !important;

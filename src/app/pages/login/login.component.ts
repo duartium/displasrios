@@ -17,12 +17,24 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
+  currentScreen: number= 1;
   frmUser = this.fb.group({
       username: this.fb.control('', [Validators.required, Validators.minLength(3)]),
       password: this.fb.control('', [Validators.required, Validators.minLength(3)])
   });
   
-  private idProfile: string;
+  frmResetPassword= this.fb.group({
+    email: this.fb.control('', [Validators.required, Validators.minLength(3)]),
+  });
+
+  frmVerifyCode = this.fb.group({
+    codeChar1: this.fb.control('', [Validators.required]),
+    codeChar2: this.fb.control('', [Validators.required]),
+    codeChar3: this.fb.control('', [Validators.required]),
+    codeChar4: this.fb.control('', [Validators.required]),
+    codeChar5: this.fb.control('', [Validators.required]),
+  });
+
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private tokenService: TokenService,
@@ -86,6 +98,16 @@ export class LoginComponent implements OnInit {
       
    
     
+  }
+
+  get email(){
+    return this.frmResetPassword.get('email');
+  }
+  
+
+  resetPassword(){
+    
+    this.currentScreen = 3;
   }
 
 }
