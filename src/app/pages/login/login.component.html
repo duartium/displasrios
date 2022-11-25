@@ -28,7 +28,7 @@
 
             <form [formGroup]="frmResetPassword" (ngSubmit)="resetPassword()" *ngIf="currentScreen === 2">
                 <h3>Olvidé mi Contraseña</h3>
-                <p>No te preocupes, te enviaremos un código a tu correo electrónico para restablecer tu contraseña.</p>
+                <p>No te preocupes, te enviaremos un código a tu correo electrónico para restablecerla.</p>
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>
                     <input type="text" name="email" class="form-control input-login" formControlName="email" 
@@ -58,7 +58,7 @@
                 <strong class="color-primary">Tiempo de validez: 5 minutos.</strong>
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!frmVerifyCode.valid">VERIFICAR</button>
-                    <span class="mt-3 linkForgotPassword" (click)="currentScreen == 1"><i class="dw dw-left-arrow1" style="font-size: 18px; color:#7538b9"></i> Regresar al inicio de sesión</span>
+                    <span class="mt-3 linkForgotPassword" (click)="currentScreen = 1"><i class="dw dw-left-arrow1" style="font-size: 18px; color:#7538b9"></i> Regresar al inicio de sesión</span>
                 </div>
             </form>
         </div>
