@@ -37,6 +37,10 @@ export class UsersService {
     return this.http.get<Response<ItemCatalogue[]>>(this.apiUrl+ "/collectors-catalog");
   }
 
+  registerVerificationCode(email: string){
+    return this.http.post<Response<boolean>>(environment.API_URL + "/authentication/forgot-password", {email});
+  }
+
  
 
   closeSession(){
