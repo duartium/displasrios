@@ -5,5 +5,10 @@ export interface AuthRequest{
 
 export interface VerificationCodeRequest{
     email: string;
-    verificationCode: string;
+    code: string;
+}
+
+export interface ChangePassword{
+    email: string;
+    newPassword: string;
 }

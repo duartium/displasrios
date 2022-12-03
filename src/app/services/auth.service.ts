@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthDto } from '../Dtos/AuthDto.model';
-import { AuthRequest, VerificationCodeRequest } from '../models/AuthRequest.model';
+import { AuthRequest, ChangePassword, VerificationCodeRequest } from '../models/AuthRequest.model';
 import { TokenService } from './token.service';
 import { environment } from './../../environments/environment';
 import { Response } from '../models/Response.model';
@@ -20,7 +20,11 @@ export class AuthService {
   }
 
   verifyCode(authRequest: VerificationCodeRequest){
-    return this.http.post<Response<boolean>>(this.apiUrl, authRequest);
+    return this.http.post<Response<boolean>>(environment.API_URL+"/authentication/verify-code", authRequest);
+  }
+
+  changePassword(changePassReq: ChangePassword){
+    return this.http.post<Response<boolean>>(environment.API_URL+"/authentication/change-password", changePassReq);
   }
 
   logout(){

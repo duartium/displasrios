@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthRequest, VerificationCodeRequest } from 'src/app/models/AuthRequest.model';
+import { AuthRequest, ChangePassword, VerificationCodeRequest } from 'src/app/models/AuthRequest.model';
 import { User } from 'src/app/models/User.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CatalogsService } from 'src/app/services/catalogs.service';
@@ -33,6 +33,11 @@ export class LoginComponent implements OnInit {
     codeChar3: this.fb.control('', [Validators.required, Validators.maxLength(1)]),
     codeChar4: this.fb.control('', [Validators.required, Validators.maxLength(1)]),
     codeChar5: this.fb.control('', [Validators.required, Validators.maxLength(1)]),
+  });
+
+  frmChangePassword =  this.fb.group({
+    password1: this.fb.control('', [Validators.required, Validators.minLength(6)]),
+    password2: this.fb.control('', [Validators.required, Validators.minLength(6)]),
   });
 
   constructor(private fb: FormBuilder,
@@ -121,6 +126,14 @@ export class LoginComponent implements OnInit {
     
   }
 
+  get password1(){
+    return this.frmChangePassword.get('password1');
+  }
+
+  get password2(){
+    return this.frmChangePassword.get('password2');
+  }
+
   get email(){
     return this.frmResetPassword.get('email');
   }
@@ -138,7 +151,13 @@ export class LoginComponent implements OnInit {
         return;
       }
 
+      this.codeChar1.setValue('');
+      this.codeChar2.setValue('');
+      this.codeChar3.setValue('');
+      this.codeChar4.setValue('');
+      this.codeChar5.setValue('');
       this.currentScreen = 3;
+
     }, (err) => {
       document.getElementById("loader").style.display = "none";
       const icon = err.status == 400 ? 'warning' : 'error';
@@ -154,25 +173,28 @@ export class LoginComponent implements OnInit {
 
   verifyCode(){
     if(!this.frmVerifyCode.valid){
-      alert('Ingrese el código recibido completo');
+      Swal.fire('Ingrese el código recibido completo', '', 'warning');
       return;
     }
     document.getElementById("loader").style.display = "";
 
     const verificationRequest: VerificationCodeRequest ={
       email: localStorage.getItem('email_to_reset'),
-      verificationCode: this.getVerificationCodeString()
+      code: this.getVerificationCodeString().toUpperCase()
     };
   
     this.authService.verifyCode(verificationRequest)
     .subscribe(resp => {
       console.log('resp', resp.data);
 
-      if(resp.success && resp.data){
-        Swal.fire("Notificación", "Verificación exitosa", "success");
+      if(resp.success){
+        this.currentScreen = 4;
+        Swal.fire("Verificación exitosa", "Establece tu nueva contraseña", "success");
       }else{
-        Swal.fire("Notificación", "No se pudo realizar la verificación, intenta nuevamente.", "warning");
+        Swal.fire("Notificación", resp.message, "warning");
       }
+
+
 
   }, (err: HttpErrorResponse) => {
     console.log('err', err);
@@ -181,9 +203,48 @@ export class LoginComponent implements OnInit {
     }else{
         Swal.fire({ icon: 'error', title: 'Lo sentimos, se ha generado un conflicto', text: 'No se pudo autenticar.'});
     }
-    document.getElementById("loader").style.display = "none";
   });
-
+  document.getElementById("loader").style.display = "none";
   }
 
+  changePassword(){
+    if(!this.frmChangePassword.valid){
+      Swal.fire('Ingrese las contraseñas', '', 'warning');
+      return;
+    }
+
+    const changePassRequest: ChangePassword ={
+      email: localStorage.getItem('email_to_reset'),
+      newPassword: this.password1.value,
+    };
+
+    console.log('changePassRequest', changePassRequest);
+    if(this.password1.value != this.password2.value){
+      Swal.fire('Datos inválidos', 'Contraseñas no coinciden, corrija e intente de nuevo', 'warning');
+      return;
+    }
+
+    document.getElementById("loader").style.display = "";
+
+    this.authService.changePassword(changePassRequest)
+    .subscribe(resp => {
+      console.log('resp', resp.data);
+
+      if(resp.success){
+        Swal.fire("Notificación", "¡Se ha cambiado tu contraseña!", "success");
+        this.currentScreen = 1;
+        this.password1.setValue('');
+        this.password2.setValue('');
+        localStorage.removeItem('email_to_reset');
+      }else{
+        Swal.fire("Notificación", resp.message, "warning");
+      }
+
+    }, (err: HttpErrorResponse) => {
+      console.log('err', err);
+      Swal.fire("Notificación", err.error.message, "warning");
+    });
+    document.getElementById("loader").style.display = "none";
+
+  }
 }
