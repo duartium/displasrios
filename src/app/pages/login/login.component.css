@@ -22,7 +22,7 @@
 
 .bg-header-login{   
     width: 100%;
-    height: 45vh;
+    height: 100vh;
     background-color: #9935b3;
     position: absolute;
 }
@@ -36,7 +36,7 @@
 }
 
 .wrap-logo-login{
-    margin-top: 5rem;
+    padding-top: 3rem;
     display: flex;
     justify-content:center;
 }
@@ -44,6 +44,13 @@
 .logo-login{
     height: 150px;
     width: 220px;
+}
+
+.girl-model-login{
+    position: absolute;
+    height: 430px;
+    width: 450px;
+    bottom: 0;
 }
 
 /* .wrap-login-mobile{
