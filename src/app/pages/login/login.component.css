@@ -1,4 +1,6 @@
-
+img {
+    pointer-events: none;
+  }
 
 .wrap-login{
     width: 100vw;
@@ -36,7 +38,7 @@
 }
 
 .wrap-logo-login{
-    padding-top: 3rem;
+    padding-top: 5rem;
     display: flex;
     justify-content:center;
 }
@@ -46,12 +48,7 @@
     width: 220px;
 }
 
-.girl-model-login{
-    position: absolute;
-    height: 430px;
-    width: 450px;
-    bottom: 0;
-}
+
 
 /* .wrap-login-mobile{
     width: 100vw;
@@ -73,10 +70,22 @@
         height: 100%;
         background-color: aqua;
 } */
+.girl-model-login{
+    display: none;
+}
 
 @media only screen and (min-device-width : 768px){
     .header-login{
         display: none;
+    }
+
+    .girl-model-login{
+        display: block;
+        padding-right: 2rem;
+        position: absolute;
+        height: 420px;
+        width: 440px;
+        bottom: 0;
     }
 
     .wrap-login{
